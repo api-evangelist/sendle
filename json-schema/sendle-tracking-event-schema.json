@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendle/main/json-schema/sendle-tracking-event-schema.json",
+  "title": "Sendle Tracking Event",
+  "description": "A single parcel tracking event as returned by GET /parcels/{ref}/tracking or delivered to a partner webhook.",
+  "type": "object",
+  "required": ["event_type", "scan_time"],
+  "properties": {
+    "sendle_reference": {
+      "type": "string",
+      "description": "Present when the event is delivered as a webhook payload; absent inside the tracking_events array of GET /parcels/{ref}/tracking."
+    },
+    "event_id": { "type": "string", "format": "uuid" },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "Pickup Attempted",
+        "Pickup",
+        "Drop Off",
+        "Dropped Off",
+        "Dropped off",
+        "Info",
+        "In Transit",
+        "Out for Delivery",
+        "Delivery Attempted",
+        "Delivered",
+        "Local Delivery",
+        "Card Left",
+        "Left with Agent",
+        "Damaged",
+        "Unable to Deliver",
+        "Expired"
+      ]
+    },
+    "scan_time": { "type": "string", "format": "date-time" },
+    "local_scan_time": { "type": "string" },
+    "display_time": { "type": "string" },
+    "description": { "type": "string" },
+    "location": { "type": "string" },
+    "location_data": {
+      "type": "object",
+      "properties": {
+        "suburb": { "type": ["string", "null"] },
+        "state": { "type": ["string", "null"] },
+        "postcode": { "type": ["string", "null"] },
+        "country": { "type": ["string", "null"] }
+      }
+    },
+    "origin_location": { "type": "string" },
+    "destination_location": { "type": "string" },
+    "reason": { "type": "string" },
+    "requester": { "type": "string" }
+  }
+}

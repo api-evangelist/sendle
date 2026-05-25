@@ -1,0 +1,139 @@
+openapi: 3.1.0
+info:
+  title: Sendle Shipping Manifests API
+  version: "1.0"
+  description: |
+    Create and manage shipping manifests so a driver can collect multiple parcels
+    by scanning a single barcode. Currently supports USPS SCAN Forms for US domestic
+    orders only. Manifests can only include orders booked the same day.
+  contact:
+    name: Sendle API Support
+    email: api@sendle.com
+    url: https://developers.sendle.com
+servers:
+  - url: https://api.sendle.com/api
+    description: Production
+  - url: https://sandbox.sendle.com/api
+    description: Sandbox
+security:
+  - basicAuth: []
+tags:
+  - name: Manifests
+    description: USPS SCAN Form shipping manifests for US Domestic orders
+paths:
+  /manifests:
+    post:
+      operationId: createShippingManifest
+      summary: Create Shipping Manifest
+      tags: [Manifests]
+      description: Creates shipping manifest(s) for the given orders. Each order can only be on one manifest and must be booked the same day.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [order_ids]
+              properties:
+                order_ids:
+                  type: array
+                  items: { type: string, format: uuid }
+      responses:
+        '201':
+          description: Shipping manifests created
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Manifest' }
+        '422':
+          description: Order already manifested or not eligible
+    get:
+      operationId: getShippingManifests
+      summary: Get All Shipping Manifests
+      tags: [Manifests]
+      description: Returns all shipping manifests for your account, including ones created via the API and the Sendle dashboard.
+      responses:
+        '200':
+          description: List of manifests
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Manifest' }
+  /manifests/{id}/download:
+    get:
+      operationId: downloadShippingManifest
+      summary: Download Shipping Manifest
+      tags: [Manifests]
+      description: Returns the printable PDF shipping manifest.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: PDF shipping manifest
+          content:
+            application/pdf:
+              schema: { type: string, format: binary }
+  /manifests/{id}/orders:
+    get:
+      operationId: getShippingManifestOrders
+      summary: Get Orders On Shipping Manifest
+      tags: [Manifests]
+      description: Returns all orders on the given shipping manifest.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Orders on the manifest
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    order_id: { type: string, format: uuid }
+                    sendle_reference: { type: string }
+                    state: { type: string }
+  /manifests/{id}/status:
+    get:
+      operationId: getShippingManifestStatus
+      summary: Get Shipping Manifest Status
+      tags: [Manifests]
+      description: Returns the status and metadata of the given shipping manifest.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Manifest status
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Manifest' }
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    Manifest:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        created_at: { type: string, format: date-time }
+        state:
+          type: string
+          enum: [pending, processing, available, failed]
+        type: { type: string, example: USPS SCAN Form }
+        order_count: { type: integer }
+        pickup_date: { type: string, format: date }
+        download_url: { type: string, format: uri }

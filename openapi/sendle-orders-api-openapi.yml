@@ -1,0 +1,427 @@
+openapi: 3.1.0
+info:
+  title: Sendle Orders API
+  version: "1.0"
+  description: |
+    Create, view, cancel, and return orders with Sendle. Sendle ships domestically inside
+    Australia, Canada, and the United States, and internationally from Australia and the
+    United States to many countries around the globe, or from Canada to the United States.
+  contact:
+    name: Sendle API Support
+    email: api@sendle.com
+    url: https://developers.sendle.com
+  license:
+    name: Proprietary
+servers:
+  - url: https://api.sendle.com/api
+    description: Production
+  - url: https://sandbox.sendle.com/api
+    description: Sandbox
+security:
+  - basicAuth: []
+tags:
+  - name: Orders
+    description: Create, view, cancel, and return parcel orders
+paths:
+  /orders:
+    post:
+      operationId: createOrder
+      summary: Create An Order
+      tags: [Orders]
+      description: Creates an order to ship a parcel to the given delivery address.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+            examples:
+              domesticAU:
+                $ref: '#/components/examples/DomesticAURequest'
+              internationalAUNZ:
+                $ref: '#/components/examples/InternationalAUNZRequest'
+      responses:
+        '201':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '422': { $ref: '#/components/responses/UnprocessableEntity' }
+        '429': { $ref: '#/components/responses/TooManyRequests' }
+  /orders/{id}:
+    get:
+      operationId: viewOrder
+      summary: View An Order
+      tags: [Orders]
+      description: Returns the order including its status, the public tracking URL, and the metadata you passed when creating it.
+      parameters:
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404': { $ref: '#/components/responses/NotFound' }
+  /orders/{id}/cancel:
+    post:
+      operationId: cancelOrder
+      summary: Cancel An Order
+      tags: [Orders]
+      description: Cancels the given order if it has not yet been collected by a driver.
+      parameters:
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          description: Cancellation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id: { type: string, format: uuid }
+                  state: { type: string, example: Cancelled }
+                  order_url: { type: string, format: uri }
+                  cancelled_at: { type: string, format: date-time }
+                  cancellable: { type: boolean }
+                  cancellation_message: { type: string }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '422': { $ref: '#/components/responses/UnprocessableEntity' }
+  /orders/{id}/return:
+    post:
+      operationId: returnOrder
+      summary: Return An Order
+      tags: [Orders]
+      description: Creates a return label, letting receivers easily send orders back to the original sender. Domestic only.
+      parameters:
+        - $ref: '#/components/parameters/OrderId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_reference: { type: string, maxLength: 255 }
+                receiver:
+                  type: object
+                  properties:
+                    instructions: { type: string, maxLength: 200 }
+      responses:
+        '201':
+          description: Return order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    get:
+      operationId: viewReturnOrder
+      summary: View A Return Order
+      tags: [Orders]
+      description: Views the given return order, including the label URLs.
+      parameters:
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          description: Return order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404': { $ref: '#/components/responses/NotFound' }
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using your Sendle ID as username and API Key as password.
+  parameters:
+    OrderId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+      description: The order_id UUID returned from createOrder.
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema: { type: string, maxLength: 100 }
+      description: Client-provided key to make order creation idempotent.
+  responses:
+    BadRequest:
+      description: Malformed request
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Unauthorized:
+      description: Missing or invalid credentials
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    UnprocessableEntity:
+      description: Validation failed
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    TooManyRequests:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+  schemas:
+    Error:
+      type: object
+      properties:
+        error: { type: string }
+        error_description: { type: string }
+        messages:
+          type: object
+          additionalProperties:
+            type: array
+            items: { type: string }
+    Weight:
+      type: object
+      required: [value, units]
+      properties:
+        value: { type: string, description: Decimal string }
+        units:
+          type: string
+          enum: [kg, lb, g, oz]
+    Dimensions:
+      type: object
+      required: [length, width, height, units]
+      properties:
+        length: { type: string }
+        width: { type: string }
+        height: { type: string }
+        units:
+          type: string
+          enum: [cm, in]
+    Volume:
+      type: object
+      properties:
+        value: { type: string }
+        units:
+          type: string
+          enum: [l, m3, in3, ft3]
+    Contact:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        phone: { type: string }
+        email: { type: string, format: email }
+        company: { type: string }
+        sendle_id: { type: string }
+    Address:
+      type: object
+      required: [address_line1, suburb, postcode, state_name]
+      properties:
+        address_line1: { type: string, maxLength: 255 }
+        address_line2: { type: string, maxLength: 255 }
+        suburb: { type: string }
+        postcode: { type: string }
+        state_name: { type: string }
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: AU
+    Party:
+      type: object
+      properties:
+        contact: { $ref: '#/components/schemas/Contact' }
+        address: { $ref: '#/components/schemas/Address' }
+        instructions: { type: string, maxLength: 200 }
+        tax_ids:
+          type: object
+          properties:
+            ioss:
+              type: string
+              pattern: ^IM[0-9]{10}$
+    ParcelContent:
+      type: object
+      required: [description, value, country_of_origin, hs_code]
+      properties:
+        description: { type: string, minLength: 3, maxLength: 300 }
+        value: { type: string, description: Decimal string >= 0.01 }
+        quantity: { type: integer, default: 1 }
+        country_of_origin: { type: string }
+        hs_code:
+          type: string
+          pattern: ^[0-9]{4}\.[0-9]{2}(?:\.[0-9]{1,4})?$
+        manufacturer_id: { type: string, maxLength: 15 }
+    Money:
+      type: object
+      properties:
+        amount: { type: number }
+        currency:
+          type: string
+          enum: [AUD, CAD, USD]
+    Price:
+      type: object
+      properties:
+        gross: { $ref: '#/components/schemas/Money' }
+        net: { $ref: '#/components/schemas/Money' }
+        tax: { $ref: '#/components/schemas/Money' }
+    Cover:
+      type: object
+      properties:
+        total_cover:
+          type: object
+          properties:
+            amount: { type: number }
+        price: { $ref: '#/components/schemas/Price' }
+    Product:
+      type: object
+      properties:
+        code: { type: string }
+        name: { type: string }
+        first_mile_option:
+          type: string
+          enum: [pickup, drop off]
+        service:
+          type: string
+          enum: [standard, express]
+        atl_only: { type: boolean }
+    Route:
+      type: object
+      properties:
+        description: { type: string }
+        type:
+          type: string
+          enum: [same-city, national, remote, export]
+        delivery_guarantee_status:
+          type: string
+          enum: [eligible, ineligible]
+    Scheduling:
+      type: object
+      properties:
+        is_cancellable: { type: boolean }
+        pickup_date: { type: string, format: date, nullable: true }
+        picked_up_on: { type: string, format: date, nullable: true }
+        delivered_on: { type: string, format: date, nullable: true }
+        estimated_delivery_date_minimum: { type: string, format: date, nullable: true }
+        estimated_delivery_date_maximum: { type: string, format: date, nullable: true }
+    OrderRequest:
+      type: object
+      required: [sender, receiver, description, weight, dimensions]
+      properties:
+        sender: { $ref: '#/components/schemas/Party' }
+        receiver: { $ref: '#/components/schemas/Party' }
+        description: { type: string, maxLength: 255 }
+        weight: { $ref: '#/components/schemas/Weight' }
+        dimensions: { $ref: '#/components/schemas/Dimensions' }
+        volume: { $ref: '#/components/schemas/Volume' }
+        customer_reference: { type: string, maxLength: 255 }
+        product_code: { type: string }
+        first_mile_option:
+          type: string
+          enum: [pickup, drop off]
+          deprecated: true
+        pickup_date: { type: string, format: date }
+        packaging_type:
+          type: string
+          enum: [box, satchel, unlimited satchel]
+        metadata: { type: object, additionalProperties: true }
+        hide_pickup_address: { type: boolean }
+        cover: { $ref: '#/components/schemas/Cover' }
+        parcel_contents:
+          type: array
+          items: { $ref: '#/components/schemas/ParcelContent' }
+        contents_type:
+          type: string
+          enum: [Documents, Gift, Merchandise, Returned Goods, Sample, Other]
+    Order:
+      type: object
+      properties:
+        order_id: { type: string, format: uuid }
+        state: { type: string }
+        order_url: { type: string, format: uri }
+        sendle_reference: { type: string, minLength: 6 }
+        tracking_url: { type: string, format: uri }
+        metadata: { type: object, additionalProperties: true }
+        labels:
+          type: array
+          items:
+            type: object
+            properties:
+              format: { type: string, enum: [pdf, png] }
+              size: { type: string, enum: [cropped, a4, letter] }
+              url: { type: string, format: uri }
+        scheduling: { $ref: '#/components/schemas/Scheduling' }
+        hide_pickup_address: { type: boolean }
+        description: { type: string }
+        weight: { $ref: '#/components/schemas/Weight' }
+        volume: { $ref: '#/components/schemas/Volume' }
+        dimensions: { $ref: '#/components/schemas/Dimensions' }
+        customer_reference: { type: string }
+        sender: { $ref: '#/components/schemas/Party' }
+        receiver: { $ref: '#/components/schemas/Party' }
+        route: { $ref: '#/components/schemas/Route' }
+        price: { $ref: '#/components/schemas/Price' }
+        price_breakdown: { type: object, additionalProperties: true }
+        tax_breakdown: { type: object, additionalProperties: true }
+        cover: { $ref: '#/components/schemas/Cover' }
+        packaging_type:
+          type: string
+          enum: [box, satchel, unlimited satchel]
+        parcel_contents:
+          type: array
+          items: { $ref: '#/components/schemas/ParcelContent' }
+        contents_type:
+          type: string
+          enum: [Documents, Gift, Merchandise, Returned Goods, Sample, Other]
+        product: { $ref: '#/components/schemas/Product' }
+        expires_at: { type: string, format: date-time }
+  examples:
+    DomesticAURequest:
+      summary: Domestic AU pickup
+      value:
+        sender:
+          contact: { name: Lex Luthor, phone: 0491 570 313, email: lluthor@example.com, company: LexCorp }
+          address: { address_line1: 123 Gotham Ln, suburb: Sydney, state_name: NSW, postcode: "2000", country: AU }
+          instructions: Knock loudly
+        receiver:
+          contact: { name: Clark Kent, email: clarkissuper@dailyplanet.xyz, company: Daily Planet }
+          address: { address_line1: 80 Wentworth Park Road, suburb: Glebe, state_name: NSW, postcode: "2037", country: AU }
+          instructions: Give directly to Clark
+        description: Kryptonite
+        weight: { value: "1.0", units: kg }
+        dimensions: { length: "30.0", width: "20.0", height: "17.0", units: cm }
+        customer_reference: SupBdayPressie
+        metadata: { your_data: XYZ123 }
+        hide_pickup_address: true
+        packaging_type: box
+    InternationalAUNZRequest:
+      summary: International AU to NZ
+      value:
+        sender:
+          contact: { name: Lex Luthor, phone: 0491 570 313, email: lluthor@example.com }
+          address: { address_line1: 123 Gotham Ln, suburb: Sydney, state_name: NSW, postcode: "2000", country: AU }
+        receiver:
+          contact: { name: Clark Kent, phone: "+64 21 555 1234", email: clarkissuper@dailyplanet.xyz }
+          address: { address_line1: 1 Queen St, suburb: Auckland, state_name: AUK, postcode: "1010", country: NZ }
+          instructions: Please leave at door
+        description: Kryptonite
+        weight: { value: "1.0", units: kg }
+        dimensions: { length: "30.0", width: "20.0", height: "17.0", units: cm }
+        parcel_contents:
+          - description: Kryptonite mineral sample
+            value: "900.0"
+            quantity: 1
+            country_of_origin: US
+            hs_code: 2530.10.00
+        contents_type: Gift
+        packaging_type: box

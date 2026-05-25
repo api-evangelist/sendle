@@ -1,0 +1,20 @@
+{
+  "delivery": {
+    "method": "POST",
+    "target": "https://your-partner-app.example.com/sendle-webhook",
+    "headers": { "Content-Type": "application/json", "User-Agent": "Sendle-Webhooks" }
+  },
+  "payload": {
+    "sendle_reference": "SAMPLE1",
+    "event_id": "d72ef987-6699-4f01-b3a2-7292048c2a46",
+    "description": "Parcel has been dropped off",
+    "event_type": "Dropped off",
+    "location_data": { "suburb": "Eugene", "state": "OR", "postcode": "97405", "country": "US" },
+    "scan_time": "2026-05-25T21:21:05Z"
+  },
+  "delivery_semantics": {
+    "expected_response": "HTTP 2xx (200, 201, etc.)",
+    "retry_policy": "Up to 3 retries on failure",
+    "signature_verification": "Not documented as of 2026-05-25"
+  }
+}

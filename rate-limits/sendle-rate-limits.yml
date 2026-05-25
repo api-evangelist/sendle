@@ -1,0 +1,55 @@
+apiCommons:
+  rateLimitsVersion: "0.1"
+provider: sendle
+title: Sendle API Rate Limits
+description: |
+  Sendle publishes one explicit rate limit (the tracking endpoint). Other endpoints
+  do not document a numeric limit; integrators are expected to back off on 429
+  responses. Webhooks reduce the need to poll tracking and are the recommended
+  way to receive ongoing updates.
+last_verified: 2026-05-25
+source:
+  - https://developers.sendle.com/reference/trackparcel
+  - https://developers.sendle.com/reference/tracking-webhooks
+defaults:
+  burst: not documented
+  sustained: not documented
+  scope: per IP
+limits:
+  - api: sendle-tracking-api
+    operation: trackParcel
+    method: GET
+    path: /parcels/{ref}/tracking
+    limit:
+      requests: 10
+      period: second
+      scope: per_ip
+    notes: Sendle recommends polling each parcel at most once per hour. Higher limits are available on request via api@sendle.com.
+  - api: sendle-orders-api
+    operation: createOrder
+    method: POST
+    path: /orders
+    limit:
+      requests: not documented
+      period: minute
+      scope: per_account
+    notes: Sendle does not publish a numeric limit. Use Idempotency-Key on retries to avoid duplicate bookings.
+  - api: sendle-products-api
+    operation: getProducts
+    method: GET
+    path: /products
+    limit:
+      requests: not documented
+      period: minute
+      scope: per_account
+quota:
+  parcels_per_month_billing_floors:
+    - tier: Sendle Premium
+      minimum: 20
+    - tier: Sendle Pro
+      minimum: 200
+recommendations:
+  - Subscribe to tracking webhooks instead of polling /parcels/{ref}/tracking on a tight loop.
+  - Cache quotes briefly (≤ 5 minutes) per route+weight to amortize Products calls.
+  - Use the sandbox (sandbox.sendle.com) for load testing — sandbox and production credentials are not interchangeable.
+  - Treat 429 as a hard backoff signal and reach out to api@sendle.com if a higher limit is required.

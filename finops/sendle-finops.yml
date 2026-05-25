@@ -1,0 +1,63 @@
+finops:
+  framework: FinOps Framework
+  data_spec: FOCUS 1.0 (aligned, not certified)
+  version: "0.1"
+provider: sendle
+title: Sendle FinOps Mapping
+description: |
+  Sendle is a fulfillment cost line item in the COGS / shipping bucket. Costs are
+  recognized per shipment, in the sender's currency, with line-item breakdowns
+  for base, fuel surcharge, cover, duties, and tax. Integrators can use order_id
+  and customer_reference as the join key into their internal cost-allocation
+  systems.
+last_verified: 2026-05-25
+billing_surface:
+  invoicing:
+    cadence: per_shipment_aggregated_monthly
+    artifact: Dashboard Billing CSV (https://developers.sendle.com/reference/dashboard-billing-csv)
+    currencies: [AUD, CAD, USD]
+  charge_model: usage
+  pricing_unit: shipment
+  metering: server-side, based on accepted /orders POSTs and label use for returns
+cost_categories:
+  - id: base
+    name: Base Shipping Fee
+    focus_charge_category: Usage
+    focus_charge_subcategory: Standard
+    description: Core route-based shipping cost.
+  - id: discount
+    name: Plan Discount
+    focus_charge_category: Adjustment
+    focus_charge_subcategory: Credit
+    description: Sendle Premium / Pro volume discount applied to the base fee.
+  - id: cover
+    name: Parcel Cover (Insurance)
+    focus_charge_category: Usage
+    focus_charge_subcategory: Add-on
+    description: Optional insurance coverage purchased per parcel.
+  - id: fuel_surcharge
+    name: Fuel Surcharge
+    focus_charge_category: Usage
+    focus_charge_subcategory: Surcharge
+    description: Variable surcharge applied per shipment.
+  - id: duties
+    name: International Duties
+    focus_charge_category: Tax
+    focus_charge_subcategory: Duty
+    description: Customs duties on DDP Price Guaranteed shipments.
+  - id: tax
+    name: GST / HST / QST / Sales Tax
+    focus_charge_category: Tax
+    focus_charge_subcategory: VAT
+    description: Indirect taxes on the gross shipment price, broken down in tax_breakdown.
+allocation_keys:
+  primary:
+    - order_id
+    - sendle_reference
+  recommended:
+    - customer_reference (caller-supplied tag for cost center / order / SKU)
+    - metadata.* (1MB free-form JSON for tagging)
+notes:
+  - The /orders response includes price.gross, price.net, price.tax, and a price_breakdown for granular FinOps mapping.
+  - There is no programmatic invoice / billing API today; reconciliation runs off the Dashboard Billing CSV plus per-order price data.
+  - There is no per-second/per-call API price — Sendle charges for shipments, not API calls.

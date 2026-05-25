@@ -1,0 +1,81 @@
+asyncapi: 3.0.0
+info:
+  title: Sendle Tracking Webhooks
+  version: "1.0"
+  description: |
+    Sendle pushes parcel tracking events to a callback URL configured in the
+    account Settings -> API page. Subscriptions are created per parcel via the
+    Tracking API. Sendle expects 2xx responses; failed deliveries are retried up
+    to three times.
+servers:
+  partner:
+    host: example.com
+    protocol: https
+    description: The partner-controlled HTTPS endpoint registered as the account callback URL.
+channels:
+  trackingEvents:
+    address: /sendle-webhook
+    description: Endpoint registered on the account to receive parcel tracking events.
+    messages:
+      trackingEvent:
+        $ref: '#/components/messages/TrackingEvent'
+operations:
+  receiveTrackingEvent:
+    action: receive
+    channel:
+      $ref: '#/channels/trackingEvents'
+    summary: Receive a tracking event for a subscribed parcel
+    messages:
+      - $ref: '#/channels/trackingEvents/messages/trackingEvent'
+components:
+  messages:
+    TrackingEvent:
+      name: TrackingEvent
+      title: Parcel Tracking Event
+      summary: Webhook fired when a subscribed parcel transitions between tracking states.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TrackingEventPayload'
+  schemas:
+    TrackingEventPayload:
+      type: object
+      required: [sendle_reference, event_id, event_type, scan_time]
+      properties:
+        sendle_reference:
+          type: string
+          description: Unique Sendle order identifier (alphanumeric, 6+ chars, starts with "S").
+        event_id:
+          type: string
+          format: uuid
+          description: Webhook event unique system identifier.
+        event_type:
+          type: string
+          enum:
+            - Pickup Attempted
+            - Pickup
+            - Drop Off
+            - Dropped off
+            - Info
+            - In Transit
+            - Out for Delivery
+            - Delivery Attempted
+            - Delivered
+            - Local Delivery
+            - Card Left
+            - Left with Agent
+            - Damaged
+            - Unable to Deliver
+            - Expired
+        scan_time:
+          type: string
+          format: date-time
+          description: UTC timestamp of the scan event (RFC 3339).
+        description:
+          type: string
+        location_data:
+          type: object
+          properties:
+            suburb: { type: string, nullable: true }
+            state: { type: string, nullable: true }
+            postcode: { type: string, nullable: true }
+            country: { type: string, nullable: true }

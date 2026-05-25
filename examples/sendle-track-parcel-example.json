@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.sendle.com/api/parcels/S3NDLE/tracking",
+    "headers": { "Authorization": "Basic <base64(SendleID:APIKey)>" }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "state": "Delivered",
+      "status": { "description": "Parcel delivered", "last_changed_at": "2026-05-25 04:25:00 UTC" },
+      "origin": { "country": "AU" },
+      "destination": { "country": "AU" },
+      "scheduling": {
+        "pickup_date": null,
+        "picked_up_on": "2026-05-24",
+        "delivered_on": "2026-05-25",
+        "estimated_delivery_date_minimum": null,
+        "estimated_delivery_date_maximum": null
+      },
+      "tracking_events": [
+        { "event_type": "Pickup", "scan_time": "2026-05-24T01:04:00Z", "description": "Parcel picked up", "location": "Sydney, NSW", "location_data": { "suburb": "Sydney", "state": "NSW", "country": "Australia" } },
+        { "event_type": "Out for Delivery", "scan_time": "2026-05-25T03:23:00Z", "description": "Parcel onboard courier vehicle for delivery", "location_data": {} },
+        { "event_type": "Delivered", "scan_time": "2026-05-25T04:25:00Z", "description": "Parcel delivered", "location_data": {} }
+      ]
+    }
+  }
+}

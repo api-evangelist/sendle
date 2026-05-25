@@ -1,0 +1,15 @@
+capability: ping-utility
+title: Sendle Ping - Credential & Idempotency Check
+description: Cheap connectivity and credential test endpoint, suitable for verifying that an integration is wired up before booking real shipments.
+provider: sendle
+api: sendle-ping-api
+operations:
+  - id: ping
+    summary: Verify credentials and server reachability
+    method: GET
+    path: /ping
+    spec: openapi/sendle-ping-api-openapi.yml
+usage:
+  - Pre-flight credential check during integration setup
+  - Test idempotency-key behavior without booking real orders
+  - Sandbox vs production smoke test

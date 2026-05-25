@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendle/main/json-schema/sendle-order-schema.json",
+  "title": "Sendle Order",
+  "description": "A Sendle parcel shipping order, returned by POST /orders and GET /orders/{id}.",
+  "type": "object",
+  "required": ["order_id", "sendle_reference", "state"],
+  "properties": {
+    "order_id": { "type": "string", "format": "uuid" },
+    "sendle_reference": { "type": "string", "minLength": 6, "pattern": "^S" },
+    "state": { "type": "string", "enum": ["Pickup", "Drop Off", "Picked up", "In Transit", "Delivered", "Cancelled", "Returned"] },
+    "order_url": { "type": "string", "format": "uri" },
+    "tracking_url": { "type": "string", "format": "uri" },
+    "customer_reference": { "type": "string", "maxLength": 255 },
+    "description": { "type": "string", "maxLength": 255 },
+    "metadata": { "type": "object", "additionalProperties": true },
+    "weight": {
+      "type": "object",
+      "required": ["value", "units"],
+      "properties": {
+        "value": { "type": "string" },
+        "units": { "type": "string", "enum": ["kg", "lb", "g", "oz"] }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "required": ["length", "width", "height", "units"],
+      "properties": {
+        "length": { "type": "string" },
+        "width": { "type": "string" },
+        "height": { "type": "string" },
+        "units": { "type": "string", "enum": ["cm", "in"] }
+      }
+    },
+    "sender": { "$ref": "#/$defs/Party" },
+    "receiver": { "$ref": "#/$defs/Party" },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "format": { "type": "string", "enum": ["pdf", "png"] },
+          "size": { "type": "string", "enum": ["cropped", "a4", "letter"] },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "price": { "$ref": "#/$defs/Price" },
+    "scheduling": {
+      "type": "object",
+      "properties": {
+        "is_cancellable": { "type": "boolean" },
+        "pickup_date": { "type": ["string", "null"], "format": "date" },
+        "picked_up_on": { "type": ["string", "null"], "format": "date" },
+        "delivered_on": { "type": ["string", "null"], "format": "date" }
+      }
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["same-city", "national", "remote", "export"] }
+      }
+    },
+    "product": {
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "first_mile_option": { "type": "string", "enum": ["pickup", "drop off"] },
+        "service": { "type": "string", "enum": ["standard", "express"] },
+        "atl_only": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "Party": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string" },
+            "phone": { "type": "string" },
+            "email": { "type": "string", "format": "email" },
+            "company": { "type": "string" }
+          }
+        },
+        "address": {
+          "type": "object",
+          "required": ["address_line1", "suburb", "postcode", "state_name"],
+          "properties": {
+            "address_line1": { "type": "string", "maxLength": 255 },
+            "address_line2": { "type": "string", "maxLength": 255 },
+            "suburb": { "type": "string" },
+            "postcode": { "type": "string" },
+            "state_name": { "type": "string" },
+            "country": { "type": "string", "description": "ISO 3166-1 alpha-2" }
+          }
+        },
+        "instructions": { "type": "string", "maxLength": 200 }
+      }
+    },
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": { "type": "number" },
+        "currency": { "type": "string", "enum": ["AUD", "CAD", "USD"] }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "properties": {
+        "gross": { "$ref": "#/$defs/Money" },
+        "net": { "$ref": "#/$defs/Money" },
+        "tax": { "$ref": "#/$defs/Money" }
+      }
+    }
+  }
+}

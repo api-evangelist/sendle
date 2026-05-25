@@ -1,0 +1,62 @@
+apiCommons:
+  plansVersion: "0.1"
+provider: sendle
+title: Sendle Plans and Pricing
+description: |
+  Sendle's commercial model is volume-based, not subscription-based. There are three
+  account tiers (Personal, Premium, Pro) with no monthly fees; better rates unlock as
+  monthly parcel volume grows. Customers are billed per shipment in the currency of
+  the sender country (AUD/CAD/USD). Sendle Premium and Pro also include levels of
+  business support.
+source:
+  - https://try.sendle.com/en-us/pricing
+  - https://sendle.com/pricing
+last_verified: 2026-05-25
+plans:
+  - id: sendle-personal
+    name: Sendle Personal
+    type: PayAsYouGo
+    description: Default tier for occasional senders. No monthly fee or minimums.
+    pricing_model: per-shipment
+    minimum_volume:
+      parcels_per_month: 0
+    geo: [AU, US, CA]
+    features:
+      - Free pickup and drop-off
+      - No subscription fees
+      - No contracts
+      - International shipping from AU and US to ~180 countries; CA to US
+      - Sendle Saver, Preferred, 3-Day Guaranteed, 2-Day Guaranteed service tiers (US)
+  - id: sendle-premium
+    name: Sendle Premium
+    type: VolumeTier
+    description: Better rates for higher-volume senders, with premium business support.
+    pricing_model: per-shipment
+    minimum_volume:
+      parcels_per_month: 20
+    geo: [AU, US, CA]
+    features:
+      - Discounted per-shipment rates
+      - Free premium business support
+      - No subscription fees
+      - Free pickup and drop-off
+  - id: sendle-pro
+    name: Sendle Pro
+    type: VolumeTier
+    description: Highest-volume tier with maximum per-shipment savings.
+    pricing_model: per-shipment
+    minimum_volume:
+      parcels_per_month: 200
+    geo: [AU, US, CA]
+    features:
+      - Up to ~80% savings vs Personal
+      - Free priority business support
+      - No subscription fees
+      - Free pickup and drop-off
+      - Account-managed onboarding for high-volume senders
+notes:
+  - Rates vary by route, weight, dimensions, packaging type, and service speed.
+  - Currency is determined by sender country (AUD for AU, CAD for CA, USD for US).
+  - International Duties Paid (DDP Price Guaranteed) shipments include duties and taxes in the quote.
+  - International Duties Unpaid (DAP) shipments leave duties to the recipient on arrival.
+  - Live rates are returned by the Products / Quote API endpoints — there is no public per-route rate card.

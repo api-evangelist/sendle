@@ -1,0 +1,73 @@
+vocabulary: sendle
+title: Sendle Shipping Vocabulary
+description: |
+  Normative terms used across the Sendle API and integration docs covering orders,
+  tracking, products, manifests, and the supply-chain context Sendle operates in.
+version: "1.0"
+domain: Logistics, Shipping, Last-Mile Delivery
+regions:
+  - Australia
+  - United States
+  - Canada
+terms:
+  - term: Sendle Reference
+    abbreviation: ref
+    definition: Unique parcel identifier (alphanumeric, 6+ chars, starts with "S") used across Orders and Tracking.
+  - term: Order
+    definition: A booked Sendle shipment with sender, receiver, weight, dimensions, price, and label.
+  - term: Product
+    definition: A specific shipping service tier and first-mile option pairing (e.g. Standard Pickup, Express Drop Off).
+  - term: First Mile
+    definition: How a parcel enters the Sendle network — driver pickup or sender drop-off at a valid Sendle location.
+  - term: Idempotency Key
+    definition: Client-provided header allowing a POST to be safely retried without creating duplicates.
+  - term: Tracking Event
+    definition: A single scan or status update in the parcel lifecycle, identified by event_type.
+  - term: Webhook Subscription
+    definition: Per-parcel registration that pushes tracking events to the account-level callback URL.
+  - term: Manifest
+    abbreviation: SCAN Form
+    definition: USPS SCAN Form bundling many US Domestic Sendle orders under a single barcode for driver collection.
+  - term: Duties Unpaid
+    abbreviation: DAP
+    definition: International service where the recipient may owe duties and taxes on arrival.
+  - term: Duties Paid
+    abbreviation: DDP
+    definition: International service where duties and taxes are included in the quote (Price Guaranteed).
+  - term: HS Code
+    definition: Harmonized System tariff code (6-10 digits) required for international parcel contents.
+  - term: Cover
+    definition: Optional insurance coverage purchased per parcel.
+  - term: Pickup
+    definition: Driver collection of the parcel from the sender's address.
+  - term: Drop Off
+    definition: Sender deposits the parcel at a valid Sendle drop-off location.
+  - term: ATL Only
+    definition: "Authority To Leave only" - parcel will be left without signature at destination.
+  - term: Hide Pickup Address
+    definition: Australia-only flag suppressing the pickup address from the printed label (privacy for senders).
+shipping_event_types:
+  - Pickup Attempted
+  - Pickup
+  - Drop Off
+  - Dropped Off
+  - Info
+  - In Transit
+  - Out for Delivery
+  - Delivery Attempted
+  - Delivered
+  - Local Delivery
+  - Card Left
+  - Left with Agent
+  - Damaged
+  - Unable to Deliver
+  - Expired
+related_standards:
+  - name: ISO 3166-1 alpha-2
+    use: Country codes in addresses
+  - name: ISO 4217
+    use: Currency codes (AUD, CAD, USD)
+  - name: RFC 3339
+    use: Timestamp serialization in tracking and webhook payloads
+  - name: Harmonized System (WCO)
+    use: International parcel contents tariff codes

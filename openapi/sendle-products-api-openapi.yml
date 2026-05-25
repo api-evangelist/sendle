@@ -1,0 +1,267 @@
+openapi: 3.1.0
+info:
+  title: Sendle Products & Quoting API
+  version: "1.0"
+  description: |
+    Quote shipments and discover serviceable products for a route. Returns one quote
+    per supported shipping product (Standard vs Express, pickup vs drop off, domestic
+    vs international Duties Unpaid vs Duties Paid).
+  contact:
+    name: Sendle API Support
+    email: api@sendle.com
+    url: https://developers.sendle.com
+servers:
+  - url: https://api.sendle.com/api
+    description: Production
+  - url: https://sandbox.sendle.com/api
+    description: Sandbox
+security:
+  - basicAuth: []
+tags:
+  - name: Products
+    description: Quote shipments and list serviceable products
+paths:
+  /products:
+    get:
+      operationId: getProducts
+      summary: Get Products
+      tags: [Products]
+      description: Returns one quote for each shipping product Sendle supports for the given route via query parameters. Supports Duties Unpaid (DAP) international quotes only.
+      parameters:
+        - name: sender_address_country
+          in: query
+          required: true
+          schema: { type: string, example: AU }
+        - name: sender_address_suburb
+          in: query
+          schema: { type: string }
+        - name: sender_address_postcode
+          in: query
+          required: true
+          schema: { type: string }
+        - name: receiver_address_country
+          in: query
+          required: true
+          schema: { type: string, example: AU }
+        - name: receiver_address_suburb
+          in: query
+          schema: { type: string }
+        - name: receiver_address_postcode
+          in: query
+          required: true
+          schema: { type: string }
+        - name: weight_value
+          in: query
+          required: true
+          schema: { type: string }
+        - name: weight_units
+          in: query
+          required: true
+          schema: { type: string, enum: [kg, lb, g, oz] }
+        - name: length_value
+          in: query
+          schema: { type: string }
+        - name: width_value
+          in: query
+          schema: { type: string }
+        - name: height_value
+          in: query
+          schema: { type: string }
+        - name: dimension_units
+          in: query
+          schema: { type: string, enum: [cm, in] }
+        - name: packaging_type
+          in: query
+          schema: { type: string, enum: [box, satchel, unlimited satchel] }
+      responses:
+        '200':
+          description: List of available products with quotes
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductQuote' }
+    post:
+      operationId: postProducts
+      summary: Serviceable Products
+      tags: [Products]
+      description: Returns one quote per shipping product for the given route. Supports both Duties Unpaid (DAP) and Duties Paid (DDP Price Guaranteed) for international.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductsRequest'
+      responses:
+        '200':
+          description: List of available products with quotes
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductQuote' }
+  /quote:
+    get:
+      operationId: getQuote
+      summary: Get A Quote (Deprecated)
+      tags: [Products]
+      deprecated: true
+      description: Legacy quote endpoint. Use GET or POST /products instead.
+      parameters:
+        - name: pickup_suburb
+          in: query
+          schema: { type: string }
+        - name: pickup_postcode
+          in: query
+          schema: { type: string }
+        - name: pickup_country
+          in: query
+          schema: { type: string }
+        - name: delivery_suburb
+          in: query
+          schema: { type: string }
+        - name: delivery_postcode
+          in: query
+          schema: { type: string }
+        - name: delivery_country
+          in: query
+          schema: { type: string }
+        - name: weight_value
+          in: query
+          schema: { type: string }
+        - name: weight_units
+          in: query
+          schema: { type: string, enum: [kg, lb, g, oz] }
+      responses:
+        '200':
+          description: Legacy quote
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductQuote' }
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    Money:
+      type: object
+      properties:
+        amount: { type: number }
+        currency:
+          type: string
+          enum: [AUD, CAD, USD]
+    AddressOnly:
+      type: object
+      required: [suburb, postcode, country]
+      properties:
+        address_line1: { type: string }
+        address_line2: { type: string }
+        suburb: { type: string }
+        postcode: { type: string }
+        country: { type: string }
+    PartyAddress:
+      type: object
+      properties:
+        address: { $ref: '#/components/schemas/AddressOnly' }
+    ProductsRequest:
+      type: object
+      required: [sender, receiver, weight]
+      properties:
+        sender: { $ref: '#/components/schemas/PartyAddress' }
+        receiver: { $ref: '#/components/schemas/PartyAddress' }
+        weight:
+          type: object
+          properties:
+            value: { type: string }
+            units: { type: string, enum: [kg, lb, g, oz] }
+        dimensions:
+          type: object
+          properties:
+            length: { type: string }
+            width: { type: string }
+            height: { type: string }
+            units: { type: string, enum: [cm, in] }
+        packaging_type:
+          type: string
+          enum: [box, satchel, unlimited satchel]
+        parcel_contents:
+          type: array
+          items:
+            type: object
+            properties:
+              description: { type: string }
+              value: { type: string }
+              quantity: { type: integer }
+              country_of_origin: { type: string }
+              hs_code: { type: string }
+        contents_type:
+          type: string
+          enum: [Documents, Gift, Merchandise, Returned Goods, Sample, Other]
+        cover:
+          type: object
+          properties:
+            total_cover:
+              type: object
+              properties:
+                amount: { type: number }
+    ProductQuote:
+      type: object
+      properties:
+        quote:
+          type: object
+          properties:
+            gross: { $ref: '#/components/schemas/Money' }
+            net: { $ref: '#/components/schemas/Money' }
+            tax: { $ref: '#/components/schemas/Money' }
+        price_breakdown:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Money'
+        tax_breakdown:
+          type: object
+          additionalProperties: true
+        plan: { type: string, example: Sendle Pro }
+        eta:
+          type: object
+          properties:
+            days_range:
+              type: array
+              items: { type: integer }
+              minItems: 2
+              maxItems: 2
+            date_range:
+              type: array
+              items: { type: string, format: date }
+              minItems: 2
+              maxItems: 2
+            for_send_date: { type: string, format: date }
+        route:
+          type: object
+          properties:
+            description: { type: string }
+            type:
+              type: string
+              enum: [same-city, national, remote, export]
+        allowed_packaging:
+          type: string
+          enum: [any, box, satchel, unlimited satchel]
+        product:
+          type: object
+          properties:
+            code: { type: string }
+            name: { type: string }
+            first_mile_option: { type: string, enum: [pickup, drop off] }
+            service: { type: string, enum: [standard, express] }
+            atl_only: { type: boolean }
+        cover:
+          type: object
+          properties:
+            price:
+              type: object
+              properties:
+                gross: { $ref: '#/components/schemas/Money' }
+                net: { $ref: '#/components/schemas/Money' }
+                tax: { $ref: '#/components/schemas/Money' }
