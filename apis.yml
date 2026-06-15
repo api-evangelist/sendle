@@ -2,16 +2,16 @@ aid: sendle
 url: https://raw.githubusercontent.com/api-evangelist/sendle/refs/heads/main/apis.yml
 name: Sendle
 tags:
-- Shipping
-- Logistics
-- Last Mile
-- Parcels
-- E-commerce
-- Carbon Neutral
-- Small Business
-- Australia
-- United States
-- Canada
+  - Shipping
+  - Logistics
+  - Last Mile
+  - Parcels
+  - E-commerce
+  - Carbon Neutral
+  - Small Business
+  - Australia
+  - United States
+  - Canada
 kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
@@ -22,192 +22,184 @@ description: |
   quoting, order creation, label retrieval, tracking, USPS SCAN-Form shipping
   manifests, and per-parcel tracking webhooks via HTTP Basic Authentication.
 apis:
-- aid: sendle:sendle-orders-api
-  name: Sendle Orders API
-  tags:
-  - Orders
-  - Shipping
-  - Labels
-  humanURL: https://developers.sendle.com/reference/createorder
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: https://developers.sendle.com/reference/createorder
-    type: Documentation
-  - url: https://developers.sendle.com/reference/vieworder
-    type: Documentation
-  - url: https://developers.sendle.com/reference/cancelorder
-    type: Documentation
-  - url: https://developers.sendle.com/reference/returnorder
-    type: Documentation
-  - url: openapi/sendle-orders-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/sendle-order-schema.json
-    type: JSONSchema
-  - url: json-ld/sendle-context.jsonld
-    type: JSONLD
-  - type: NaftikoCapability
-    url: capabilities/orders-shipping.yaml
-  description: |
-    Create, view, cancel, and return parcel orders. Supports domestic AU / US / CA
-    orders plus international from AU and US (DAP and DDP Price Guaranteed) and from
-    CA to US. Returns label URLs, tracking URL, full price + tax breakdown, scheduling,
-    and route metadata. Idempotency-Key header is supported for safe retries.
-- aid: sendle:sendle-products-api
-  name: Sendle Products & Quoting API
-  tags:
-  - Quoting
-  - Products
-  - Pricing
-  humanURL: https://developers.sendle.com/reference/getproducts
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: https://developers.sendle.com/reference/getproducts
-    type: Documentation
-  - url: https://developers.sendle.com/reference/postproducts
-    type: Documentation
-  - url: https://developers.sendle.com/reference/getquote
-    type: Documentation
-  - url: openapi/sendle-products-api-openapi.yml
-    type: OpenAPI
-  description: |
-    Get one quote per shipping product for a given route. GET /products handles
-    domestic and DAP international; POST /products adds DDP Price Guaranteed
-    (duties + taxes included). Each quote includes plan, ETA, route classification,
-    allowed packaging, and product code (e.g. STANDARD-PICKUP). The legacy
-    GET /quote is deprecated.
-- aid: sendle:sendle-tracking-api
-  name: Sendle Tracking API
-  tags:
-  - Tracking
-  - Webhooks
-  - Events
-  humanURL: https://developers.sendle.com/reference/trackparcel
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: https://developers.sendle.com/reference/trackparcel
-    type: Documentation
-  - url: https://developers.sendle.com/reference/subscribetotrackingevents
-    type: Documentation
-  - url: https://developers.sendle.com/reference/unsubscribetotrackingevents
-    type: Documentation
-  - url: https://developers.sendle.com/reference/tracking-webhooks
-    type: Documentation
-  - url: openapi/sendle-tracking-api-openapi.yml
-    type: OpenAPI
-  - url: asyncapi/sendle-tracking-asyncapi.yml
-    type: AsyncAPI
-  - url: json-schema/sendle-tracking-event-schema.json
-    type: JSONSchema
-  - type: NaftikoCapability
-    url: capabilities/tracking-events.yaml
-  description: |
-    Retrieve all tracking events for a parcel by Sendle reference, or subscribe a
-    parcel to webhook tracking updates. Webhooks deliver per-event JSON payloads
-    to the account-level callback URL configured in the Sendle dashboard. Polling
-    is rate-limited to 10 req/sec/IP; Sendle recommends webhooks over polling.
-- aid: sendle:sendle-manifests-api
-  name: Sendle Shipping Manifests API
-  tags:
-  - Manifests
-  - USPS
-  - SCAN Form
-  - US Domestic
-  humanURL: https://developers.sendle.com/reference/createshippingmanifest
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: https://developers.sendle.com/reference/createshippingmanifest
-    type: Documentation
-  - url: https://developers.sendle.com/reference/getshippingmanifests
-    type: Documentation
-  - url: https://developers.sendle.com/reference/downloadshippingmanifest
-    type: Documentation
-  - url: https://developers.sendle.com/reference/getshippingmanifeststatus
-    type: Documentation
-  - url: openapi/sendle-manifests-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/manifests-usps-scan.yaml
-  description: |
-    Create, list, download (PDF), and inspect USPS SCAN Form shipping manifests so
-    a driver can pick up many US Domestic Sendle orders with a single barcode scan.
-    Orders must be created the same day as the manifest; manifests are immutable
-    once created.
-- aid: sendle:sendle-ping-api
-  name: Sendle Ping API
-  tags:
-  - Utility
-  - Health Check
-  humanURL: https://developers.sendle.com/reference/ping
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: https://developers.sendle.com/reference/ping
-    type: Documentation
-  - url: openapi/sendle-ping-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/ping-utility.yaml
-  description: |
-    Cheap connectivity and credential test endpoint. Verifies that Sendle ID / API
-    Key are correctly configured and that idempotency keys are being applied,
-    without booking any real shipments.
+  - aid: sendle:sendle-orders-api
+    name: Sendle Orders API
+    tags:
+      - Orders
+      - Shipping
+      - Labels
+    humanURL: https://developers.sendle.com/reference/createorder
+    baseURL: https://api.sendle.com/api
+    properties:
+      - url: https://developers.sendle.com/reference/createorder
+        type: Documentation
+      - url: https://developers.sendle.com/reference/vieworder
+        type: Documentation
+      - url: https://developers.sendle.com/reference/cancelorder
+        type: Documentation
+      - url: https://developers.sendle.com/reference/returnorder
+        type: Documentation
+      - url: openapi/sendle-orders-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/sendle-order-schema.json
+        type: JSONSchema
+      - url: json-ld/sendle-context.jsonld
+        type: JSONLD
+    description: |
+      Create, view, cancel, and return parcel orders. Supports domestic AU / US / CA
+      orders plus international from AU and US (DAP and DDP Price Guaranteed) and from
+      CA to US. Returns label URLs, tracking URL, full price + tax breakdown, scheduling,
+      and route metadata. Idempotency-Key header is supported for safe retries.
+  - aid: sendle:sendle-products-api
+    name: Sendle Products & Quoting API
+    tags:
+      - Quoting
+      - Products
+      - Pricing
+    humanURL: https://developers.sendle.com/reference/getproducts
+    baseURL: https://api.sendle.com/api
+    properties:
+      - url: https://developers.sendle.com/reference/getproducts
+        type: Documentation
+      - url: https://developers.sendle.com/reference/postproducts
+        type: Documentation
+      - url: https://developers.sendle.com/reference/getquote
+        type: Documentation
+      - url: openapi/sendle-products-api-openapi.yml
+        type: OpenAPI
+    description: |
+      Get one quote per shipping product for a given route. GET /products handles
+      domestic and DAP international; POST /products adds DDP Price Guaranteed
+      (duties + taxes included). Each quote includes plan, ETA, route classification,
+      allowed packaging, and product code (e.g. STANDARD-PICKUP). The legacy
+      GET /quote is deprecated.
+  - aid: sendle:sendle-tracking-api
+    name: Sendle Tracking API
+    tags:
+      - Tracking
+      - Webhooks
+      - Events
+    humanURL: https://developers.sendle.com/reference/trackparcel
+    baseURL: https://api.sendle.com/api
+    properties:
+      - url: https://developers.sendle.com/reference/trackparcel
+        type: Documentation
+      - url: https://developers.sendle.com/reference/subscribetotrackingevents
+        type: Documentation
+      - url: https://developers.sendle.com/reference/unsubscribetotrackingevents
+        type: Documentation
+      - url: https://developers.sendle.com/reference/tracking-webhooks
+        type: Documentation
+      - url: openapi/sendle-tracking-api-openapi.yml
+        type: OpenAPI
+      - url: asyncapi/sendle-tracking-asyncapi.yml
+        type: AsyncAPI
+      - url: json-schema/sendle-tracking-event-schema.json
+        type: JSONSchema
+    description: |
+      Retrieve all tracking events for a parcel by Sendle reference, or subscribe a
+      parcel to webhook tracking updates. Webhooks deliver per-event JSON payloads
+      to the account-level callback URL configured in the Sendle dashboard. Polling
+      is rate-limited to 10 req/sec/IP; Sendle recommends webhooks over polling.
+  - aid: sendle:sendle-manifests-api
+    name: Sendle Shipping Manifests API
+    tags:
+      - Manifests
+      - USPS
+      - SCAN Form
+      - US Domestic
+    humanURL: https://developers.sendle.com/reference/createshippingmanifest
+    baseURL: https://api.sendle.com/api
+    properties:
+      - url: https://developers.sendle.com/reference/createshippingmanifest
+        type: Documentation
+      - url: https://developers.sendle.com/reference/getshippingmanifests
+        type: Documentation
+      - url: https://developers.sendle.com/reference/downloadshippingmanifest
+        type: Documentation
+      - url: https://developers.sendle.com/reference/getshippingmanifeststatus
+        type: Documentation
+      - url: openapi/sendle-manifests-api-openapi.yml
+        type: OpenAPI
+    description: |
+      Create, list, download (PDF), and inspect USPS SCAN Form shipping manifests so
+      a driver can pick up many US Domestic Sendle orders with a single barcode scan.
+      Orders must be created the same day as the manifest; manifests are immutable
+      once created.
+  - aid: sendle:sendle-ping-api
+    name: Sendle Ping API
+    tags:
+      - Utility
+      - Health Check
+    humanURL: https://developers.sendle.com/reference/ping
+    baseURL: https://api.sendle.com/api
+    properties:
+      - url: https://developers.sendle.com/reference/ping
+        type: Documentation
+      - url: openapi/sendle-ping-api-openapi.yml
+        type: OpenAPI
+    description: |
+      Cheap connectivity and credential test endpoint. Verifies that Sendle ID / API
+      Key are correctly configured and that idempotency keys are being applied,
+      without booking any real shipments.
 common:
-- url: https://www.sendle.com
-  name: Sendle
-  type: Website
-- url: https://developers.sendle.com
-  name: Sendle Developer Hub
-  type: Portal
-- url: https://developers.sendle.com/llms.txt
-  name: Sendle Docs Index (llms.txt)
-  type: Documentation
-- url: https://developers.sendle.com/reference/authentication
-  name: Authenticating API Requests
-  type: Authentication
-- url: https://developers.sendle.com/reference/getting-your-api-key
-  name: Getting Your API Key
-  type: Onboarding
-- url: https://developers.sendle.com/reference/sendles-sandbox-server
-  name: Sendle's Sandbox Server
-  type: Sandbox
-- url: https://developers.sendle.com/docs/integration-best-practices
-  name: Integration Best Practices
-  type: Guide
-- url: https://developers.sendle.com/docs/regional-api-differences
-  name: Regional API Differences
-  type: Guide
-- url: https://developers.sendle.com/docs/becoming-a-partner
-  name: Becoming a Partner
-  type: Partnerships
-- url: https://developers.sendle.com/changelog
-  name: Sendle API Changelog
-  type: ChangeLog
-- url: https://status.sendle.com
-  name: Sendle Status
-  type: StatusPage
-- url: https://github.com/sendle
-  name: Sendle on GitHub
-  type: GitHub
-- url: https://www.linkedin.com/company/sendle
-  name: Sendle on LinkedIn
-  type: LinkedIn
-- url: https://try.sendle.com/en-us/pricing
-  name: Sendle Pricing
-  type: Pricing
-- url: plans/sendle-plans-pricing.yml
-  name: Sendle Plans
-  type: Plans
-- url: rate-limits/sendle-rate-limits.yml
-  name: Sendle Rate Limits
-  type: RateLimits
-- url: finops/sendle-finops.yml
-  name: Sendle FinOps Mapping
-  type: FinOps
-- url: vocabulary/sendle-vocabulary.yml
-  name: Sendle Vocabulary
-  type: Vocabulary
-- url: mailto:api@sendle.com
-  name: Sendle API Support
-  type: Support
+  - url: https://www.sendle.com
+    name: Sendle
+    type: Website
+  - url: https://developers.sendle.com
+    name: Sendle Developer Hub
+    type: Portal
+  - url: https://developers.sendle.com/llms.txt
+    name: Sendle Docs Index (llms.txt)
+    type: Documentation
+  - url: https://developers.sendle.com/reference/authentication
+    name: Authenticating API Requests
+    type: Authentication
+  - url: https://developers.sendle.com/reference/getting-your-api-key
+    name: Getting Your API Key
+    type: Onboarding
+  - url: https://developers.sendle.com/reference/sendles-sandbox-server
+    name: Sendle's Sandbox Server
+    type: Sandbox
+  - url: https://developers.sendle.com/docs/integration-best-practices
+    name: Integration Best Practices
+    type: Guide
+  - url: https://developers.sendle.com/docs/regional-api-differences
+    name: Regional API Differences
+    type: Guide
+  - url: https://developers.sendle.com/docs/becoming-a-partner
+    name: Becoming a Partner
+    type: Partnerships
+  - url: https://developers.sendle.com/changelog
+    name: Sendle API Changelog
+    type: ChangeLog
+  - url: https://status.sendle.com
+    name: Sendle Status
+    type: StatusPage
+  - url: https://github.com/sendle
+    name: Sendle on GitHub
+    type: GitHub
+  - url: https://www.linkedin.com/company/sendle
+    name: Sendle on LinkedIn
+    type: LinkedIn
+  - url: https://try.sendle.com/en-us/pricing
+    name: Sendle Pricing
+    type: Pricing
+  - url: plans/sendle-plans-pricing.yml
+    name: Sendle Plans
+    type: Plans
+  - url: rate-limits/sendle-rate-limits.yml
+    name: Sendle Rate Limits
+    type: RateLimits
+  - url: finops/sendle-finops.yml
+    name: Sendle FinOps Mapping
+    type: FinOps
+  - url: vocabulary/sendle-vocabulary.yml
+    name: Sendle Vocabulary
+    type: Vocabulary
+  - url: mailto:api@sendle.com
+    name: Sendle API Support
+    type: Support
 maintainers:
-- FN: Kin Lane
-  email: info@apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com

@@ -1,0 +1,481 @@
+{
+  "item": [
+    {
+      "id": "daa5d64d-14b0-4584-9fda-783f4b1ccbc8",
+      "name": "Tracking",
+      "description": {
+        "content": "Parcel tracking and webhook subscriptions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d7969a43-82dd-40f2-95ac-35c8ceaa2339",
+          "name": "Track A Parcel",
+          "request": {
+            "name": "Track A Parcel",
+            "description": {
+              "content": "Returns tracking details for the given parcel. Limit to 10 requests/second per IP.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                ":ref",
+                "tracking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) Sendle reference (alphanumeric, 6+ chars, begins with \"S\")."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15223a6f-b75e-453d-9733-4023cb7fe9e3",
+              "name": "Tracking details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":ref",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) Sendle reference (alphanumeric, 6+ chars, begins with \"S\")."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"state\": \"string\",\n  \"status\": {\n    \"description\": \"string\",\n    \"last_changed_at\": \"string\"\n  },\n  \"origin\": {\n    \"country\": \"string\"\n  },\n  \"destination\": {\n    \"country\": \"string\"\n  },\n  \"scheduling\": {\n    \"pickup_date\": \"1986-02-26\",\n    \"picked_up_on\": \"1988-09-11\",\n    \"delivered_on\": \"1966-01-24\",\n    \"estimated_delivery_date_minimum\": \"2008-06-29\",\n    \"estimated_delivery_date_maximum\": \"1981-09-29\"\n  },\n  \"tracking_events\": [\n    {\n      \"event_type\": \"In Transit\",\n      \"scan_time\": \"1965-10-22T15:30:57.230Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    },\n    {\n      \"event_type\": \"Card Left\",\n      \"scan_time\": \"1954-11-26T18:47:34.840Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "663fc732-1975-4840-a14c-499f7511abfd",
+              "name": "Parcel not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":ref",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) Sendle reference (alphanumeric, 6+ chars, begins with \"S\")."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ee49cfb8-2a4a-4ac2-aeee-d1d49a26a576",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":ref",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) Sendle reference (alphanumeric, 6+ chars, begins with \"S\")."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38096dde-afd7-4e53-924b-4158c92a9314",
+          "name": "Subscribe To Tracking Events",
+          "request": {
+            "name": "Subscribe To Tracking Events",
+            "description": {
+              "content": "Subscribe to webhook tracking events for a parcel. A callback URL must be configured in the account Settings -> API page before subscribing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                ":ref",
+                "tracking",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7fdecb0d-2e54-4e51-9327-216a19343f0b",
+              "name": "Existing tracking events at the time of subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":ref",
+                    "tracking",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"state\": \"string\",\n  \"status\": {\n    \"description\": \"string\",\n    \"last_changed_at\": \"string\"\n  },\n  \"origin\": {\n    \"country\": \"string\"\n  },\n  \"destination\": {\n    \"country\": \"string\"\n  },\n  \"scheduling\": {\n    \"pickup_date\": \"1986-02-26\",\n    \"picked_up_on\": \"1988-09-11\",\n    \"delivered_on\": \"1966-01-24\",\n    \"estimated_delivery_date_minimum\": \"2008-06-29\",\n    \"estimated_delivery_date_maximum\": \"1981-09-29\"\n  },\n  \"tracking_events\": [\n    {\n      \"event_type\": \"In Transit\",\n      \"scan_time\": \"1965-10-22T15:30:57.230Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    },\n    {\n      \"event_type\": \"Card Left\",\n      \"scan_time\": \"1954-11-26T18:47:34.840Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6149e847-ed93-487c-bc56-2fa9935eb423",
+              "name": "No callback URL configured on the account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":ref",
+                    "tracking",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "681a961d-87a5-4c34-9985-a87f5d8544c9",
+          "name": "Unsubscribe From Tracking Events",
+          "request": {
+            "name": "Unsubscribe From Tracking Events",
+            "description": {
+              "content": "Stop receiving webhooks for the given parcel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                ":ref",
+                "tracking",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "519554b8-a43e-4731-852b-db2a9b3a2244",
+              "name": "Unsubscribed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":ref",
+                    "tracking",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sendle.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "06045a1f-6dc6-4421-a567-607afac57e13",
+    "name": "Sendle Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Retrieve parcel tracking events and subscribe/unsubscribe a parcel from webhook tracking updates.\nSendle delivers webhooks to a callback URL configured on the account.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
+      "type": "text/plain"
+    }
+  }
+}

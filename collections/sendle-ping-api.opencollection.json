@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendle Ping API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Utility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Basic API Test",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/ping",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a simple response and a server-generated timestamp. Useful for verifying API credentials and idempotency keys."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,563 @@
+{
+  "item": [
+    {
+      "id": "5327b266-3deb-4a5c-871f-fec25d38b77e",
+      "name": "Manifests",
+      "description": {
+        "content": "USPS SCAN Form shipping manifests for US Domestic orders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "73948dfa-5eb5-4071-a0d1-a08919875aa8",
+          "name": "Create Shipping Manifest",
+          "request": {
+            "name": "Create Shipping Manifest",
+            "description": {
+              "content": "Creates shipping manifest(s) for the given orders. Each order can only be on one manifest and must be booked the same day.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manifests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bea572be-f91b-49db-897e-dc1c460a02ed",
+              "name": "Shipping manifests created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manifests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"43148258-7f84-2c71-b671-a88244997372\",\n    \"created_at\": \"2024-12-21T18:53:23.693Z\",\n    \"state\": \"available\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 288,\n    \"pickup_date\": \"1984-11-15\",\n    \"download_url\": \"https://skctMnhXXAfVuDwkOy.hyiPN9AY4X99t2BiCj\"\n  },\n  {\n    \"id\": \"37c4e145-7037-fd26-1672-3f4ef80a790c\",\n    \"created_at\": \"2018-05-17T16:03:40.535Z\",\n    \"state\": \"processing\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 1794,\n    \"pickup_date\": \"1947-10-11\",\n    \"download_url\": \"http://bHeSUmgLXwjobLROcRRvrjwGJVmF.asAf7PE0l5F31JySshw1hG+faynC+santT0byx68KKlhxi,QwRyqx,yU\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8caa9620-8ce3-4035-9c9e-509b20cc755d",
+              "name": "Order already manifested or not eligible",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manifests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06fac229-b597-4e3f-bc09-2fe4384d87aa",
+          "name": "Get All Shipping Manifests",
+          "request": {
+            "name": "Get All Shipping Manifests",
+            "description": {
+              "content": "Returns all shipping manifests for your account, including ones created via the API and the Sendle dashboard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manifests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2b5cbed-e51b-4538-b5dd-f9a83262be54",
+              "name": "List of manifests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manifests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"43148258-7f84-2c71-b671-a88244997372\",\n    \"created_at\": \"2024-12-21T18:53:23.693Z\",\n    \"state\": \"available\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 288,\n    \"pickup_date\": \"1984-11-15\",\n    \"download_url\": \"https://skctMnhXXAfVuDwkOy.hyiPN9AY4X99t2BiCj\"\n  },\n  {\n    \"id\": \"37c4e145-7037-fd26-1672-3f4ef80a790c\",\n    \"created_at\": \"2018-05-17T16:03:40.535Z\",\n    \"state\": \"processing\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 1794,\n    \"pickup_date\": \"1947-10-11\",\n    \"download_url\": \"http://bHeSUmgLXwjobLROcRRvrjwGJVmF.asAf7PE0l5F31JySshw1hG+faynC+santT0byx68KKlhxi,QwRyqx,yU\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "453d51c6-ca22-4b80-a7fc-d12853fcd221",
+          "name": "Download Shipping Manifest",
+          "request": {
+            "name": "Download Shipping Manifest",
+            "description": {
+              "content": "Returns the printable PDF shipping manifest.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manifests",
+                ":id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8120034-697d-461c-a904-89f91d853bc7",
+              "name": "PDF shipping manifest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manifests",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84a821d2-2fab-4fcd-bf46-b9ab9db4cc3f",
+          "name": "Get Orders On Shipping Manifest",
+          "request": {
+            "name": "Get Orders On Shipping Manifest",
+            "description": {
+              "content": "Returns all orders on the given shipping manifest.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manifests",
+                ":id",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01cad7bb-5c9c-4029-a681-9c218256ed9f",
+              "name": "Orders on the manifest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manifests",
+                    ":id",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"order_id\": \"d1d6997e-3d23-1901-3064-5d6d2c1b872a\",\n    \"sendle_reference\": \"string\",\n    \"state\": \"string\"\n  },\n  {\n    \"order_id\": \"d98aa3f2-8430-a782-049e-22502f236027\",\n    \"sendle_reference\": \"string\",\n    \"state\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9b6abfd-05a3-4dc5-9b13-b0fc6780a658",
+          "name": "Get Shipping Manifest Status",
+          "request": {
+            "name": "Get Shipping Manifest Status",
+            "description": {
+              "content": "Returns the status and metadata of the given shipping manifest.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manifests",
+                ":id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62f608f4-28a5-4f0d-a022-96057f70adbf",
+              "name": "Manifest status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manifests",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"534a6789-20f3-b21c-f079-2656b229894d\",\n  \"created_at\": \"1983-12-21T05:49:46.335Z\",\n  \"state\": \"available\",\n  \"type\": \"USPS SCAN Form\",\n  \"order_count\": 1371,\n  \"pickup_date\": \"2020-11-13\",\n  \"download_url\": \"https://ZmCHHAalQsLUakgxABVmlXhOFVLAsJ.gzvtSjW+ySvUtUbcyYxfMM-pKWg,aC,+rdGzHM3mQ7w5Nyqxt1ihu2T,VWn\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sendle.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5376fc78-d06f-48e1-8538-4b593cfa7322",
+    "name": "Sendle Shipping Manifests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create and manage shipping manifests so a driver can collect multiple parcels\nby scanning a single barcode. Currently supports USPS SCAN Forms for US domestic\norders only. Manifests can only include orders booked the same day.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
+      "type": "text/plain"
+    }
+  }
+}

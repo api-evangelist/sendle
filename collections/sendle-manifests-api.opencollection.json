@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendle Shipping Manifests API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manifests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Shipping Manifests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/manifests"
+          },
+          "docs": "Returns all shipping manifests for your account, including ones created via the API and the Sendle dashboard."
+        },
+        {
+          "info": {
+            "name": "Create Shipping Manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sendle.com/api/manifests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates shipping manifest(s) for the given orders. Each order can only be on one manifest and must be booked the same day."
+        },
+        {
+          "info": {
+            "name": "Download Shipping Manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/manifests/:id/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the printable PDF shipping manifest."
+        },
+        {
+          "info": {
+            "name": "Get Orders On Shipping Manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/manifests/:id/orders",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all orders on the given shipping manifest."
+        },
+        {
+          "info": {
+            "name": "Get Shipping Manifest Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/manifests/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the status and metadata of the given shipping manifest."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

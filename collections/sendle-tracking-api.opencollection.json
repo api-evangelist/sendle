@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendle Tracking API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track A Parcel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/parcels/:ref/tracking",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "Sendle reference (alphanumeric, 6+ chars, begins with \"S\")."
+              }
+            ]
+          },
+          "docs": "Returns tracking details for the given parcel. Limit to 10 requests/second per IP."
+        },
+        {
+          "info": {
+            "name": "Subscribe To Tracking Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sendle.com/api/parcels/:ref/tracking/subscribe",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Subscribe to webhook tracking events for a parcel. A callback URL must be configured in the account Settings -> API page before subscribing."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe From Tracking Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sendle.com/api/parcels/:ref/tracking/subscribe",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop receiving webhooks for the given parcel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

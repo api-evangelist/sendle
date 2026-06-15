@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendle Products & Quoting API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/products",
+            "params": [
+              {
+                "name": "sender_address_country",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sender_address_suburb",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sender_address_postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "receiver_address_country",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "receiver_address_suburb",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "receiver_address_postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "weight_value",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "weight_units",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "length_value",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "width_value",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "height_value",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dimension_units",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "packaging_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns one quote for each shipping product Sendle supports for the given route via query parameters. Supports Duties Unpaid (DAP) international quotes only."
+        },
+        {
+          "info": {
+            "name": "Serviceable Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sendle.com/api/products",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns one quote per shipping product for the given route. Supports both Duties Unpaid (DAP) and Duties Paid (DDP Price Guaranteed) for international."
+        },
+        {
+          "info": {
+            "name": "Get A Quote (Deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/quote",
+            "params": [
+              {
+                "name": "pickup_suburb",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pickup_postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pickup_country",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "delivery_suburb",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "delivery_postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "delivery_country",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "weight_value",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "weight_units",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Legacy quote endpoint. Use GET or POST /products instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

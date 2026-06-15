@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendle Orders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create An Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sendle.com/api/orders",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an order to ship a parcel to the given delivery address."
+        },
+        {
+          "info": {
+            "name": "View An Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The order_id UUID returned from createOrder."
+              }
+            ]
+          },
+          "docs": "Returns the order including its status, the public tracking URL, and the metadata you passed when creating it."
+        },
+        {
+          "info": {
+            "name": "Cancel An Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sendle.com/api/orders/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The order_id UUID returned from createOrder."
+              }
+            ]
+          },
+          "docs": "Cancels the given order if it has not yet been collected by a driver."
+        },
+        {
+          "info": {
+            "name": "View A Return Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sendle.com/api/orders/:id/return",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The order_id UUID returned from createOrder."
+              }
+            ]
+          },
+          "docs": "Views the given return order, including the label URLs."
+        },
+        {
+          "info": {
+            "name": "Return An Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sendle.com/api/orders/:id/return",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The order_id UUID returned from createOrder."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a return label, letting receivers easily send orders back to the original sender. Domestic only."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
