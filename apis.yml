@@ -157,7 +157,7 @@ common:
     type: Authentication
   - url: https://developers.sendle.com/reference/getting-your-api-key
     name: Getting Your API Key
-    type: Onboarding
+    type: GettingStarted
   - url: https://developers.sendle.com/reference/sendles-sandbox-server
     name: Sendle's Sandbox Server
     type: Sandbox
