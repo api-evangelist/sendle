@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sendle-manifests-api-openapi.yml, openapi/sendle-orders-api-openapi.yml, openapi/sendle-ping-api-openapi.yml,
+  openapi/sendle-products-api-openapi.yml, openapi/sendle-tracking-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/sendle-manifests-api-openapi.yml
+  - openapi/sendle-orders-api-openapi.yml
+  - openapi/sendle-ping-api-openapi.yml
+  - openapi/sendle-products-api-openapi.yml
+  - openapi/sendle-tracking-api-openapi.yml

@@ -143,6 +143,10 @@ apis:
       Key are correctly configured and that idempotency keys are being applied,
       without booking any real shipments.
 common:
+  - type: DomainSecurity
+    url: security/sendle-domain-security.yml
+  - type: Authentication
+    url: authentication/sendle-authentication.yml
   - url: https://www.sendle.com
     name: Sendle
     type: Website
