@@ -1,43 +1,50 @@
 openapi: 3.1.0
 info:
-  title: Sendle Tracking API
-  version: "1.0"
-  description: |
-    Retrieve parcel tracking events and subscribe/unsubscribe a parcel from webhook tracking updates.
-    Sendle delivers webhooks to a callback URL configured on the account.
+  title: Sendle Shipping Manifests Tracking API
+  version: '1.0'
+  description: 'Create and manage shipping manifests so a driver can collect multiple parcels
+
+    by scanning a single barcode. Currently supports USPS SCAN Forms for US domestic
+
+    orders only. Manifests can only include orders booked the same day.
+
+    '
   contact:
     name: Sendle API Support
     email: api@sendle.com
     url: https://developers.sendle.com
 servers:
-  - url: https://api.sendle.com/api
-    description: Production
-  - url: https://sandbox.sendle.com/api
-    description: Sandbox
+- url: https://api.sendle.com/api
+  description: Production
+- url: https://sandbox.sendle.com/api
+  description: Sandbox
 security:
-  - basicAuth: []
+- basicAuth: []
 tags:
-  - name: Tracking
-    description: Parcel tracking and webhook subscriptions
+- name: Tracking
+  description: Parcel tracking and webhook subscriptions
 paths:
   /parcels/{ref}/tracking:
     get:
       operationId: trackParcel
       summary: Track A Parcel
-      tags: [Tracking]
+      tags:
+      - Tracking
       description: Returns tracking details for the given parcel. Limit to 10 requests/second per IP.
       parameters:
-        - name: ref
-          in: path
-          required: true
-          schema: { type: string }
-          description: Sendle reference (alphanumeric, 6+ chars, begins with "S").
+      - name: ref
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Sendle reference (alphanumeric, 6+ chars, begins with "S").
       responses:
         '200':
           description: Tracking details
           content:
             application/json:
-              schema: { $ref: '#/components/schemas/Tracking' }
+              schema:
+                $ref: '#/components/schemas/Tracking'
         '404':
           description: Parcel not found
         '429':
@@ -46,102 +53,146 @@ paths:
     post:
       operationId: subscribeToTrackingEvents
       summary: Subscribe To Tracking Events
-      tags: [Tracking]
+      tags:
+      - Tracking
       description: Subscribe to webhook tracking events for a parcel. A callback URL must be configured in the account Settings -> API page before subscribing.
       parameters:
-        - name: ref
-          in: path
-          required: true
-          schema: { type: string }
+      - name: ref
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Existing tracking events at the time of subscription
           content:
             application/json:
-              schema: { $ref: '#/components/schemas/Tracking' }
+              schema:
+                $ref: '#/components/schemas/Tracking'
         '422':
           description: No callback URL configured on the account
     delete:
       operationId: unsubscribeFromTrackingEvents
       summary: Unsubscribe From Tracking Events
-      tags: [Tracking]
+      tags:
+      - Tracking
       description: Stop receiving webhooks for the given parcel.
       parameters:
-        - name: ref
-          in: path
-          required: true
-          schema: { type: string }
+      - name: ref
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Unsubscribed
 components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
   schemas:
     Tracking:
       type: object
       properties:
-        state: { type: string }
+        state:
+          type: string
         status:
           type: object
           properties:
-            description: { type: string }
-            last_changed_at: { type: string }
+            description:
+              type: string
+            last_changed_at:
+              type: string
         origin:
           type: object
           properties:
-            country: { type: string }
+            country:
+              type: string
         destination:
           type: object
           properties:
-            country: { type: string }
+            country:
+              type: string
         scheduling:
           type: object
           properties:
-            pickup_date: { type: string, format: date, nullable: true }
-            picked_up_on: { type: string, format: date, nullable: true }
-            delivered_on: { type: string, format: date, nullable: true }
-            estimated_delivery_date_minimum: { type: string, format: date, nullable: true }
-            estimated_delivery_date_maximum: { type: string, format: date, nullable: true }
+            pickup_date:
+              type: string
+              format: date
+              nullable: true
+            picked_up_on:
+              type: string
+              format: date
+              nullable: true
+            delivered_on:
+              type: string
+              format: date
+              nullable: true
+            estimated_delivery_date_minimum:
+              type: string
+              format: date
+              nullable: true
+            estimated_delivery_date_maximum:
+              type: string
+              format: date
+              nullable: true
         tracking_events:
           type: array
-          items: { $ref: '#/components/schemas/TrackingEvent' }
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
     TrackingEvent:
       type: object
       properties:
         event_type:
           type: string
           enum:
-            - Pickup Attempted
-            - Pickup
-            - Drop Off
-            - Dropped Off
-            - Info
-            - In Transit
-            - Out for Delivery
-            - Delivery Attempted
-            - Delivered
-            - Local Delivery
-            - Card Left
-            - Left with Agent
-            - Damaged
-            - Unable to Deliver
-            - Expired
-        scan_time: { type: string, format: date-time }
-        local_scan_time: { type: string }
-        display_time: { type: string }
-        description: { type: string }
-        location: { type: string }
+          - Pickup Attempted
+          - Pickup
+          - Drop Off
+          - Dropped Off
+          - Info
+          - In Transit
+          - Out for Delivery
+          - Delivery Attempted
+          - Delivered
+          - Local Delivery
+          - Card Left
+          - Left with Agent
+          - Damaged
+          - Unable to Deliver
+          - Expired
+        scan_time:
+          type: string
+          format: date-time
+        local_scan_time:
+          type: string
+        display_time:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
         location_data:
           type: object
           properties:
-            suburb: { type: string, nullable: true }
-            state: { type: string, nullable: true }
-            postcode: { type: string, nullable: true }
-            country: { type: string, nullable: true }
-        origin_location: { type: string }
-        destination_location: { type: string }
-        reason: { type: string }
-        requester: { type: string }
+            suburb:
+              type: string
+              nullable: true
+            state:
+              type: string
+              nullable: true
+            postcode:
+              type: string
+              nullable: true
+            country:
+              type: string
+              nullable: true
+        origin_location:
+          type: string
+        destination_location:
+          type: string
+        reason:
+          type: string
+        requester:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
