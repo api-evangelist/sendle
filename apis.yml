@@ -13,7 +13,20 @@ tags:
   - United States
   - Canada
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sendle.png
 access: 3rd-Party
 description: |
   Sendle is a 100%-carbon-neutral parcel shipping service built for small businesses,
@@ -22,127 +35,138 @@ description: |
   quoting, order creation, label retrieval, tracking, USPS SCAN-Form shipping
   manifests, and per-parcel tracking webhooks via HTTP Basic Authentication.
 apis:
-  - aid: sendle:sendle-orders-api
-    name: Sendle Orders API
-    tags:
-      - Orders
-      - Shipping
-      - Labels
-    humanURL: https://developers.sendle.com/reference/createorder
-    baseURL: https://api.sendle.com/api
-    properties:
-      - url: https://developers.sendle.com/reference/createorder
-        type: Documentation
-      - url: https://developers.sendle.com/reference/vieworder
-        type: Documentation
-      - url: https://developers.sendle.com/reference/cancelorder
-        type: Documentation
-      - url: https://developers.sendle.com/reference/returnorder
-        type: Documentation
-      - url: openapi/sendle-orders-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/sendle-order-schema.json
-        type: JSONSchema
-      - url: json-ld/sendle-context.jsonld
-        type: JSONLD
-    description: |
-      Create, view, cancel, and return parcel orders. Supports domestic AU / US / CA
-      orders plus international from AU and US (DAP and DDP Price Guaranteed) and from
-      CA to US. Returns label URLs, tracking URL, full price + tax breakdown, scheduling,
-      and route metadata. Idempotency-Key header is supported for safe retries.
-  - aid: sendle:sendle-products-api
-    name: Sendle Products & Quoting API
-    tags:
-      - Quoting
-      - Products
-      - Pricing
-    humanURL: https://developers.sendle.com/reference/getproducts
-    baseURL: https://api.sendle.com/api
-    properties:
-      - url: https://developers.sendle.com/reference/getproducts
-        type: Documentation
-      - url: https://developers.sendle.com/reference/postproducts
-        type: Documentation
-      - url: https://developers.sendle.com/reference/getquote
-        type: Documentation
-      - url: openapi/sendle-products-api-openapi.yml
-        type: OpenAPI
-    description: |
-      Get one quote per shipping product for a given route. GET /products handles
-      domestic and DAP international; POST /products adds DDP Price Guaranteed
-      (duties + taxes included). Each quote includes plan, ETA, route classification,
-      allowed packaging, and product code (e.g. STANDARD-PICKUP). The legacy
-      GET /quote is deprecated.
-  - aid: sendle:sendle-tracking-api
-    name: Sendle Tracking API
-    tags:
-      - Tracking
-      - Webhooks
-      - Events
-    humanURL: https://developers.sendle.com/reference/trackparcel
-    baseURL: https://api.sendle.com/api
-    properties:
-      - url: https://developers.sendle.com/reference/trackparcel
-        type: Documentation
-      - url: https://developers.sendle.com/reference/subscribetotrackingevents
-        type: Documentation
-      - url: https://developers.sendle.com/reference/unsubscribetotrackingevents
-        type: Documentation
-      - url: https://developers.sendle.com/reference/tracking-webhooks
-        type: Documentation
-      - url: openapi/sendle-tracking-api-openapi.yml
-        type: OpenAPI
-      - url: asyncapi/sendle-tracking-asyncapi.yml
-        type: AsyncAPI
-      - url: json-schema/sendle-tracking-event-schema.json
-        type: JSONSchema
-    description: |
-      Retrieve all tracking events for a parcel by Sendle reference, or subscribe a
-      parcel to webhook tracking updates. Webhooks deliver per-event JSON payloads
-      to the account-level callback URL configured in the Sendle dashboard. Polling
-      is rate-limited to 10 req/sec/IP; Sendle recommends webhooks over polling.
-  - aid: sendle:sendle-manifests-api
-    name: Sendle Shipping Manifests API
-    tags:
-      - Manifests
-      - USPS
-      - SCAN Form
-      - US Domestic
-    humanURL: https://developers.sendle.com/reference/createshippingmanifest
-    baseURL: https://api.sendle.com/api
-    properties:
-      - url: https://developers.sendle.com/reference/createshippingmanifest
-        type: Documentation
-      - url: https://developers.sendle.com/reference/getshippingmanifests
-        type: Documentation
-      - url: https://developers.sendle.com/reference/downloadshippingmanifest
-        type: Documentation
-      - url: https://developers.sendle.com/reference/getshippingmanifeststatus
-        type: Documentation
-      - url: openapi/sendle-manifests-api-openapi.yml
-        type: OpenAPI
-    description: |
-      Create, list, download (PDF), and inspect USPS SCAN Form shipping manifests so
-      a driver can pick up many US Domestic Sendle orders with a single barcode scan.
-      Orders must be created the same day as the manifest; manifests are immutable
-      once created.
-  - aid: sendle:sendle-ping-api
-    name: Sendle Ping API
-    tags:
-      - Utility
-      - Health Check
-    humanURL: https://developers.sendle.com/reference/ping
-    baseURL: https://api.sendle.com/api
-    properties:
-      - url: https://developers.sendle.com/reference/ping
-        type: Documentation
-      - url: openapi/sendle-ping-api-openapi.yml
-        type: OpenAPI
-    description: |
-      Cheap connectivity and credential test endpoint. Verifies that Sendle ID / API
-      Key are correctly configured and that idempotency keys are being applied,
-      without booking any real shipments.
+- aid: sendle:sendle-orders-api
+  name: Sendle Orders API
+  tags:
+  - Orders
+  - Shipping
+  - Labels
+  humanURL: https://developers.sendle.com/reference/createorder
+  baseURL: https://api.sendle.com/api
+  properties:
+  - url: https://developers.sendle.com/reference/createorder
+    type: Documentation
+  - url: https://developers.sendle.com/reference/vieworder
+    type: Documentation
+  - url: https://developers.sendle.com/reference/cancelorder
+    type: Documentation
+  - url: https://developers.sendle.com/reference/returnorder
+    type: Documentation
+  - url: openapi/sendle-orders-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/sendle-order-schema.json
+    type: JSONSchema
+  - url: json-ld/sendle-context.jsonld
+    type: JSONLD
+  description: >
+    Create, view, cancel, and return parcel orders. Supports domestic AU / US / CA
+
+    orders plus international from AU and US (DAP and DDP Price Guaranteed) and from
+
+    CA to US. Returns label URLs, tracking URL, full price + tax breakdown, scheduling,
+
+    and route metadata. Idempotency-Key header is supported for safe retries.
+- aid: sendle:sendle-products-api
+  name: Sendle Products & Quoting API
+  tags:
+  - Quoting
+  - Products
+  - Pricing
+  humanURL: https://developers.sendle.com/reference/getproducts
+  baseURL: https://api.sendle.com/api
+  properties:
+  - url: https://developers.sendle.com/reference/getproducts
+    type: Documentation
+  - url: https://developers.sendle.com/reference/postproducts
+    type: Documentation
+  - url: https://developers.sendle.com/reference/getquote
+    type: Documentation
+  - url: openapi/sendle-products-api-openapi.yml
+    type: OpenAPI
+  description: >
+    Get one quote per shipping product for a given route. GET /products handles
+
+    domestic and DAP international; POST /products adds DDP Price Guaranteed
+
+    (duties + taxes included). Each quote includes plan, ETA, route classification,
+
+    allowed packaging, and product code (e.g. STANDARD-PICKUP). The legacy
+
+    GET /quote is deprecated.
+- aid: sendle:sendle-tracking-api
+  name: Sendle Tracking API
+  tags:
+  - Tracking
+  - Webhooks
+  - Events
+  humanURL: https://developers.sendle.com/reference/trackparcel
+  baseURL: https://api.sendle.com/api
+  properties:
+  - url: https://developers.sendle.com/reference/trackparcel
+    type: Documentation
+  - url: https://developers.sendle.com/reference/subscribetotrackingevents
+    type: Documentation
+  - url: https://developers.sendle.com/reference/unsubscribetotrackingevents
+    type: Documentation
+  - url: https://developers.sendle.com/reference/tracking-webhooks
+    type: Documentation
+  - url: openapi/sendle-tracking-api-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/sendle-tracking-asyncapi.yml
+    type: AsyncAPI
+  - url: json-schema/sendle-tracking-event-schema.json
+    type: JSONSchema
+  description: >
+    Retrieve all tracking events for a parcel by Sendle reference, or subscribe a
+
+    parcel to webhook tracking updates. Webhooks deliver per-event JSON payloads
+
+    to the account-level callback URL configured in the Sendle dashboard. Polling
+
+    is rate-limited to 10 req/sec/IP; Sendle recommends webhooks over polling.
+- aid: sendle:sendle-manifests-api
+  name: Sendle Shipping Manifests API
+  tags:
+  - Manifests
+  - USPS
+  - SCAN Form
+  - US Domestic
+  humanURL: https://developers.sendle.com/reference/createshippingmanifest
+  baseURL: https://api.sendle.com/api
+  properties:
+  - url: https://developers.sendle.com/reference/createshippingmanifest
+    type: Documentation
+  - url: https://developers.sendle.com/reference/getshippingmanifests
+    type: Documentation
+  - url: https://developers.sendle.com/reference/downloadshippingmanifest
+    type: Documentation
+  - url: https://developers.sendle.com/reference/getshippingmanifeststatus
+    type: Documentation
+  - url: openapi/sendle-manifests-api-openapi.yml
+    type: OpenAPI
+  description: >
+    Create, list, download (PDF), and inspect USPS SCAN Form shipping manifests so
+
+    a driver can pick up many US Domestic Sendle orders with a single barcode scan.
+
+    Orders must be created the same day as the manifest; manifests are immutable
+
+    once created.
+- aid: sendle:sendle-utility-api
+  name: Sendle Utility API
+  description: Connectivity and credential testing
+  humanURL: https://developers.sendle.com/reference/createorder
+  baseURL: https://api.sendle.com/api
+  tags:
+  - Utility
+  properties:
+  - type: OpenAPI
+    url: openapi/sendle-utility-api-openapi.yml
+  - type: Documentation
+    url: https://developers.sendle.com/reference/ping
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/sendle/overview
   - type: AgenticAccess
     url: agentic-access/sendle-agentic-access.yml
   - type: DomainSecurity
