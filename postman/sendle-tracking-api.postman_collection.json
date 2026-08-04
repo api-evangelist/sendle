@@ -1,0 +1,452 @@
+{
+  "info": {
+    "_postman_id": "47e2f0f5-fe17-4a69-9f6a-57f8af85d0d7",
+    "name": "Sendle Shipping Manifests Tracking API",
+    "description": "Create and manage shipping manifests so a driver can collect multiple parcels\nby scanning a single barcode. Currently supports USPS SCAN Forms for US domestic\norders only. Manifests can only include orders booked the same day.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:51:55.000Z",
+    "updatedAt": "2026-07-28T02:51:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-47e2f0f5-fe17-4a69-9f6a-57f8af85d0d7"
+  },
+  "item": [
+    {
+      "name": "parcels",
+      "item": [
+        {
+          "name": "{ref}",
+          "item": [
+            {
+              "name": "tracking",
+              "item": [
+                {
+                  "name": "subscribe",
+                  "item": [
+                    {
+                      "name": "Subscribe To Tracking Events",
+                      "id": "c4c5b4e6-7fbd-408a-806b-e31274301022",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parcels/:ref/tracking/subscribe",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parcels",
+                            ":ref",
+                            "tracking",
+                            "subscribe"
+                          ],
+                          "variable": [
+                            {
+                              "id": "32e8f849-9818-4c23-8434-1d6b9ef1727c",
+                              "key": "ref",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Subscribe to webhook tracking events for a parcel. A callback URL must be configured in the account Settings -> API page before subscribing."
+                      },
+                      "response": [
+                        {
+                          "id": "171708c7-6d94-4e36-8c5b-ac1fd4406d7e",
+                          "name": "Existing tracking events at the time of subscription",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/parcels/:ref/tracking/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "parcels",
+                                ":ref",
+                                "tracking",
+                                "subscribe"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ref"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"state\": \"<string>\",\n  \"status\": {\n    \"description\": \"<string>\",\n    \"last_changed_at\": \"<string>\"\n  },\n  \"origin\": {\n    \"country\": \"<string>\"\n  },\n  \"destination\": {\n    \"country\": \"<string>\"\n  },\n  \"scheduling\": {\n    \"pickup_date\": \"<date>\",\n    \"picked_up_on\": \"<date>\",\n    \"delivered_on\": \"<date>\",\n    \"estimated_delivery_date_minimum\": \"<date>\",\n    \"estimated_delivery_date_maximum\": \"<date>\"\n  },\n  \"tracking_events\": [\n    {\n      \"event_type\": \"Pickup Attempted\",\n      \"scan_time\": \"<dateTime>\",\n      \"local_scan_time\": \"<string>\",\n      \"display_time\": \"<string>\",\n      \"description\": \"<string>\",\n      \"location\": \"<string>\",\n      \"location_data\": {\n        \"suburb\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"origin_location\": \"<string>\",\n      \"destination_location\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"requester\": \"<string>\"\n    },\n    {\n      \"event_type\": \"In Transit\",\n      \"scan_time\": \"<dateTime>\",\n      \"local_scan_time\": \"<string>\",\n      \"display_time\": \"<string>\",\n      \"description\": \"<string>\",\n      \"location\": \"<string>\",\n      \"location_data\": {\n        \"suburb\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"origin_location\": \"<string>\",\n      \"destination_location\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"requester\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:51:55.000Z",
+                          "updatedAt": "2026-07-28T02:51:55.000Z",
+                          "uid": "35240-171708c7-6d94-4e36-8c5b-ac1fd4406d7e"
+                        },
+                        {
+                          "id": "f4bbcbad-c911-45a3-a915-fa2bcf51ffef",
+                          "name": "No callback URL configured on the account",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/parcels/:ref/tracking/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "parcels",
+                                ":ref",
+                                "tracking",
+                                "subscribe"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ref"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:51:55.000Z",
+                          "updatedAt": "2026-07-28T02:51:55.000Z",
+                          "uid": "35240-f4bbcbad-c911-45a3-a915-fa2bcf51ffef"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:51:55.000Z",
+                      "updatedAt": "2026-07-28T02:51:55.000Z",
+                      "uid": "35240-c4c5b4e6-7fbd-408a-806b-e31274301022"
+                    },
+                    {
+                      "name": "Unsubscribe From Tracking Events",
+                      "id": "d9791e78-c96f-43a5-96d8-a52d8a3d37ff",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/parcels/:ref/tracking/subscribe",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parcels",
+                            ":ref",
+                            "tracking",
+                            "subscribe"
+                          ],
+                          "variable": [
+                            {
+                              "id": "26c90e71-5b7a-4ec0-bfd0-e687e6d9421a",
+                              "key": "ref",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Stop receiving webhooks for the given parcel."
+                      },
+                      "response": [
+                        {
+                          "id": "a44bd314-aef7-4e08-86bd-3546c10a7f11",
+                          "name": "Unsubscribed",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/parcels/:ref/tracking/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "parcels",
+                                ":ref",
+                                "tracking",
+                                "subscribe"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ref"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:51:55.000Z",
+                          "updatedAt": "2026-07-28T02:51:55.000Z",
+                          "uid": "35240-a44bd314-aef7-4e08-86bd-3546c10a7f11"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:51:55.000Z",
+                      "updatedAt": "2026-07-28T02:51:55.000Z",
+                      "uid": "35240-d9791e78-c96f-43a5-96d8-a52d8a3d37ff"
+                    }
+                  ],
+                  "id": "33d2ac57-60e1-4246-9b5f-0691e6b6dbcb",
+                  "createdAt": "2026-07-28T02:51:55.000Z",
+                  "updatedAt": "2026-07-28T02:51:55.000Z",
+                  "uid": "35240-33d2ac57-60e1-4246-9b5f-0691e6b6dbcb"
+                },
+                {
+                  "name": "Track A Parcel",
+                  "id": "0a3e5a93-8b94-4b13-9afb-ee2ba28015af",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/parcels/:ref/tracking",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "parcels",
+                        ":ref",
+                        "tracking"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c6eeeeda-a62c-48ab-88ef-1b401fea5a91",
+                          "key": "ref",
+                          "value": "<string>",
+                          "description": "(Required) Sendle reference (alphanumeric, 6+ chars, begins with \"S\")."
+                        }
+                      ]
+                    },
+                    "description": "Returns tracking details for the given parcel. Limit to 10 requests/second per IP."
+                  },
+                  "response": [
+                    {
+                      "id": "f362071e-576c-4f13-869b-c621287c2008",
+                      "name": "Tracking details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parcels/:ref/tracking",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parcels",
+                            ":ref",
+                            "tracking"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ref"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"state\": \"<string>\",\n  \"status\": {\n    \"description\": \"<string>\",\n    \"last_changed_at\": \"<string>\"\n  },\n  \"origin\": {\n    \"country\": \"<string>\"\n  },\n  \"destination\": {\n    \"country\": \"<string>\"\n  },\n  \"scheduling\": {\n    \"pickup_date\": \"<date>\",\n    \"picked_up_on\": \"<date>\",\n    \"delivered_on\": \"<date>\",\n    \"estimated_delivery_date_minimum\": \"<date>\",\n    \"estimated_delivery_date_maximum\": \"<date>\"\n  },\n  \"tracking_events\": [\n    {\n      \"event_type\": \"Pickup Attempted\",\n      \"scan_time\": \"<dateTime>\",\n      \"local_scan_time\": \"<string>\",\n      \"display_time\": \"<string>\",\n      \"description\": \"<string>\",\n      \"location\": \"<string>\",\n      \"location_data\": {\n        \"suburb\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"origin_location\": \"<string>\",\n      \"destination_location\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"requester\": \"<string>\"\n    },\n    {\n      \"event_type\": \"In Transit\",\n      \"scan_time\": \"<dateTime>\",\n      \"local_scan_time\": \"<string>\",\n      \"display_time\": \"<string>\",\n      \"description\": \"<string>\",\n      \"location\": \"<string>\",\n      \"location_data\": {\n        \"suburb\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"origin_location\": \"<string>\",\n      \"destination_location\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"requester\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:51:55.000Z",
+                      "updatedAt": "2026-07-28T02:51:55.000Z",
+                      "uid": "35240-f362071e-576c-4f13-869b-c621287c2008"
+                    },
+                    {
+                      "id": "129054fd-fc65-4f0a-b076-61fde066f150",
+                      "name": "Parcel not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parcels/:ref/tracking",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parcels",
+                            ":ref",
+                            "tracking"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ref"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:51:55.000Z",
+                      "updatedAt": "2026-07-28T02:51:55.000Z",
+                      "uid": "35240-129054fd-fc65-4f0a-b076-61fde066f150"
+                    },
+                    {
+                      "id": "7afc619e-7981-42a5-a580-1d240b333434",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parcels/:ref/tracking",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parcels",
+                            ":ref",
+                            "tracking"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ref"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:51:55.000Z",
+                      "updatedAt": "2026-07-28T02:51:55.000Z",
+                      "uid": "35240-7afc619e-7981-42a5-a580-1d240b333434"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:51:55.000Z",
+                  "updatedAt": "2026-07-28T02:51:55.000Z",
+                  "uid": "35240-0a3e5a93-8b94-4b13-9afb-ee2ba28015af"
+                }
+              ],
+              "id": "8bebb533-2dc7-4577-946b-267b2b5fa981",
+              "createdAt": "2026-07-28T02:51:55.000Z",
+              "updatedAt": "2026-07-28T02:51:55.000Z",
+              "uid": "35240-8bebb533-2dc7-4577-946b-267b2b5fa981"
+            }
+          ],
+          "id": "10a31625-9b98-46db-89ea-2adbda7cadb5",
+          "createdAt": "2026-07-28T02:51:55.000Z",
+          "updatedAt": "2026-07-28T02:51:55.000Z",
+          "uid": "35240-10a31625-9b98-46db-89ea-2adbda7cadb5"
+        }
+      ],
+      "id": "2b237a3a-ee65-4b3b-931c-a755cec5ef19",
+      "createdAt": "2026-07-28T02:51:55.000Z",
+      "updatedAt": "2026-07-28T02:51:55.000Z",
+      "uid": "35240-2b237a3a-ee65-4b3b-931c-a755cec5ef19"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sendle.com/api"
+    }
+  ]
+}

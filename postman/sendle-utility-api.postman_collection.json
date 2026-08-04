@@ -1,0 +1,125 @@
+{
+  "info": {
+    "_postman_id": "0444d926-7155-4023-ac57-e5822d83b8de",
+    "name": "Sendle Shipping Manifests Utility API",
+    "description": "Create and manage shipping manifests so a driver can collect multiple parcels\nby scanning a single barcode. Currently supports USPS SCAN Forms for US domestic\norders only. Manifests can only include orders booked the same day.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:51:57.000Z",
+    "updatedAt": "2026-07-28T02:51:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0444d926-7155-4023-ac57-e5822d83b8de"
+  },
+  "item": [
+    {
+      "name": "ping",
+      "item": [
+        {
+          "name": "Basic API Test",
+          "id": "e2f9f015-6001-489a-b3a8-9be4a0a15851",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ping"
+              ]
+            },
+            "description": "Returns a simple response and a server-generated timestamp. Useful for verifying API credentials and idempotency keys."
+          },
+          "response": [
+            {
+              "id": "bf16c609-38ab-42cc-8efe-01a3587dbec4",
+              "name": "Ping response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ping",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"ping\": \"<string>\",\n  \"timestamp\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T02:51:57.000Z",
+              "updatedAt": "2026-07-28T02:51:57.000Z",
+              "uid": "35240-bf16c609-38ab-42cc-8efe-01a3587dbec4"
+            }
+          ],
+          "createdAt": "2026-07-28T02:51:57.000Z",
+          "updatedAt": "2026-07-28T02:51:57.000Z",
+          "uid": "35240-e2f9f015-6001-489a-b3a8-9be4a0a15851"
+        }
+      ],
+      "id": "9d2c7002-8805-4fd9-b2e3-8ff81f447dde",
+      "createdAt": "2026-07-28T02:51:57.000Z",
+      "updatedAt": "2026-07-28T02:51:57.000Z",
+      "uid": "35240-9d2c7002-8805-4fd9-b2e3-8ff81f447dde"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sendle.com/api"
+    }
+  ]
+}

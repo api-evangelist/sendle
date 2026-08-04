@@ -1,0 +1,488 @@
+{
+  "info": {
+    "_postman_id": "c024c1d0-3cfb-4837-aa64-8528f515b302",
+    "name": "Sendle Shipping Manifests Products API",
+    "description": "Create and manage shipping manifests so a driver can collect multiple parcels\nby scanning a single barcode. Currently supports USPS SCAN Forms for US domestic\norders only. Manifests can only include orders booked the same day.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:51:54.000Z",
+    "updatedAt": "2026-07-28T02:51:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c024c1d0-3cfb-4837-aa64-8528f515b302"
+  },
+  "item": [
+    {
+      "name": "products",
+      "item": [
+        {
+          "name": "Get Products",
+          "id": "99e07e7f-68ad-4e53-a828-2a2a5e3e0755",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products?sender_address_country=<string>&sender_address_suburb=<string>&sender_address_postcode=<string>&receiver_address_country=<string>&receiver_address_suburb=<string>&receiver_address_postcode=<string>&weight_value=<string>&weight_units=kg&length_value=<string>&width_value=<string>&height_value=<string>&dimension_units=cm&packaging_type=satchel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "description": "(Required) ",
+                  "key": "sender_address_country",
+                  "value": "<string>"
+                },
+                {
+                  "key": "sender_address_suburb",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "sender_address_postcode",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "receiver_address_country",
+                  "value": "<string>"
+                },
+                {
+                  "key": "receiver_address_suburb",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "receiver_address_postcode",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "weight_value",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "weight_units",
+                  "value": "kg"
+                },
+                {
+                  "key": "length_value",
+                  "value": "<string>"
+                },
+                {
+                  "key": "width_value",
+                  "value": "<string>"
+                },
+                {
+                  "key": "height_value",
+                  "value": "<string>"
+                },
+                {
+                  "key": "dimension_units",
+                  "value": "cm"
+                },
+                {
+                  "key": "packaging_type",
+                  "value": "satchel"
+                }
+              ]
+            },
+            "description": "Returns one quote for each shipping product Sendle supports for the given route via query parameters. Supports Duties Unpaid (DAP) international quotes only."
+          },
+          "response": [
+            {
+              "id": "127ee803-5e50-41cd-956b-875e867cb0de",
+              "name": "List of available products with quotes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products?sender_address_country=<string>&sender_address_suburb=<string>&sender_address_postcode=<string>&receiver_address_country=<string>&receiver_address_suburb=<string>&receiver_address_postcode=<string>&weight_value=<string>&weight_units=kg&length_value=<string>&width_value=<string>&height_value=<string>&dimension_units=cm&packaging_type=satchel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "sender_address_country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender_address_suburb",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "sender_address_postcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "receiver_address_country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "receiver_address_suburb",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "receiver_address_postcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "weight_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "weight_units",
+                      "value": "kg"
+                    },
+                    {
+                      "key": "length_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "width_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "height_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dimension_units",
+                      "value": "cm"
+                    },
+                    {
+                      "key": "packaging_type",
+                      "value": "satchel"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"quote\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      }\n    },\n    \"price_breakdown\": {\n      \"et_89\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      },\n      \"sit_7\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"ut_0db\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    \"tax_breakdown\": {\n      \"Duis_3\": -91050169,\n      \"sunt_89\": -19229597,\n      \"enim9\": false\n    },\n    \"plan\": \"<string>\",\n    \"eta\": {\n      \"days_range\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"date_range\": [\n        \"<date>\",\n        \"<date>\"\n      ],\n      \"for_send_date\": \"<date>\"\n    },\n    \"route\": {\n      \"description\": \"<string>\",\n      \"type\": \"national\"\n    },\n    \"allowed_packaging\": \"satchel\",\n    \"product\": {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"first_mile_option\": \"pickup\",\n      \"service\": \"standard\",\n      \"atl_only\": \"<boolean>\"\n    },\n    \"cover\": {\n      \"price\": {\n        \"gross\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"AUD\"\n        },\n        \"net\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"tax\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  },\n  {\n    \"quote\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    \"price_breakdown\": {\n      \"Lorem__\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      }\n    },\n    \"tax_breakdown\": {\n      \"Duis_dc\": 50554375,\n      \"dolor04\": -32741934,\n      \"ut__e\": -67773558\n    },\n    \"plan\": \"<string>\",\n    \"eta\": {\n      \"days_range\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"date_range\": [\n        \"<date>\",\n        \"<date>\"\n      ],\n      \"for_send_date\": \"<date>\"\n    },\n    \"route\": {\n      \"description\": \"<string>\",\n      \"type\": \"national\"\n    },\n    \"allowed_packaging\": \"box\",\n    \"product\": {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"first_mile_option\": \"drop off\",\n      \"service\": \"express\",\n      \"atl_only\": \"<boolean>\"\n    },\n    \"cover\": {\n      \"price\": {\n        \"gross\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"net\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"tax\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  }\n]",
+              "createdAt": "2026-07-28T02:51:55.000Z",
+              "updatedAt": "2026-07-28T02:51:55.000Z",
+              "uid": "35240-127ee803-5e50-41cd-956b-875e867cb0de"
+            }
+          ],
+          "createdAt": "2026-07-28T02:51:55.000Z",
+          "updatedAt": "2026-07-28T02:51:55.000Z",
+          "uid": "35240-99e07e7f-68ad-4e53-a828-2a2a5e3e0755"
+        },
+        {
+          "name": "Serviceable Products",
+          "id": "727fe46c-fd33-44f6-b007-b91adb533614",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sender\": {\n    \"address\": {\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\"\n    }\n  },\n  \"receiver\": {\n    \"address\": {\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\"\n    }\n  },\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"packaging_type\": \"satchel\",\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Documents\",\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products"
+              ]
+            },
+            "description": "Returns one quote per shipping product for the given route. Supports both Duties Unpaid (DAP) and Duties Paid (DDP Price Guaranteed) for international."
+          },
+          "response": [
+            {
+              "id": "6c185f4b-49ea-445b-806c-7651c8d76b15",
+              "name": "List of available products with quotes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": {\n    \"address\": {\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\"\n    }\n  },\n  \"receiver\": {\n    \"address\": {\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\"\n    }\n  },\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"packaging_type\": \"satchel\",\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Documents\",\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"quote\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      }\n    },\n    \"price_breakdown\": {\n      \"et_89\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      },\n      \"sit_7\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"ut_0db\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    \"tax_breakdown\": {\n      \"Duis_3\": -91050169,\n      \"sunt_89\": -19229597,\n      \"enim9\": false\n    },\n    \"plan\": \"<string>\",\n    \"eta\": {\n      \"days_range\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"date_range\": [\n        \"<date>\",\n        \"<date>\"\n      ],\n      \"for_send_date\": \"<date>\"\n    },\n    \"route\": {\n      \"description\": \"<string>\",\n      \"type\": \"national\"\n    },\n    \"allowed_packaging\": \"satchel\",\n    \"product\": {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"first_mile_option\": \"pickup\",\n      \"service\": \"standard\",\n      \"atl_only\": \"<boolean>\"\n    },\n    \"cover\": {\n      \"price\": {\n        \"gross\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"AUD\"\n        },\n        \"net\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"tax\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  },\n  {\n    \"quote\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    \"price_breakdown\": {\n      \"Lorem__\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      }\n    },\n    \"tax_breakdown\": {\n      \"Duis_dc\": 50554375,\n      \"dolor04\": -32741934,\n      \"ut__e\": -67773558\n    },\n    \"plan\": \"<string>\",\n    \"eta\": {\n      \"days_range\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"date_range\": [\n        \"<date>\",\n        \"<date>\"\n      ],\n      \"for_send_date\": \"<date>\"\n    },\n    \"route\": {\n      \"description\": \"<string>\",\n      \"type\": \"national\"\n    },\n    \"allowed_packaging\": \"box\",\n    \"product\": {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"first_mile_option\": \"drop off\",\n      \"service\": \"express\",\n      \"atl_only\": \"<boolean>\"\n    },\n    \"cover\": {\n      \"price\": {\n        \"gross\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"net\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"tax\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  }\n]",
+              "createdAt": "2026-07-28T02:51:55.000Z",
+              "updatedAt": "2026-07-28T02:51:55.000Z",
+              "uid": "35240-6c185f4b-49ea-445b-806c-7651c8d76b15"
+            }
+          ],
+          "createdAt": "2026-07-28T02:51:55.000Z",
+          "updatedAt": "2026-07-28T02:51:55.000Z",
+          "uid": "35240-727fe46c-fd33-44f6-b007-b91adb533614"
+        }
+      ],
+      "id": "4a2dc6eb-b507-4b22-876a-421eb1c15cdd",
+      "createdAt": "2026-07-28T02:51:55.000Z",
+      "updatedAt": "2026-07-28T02:51:55.000Z",
+      "uid": "35240-4a2dc6eb-b507-4b22-876a-421eb1c15cdd"
+    },
+    {
+      "name": "quote",
+      "item": [
+        {
+          "name": "Get A Quote (Deprecated)",
+          "id": "726f645c-5287-436e-9406-78c150fe3946",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/quote?pickup_suburb=<string>&pickup_postcode=<string>&pickup_country=<string>&delivery_suburb=<string>&delivery_postcode=<string>&delivery_country=<string>&weight_value=<string>&weight_units=kg",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "quote"
+              ],
+              "query": [
+                {
+                  "key": "pickup_suburb",
+                  "value": "<string>"
+                },
+                {
+                  "key": "pickup_postcode",
+                  "value": "<string>"
+                },
+                {
+                  "key": "pickup_country",
+                  "value": "<string>"
+                },
+                {
+                  "key": "delivery_suburb",
+                  "value": "<string>"
+                },
+                {
+                  "key": "delivery_postcode",
+                  "value": "<string>"
+                },
+                {
+                  "key": "delivery_country",
+                  "value": "<string>"
+                },
+                {
+                  "key": "weight_value",
+                  "value": "<string>"
+                },
+                {
+                  "key": "weight_units",
+                  "value": "kg"
+                }
+              ]
+            },
+            "description": "Legacy quote endpoint. Use GET or POST /products instead."
+          },
+          "response": [
+            {
+              "id": "a27a8e55-775a-4813-a2f5-71f2102ba862",
+              "name": "Legacy quote",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/quote?pickup_suburb=<string>&pickup_postcode=<string>&pickup_country=<string>&delivery_suburb=<string>&delivery_postcode=<string>&delivery_country=<string>&weight_value=<string>&weight_units=kg",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quote"
+                  ],
+                  "query": [
+                    {
+                      "key": "pickup_suburb",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pickup_postcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pickup_country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delivery_suburb",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delivery_postcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delivery_country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "weight_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "weight_units",
+                      "value": "kg"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"quote\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      }\n    },\n    \"price_breakdown\": {\n      \"et_89\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      },\n      \"sit_7\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"ut_0db\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    \"tax_breakdown\": {\n      \"Duis_3\": -91050169,\n      \"sunt_89\": -19229597,\n      \"enim9\": false\n    },\n    \"plan\": \"<string>\",\n    \"eta\": {\n      \"days_range\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"date_range\": [\n        \"<date>\",\n        \"<date>\"\n      ],\n      \"for_send_date\": \"<date>\"\n    },\n    \"route\": {\n      \"description\": \"<string>\",\n      \"type\": \"national\"\n    },\n    \"allowed_packaging\": \"satchel\",\n    \"product\": {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"first_mile_option\": \"pickup\",\n      \"service\": \"standard\",\n      \"atl_only\": \"<boolean>\"\n    },\n    \"cover\": {\n      \"price\": {\n        \"gross\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"AUD\"\n        },\n        \"net\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"tax\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  },\n  {\n    \"quote\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    \"price_breakdown\": {\n      \"Lorem__\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"AUD\"\n      }\n    },\n    \"tax_breakdown\": {\n      \"Duis_dc\": 50554375,\n      \"dolor04\": -32741934,\n      \"ut__e\": -67773558\n    },\n    \"plan\": \"<string>\",\n    \"eta\": {\n      \"days_range\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"date_range\": [\n        \"<date>\",\n        \"<date>\"\n      ],\n      \"for_send_date\": \"<date>\"\n    },\n    \"route\": {\n      \"description\": \"<string>\",\n      \"type\": \"national\"\n    },\n    \"allowed_packaging\": \"box\",\n    \"product\": {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"first_mile_option\": \"drop off\",\n      \"service\": \"express\",\n      \"atl_only\": \"<boolean>\"\n    },\n    \"cover\": {\n      \"price\": {\n        \"gross\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"net\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"tax\": {\n          \"amount\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      }\n    }\n  }\n]",
+              "createdAt": "2026-07-28T02:51:55.000Z",
+              "updatedAt": "2026-07-28T02:51:55.000Z",
+              "uid": "35240-a27a8e55-775a-4813-a2f5-71f2102ba862"
+            }
+          ],
+          "createdAt": "2026-07-28T02:51:55.000Z",
+          "updatedAt": "2026-07-28T02:51:55.000Z",
+          "uid": "35240-726f645c-5287-436e-9406-78c150fe3946"
+        }
+      ],
+      "id": "022fe539-ae05-474d-b159-8251009deb24",
+      "createdAt": "2026-07-28T02:51:55.000Z",
+      "updatedAt": "2026-07-28T02:51:55.000Z",
+      "uid": "35240-022fe539-ae05-474d-b159-8251009deb24"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sendle.com/api"
+    }
+  ]
+}

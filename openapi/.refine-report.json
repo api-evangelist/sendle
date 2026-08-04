@@ -1,0 +1,22 @@
+{
+  "provider": "sendle",
+  "sources": [
+    "sendle-manifests-api-openapi.yml",
+    "sendle-orders-api-openapi.yml",
+    "sendle-products-api-openapi.yml",
+    "sendle-tracking-api-openapi.yml",
+    "sendle-utility-api-openapi.yml"
+  ],
+  "outputs": [
+    "sendle-manifests-api-openapi.yml",
+    "sendle-orders-api-openapi.yml",
+    "sendle-products-api-openapi.yml",
+    "sendle-tracking-api-openapi.yml",
+    "sendle-utility-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

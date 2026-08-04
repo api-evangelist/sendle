@@ -1,0 +1,1007 @@
+{
+  "info": {
+    "_postman_id": "ea990388-b9f1-4652-98db-8d2fb8e57496",
+    "name": "Sendle Shipping Manifests Orders API",
+    "description": "Create and manage shipping manifests so a driver can collect multiple parcels\nby scanning a single barcode. Currently supports USPS SCAN Forms for US domestic\norders only. Manifests can only include orders booked the same day.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:51:53.000Z",
+    "updatedAt": "2026-07-28T02:51:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ea990388-b9f1-4652-98db-8d2fb8e57496"
+  },
+  "item": [
+    {
+      "name": "orders",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "cancel",
+              "item": [
+                {
+                  "name": "Cancel An Order",
+                  "id": "b1ae6867-cb99-4414-a505-20025805554d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id/cancel",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id",
+                        "cancel"
+                      ],
+                      "variable": [
+                        {
+                          "id": "87e42247-5cc7-4341-b073-2409980500ff",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) The order_id UUID returned from createOrder."
+                        }
+                      ]
+                    },
+                    "description": "Cancels the given order if it has not yet been collected by a driver."
+                  },
+                  "response": [
+                    {
+                      "id": "12ddc3c8-e422-4654-9a9d-696fb5ed398d",
+                      "name": "Cancellation result",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/orders/:id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "orders",
+                            ":id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"order_id\": \"<uuid>\",\n  \"state\": \"<string>\",\n  \"order_url\": \"<uri>\",\n  \"cancelled_at\": \"<dateTime>\",\n  \"cancellable\": \"<boolean>\",\n  \"cancellation_message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:51:54.000Z",
+                      "updatedAt": "2026-07-28T02:51:54.000Z",
+                      "uid": "35240-12ddc3c8-e422-4654-9a9d-696fb5ed398d"
+                    },
+                    {
+                      "id": "e96bd1c6-52a7-46cb-bce0-2e02a7152bda",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/orders/:id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "orders",
+                            ":id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\",\n  \"messages\": {\n    \"utee\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:51:54.000Z",
+                      "updatedAt": "2026-07-28T02:51:54.000Z",
+                      "uid": "35240-e96bd1c6-52a7-46cb-bce0-2e02a7152bda"
+                    },
+                    {
+                      "id": "165e85d7-1241-48da-9f2b-53bc3f4f1340",
+                      "name": "Validation failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/orders/:id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "orders",
+                            ":id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\",\n  \"messages\": {\n    \"utee\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:51:54.000Z",
+                      "updatedAt": "2026-07-28T02:51:54.000Z",
+                      "uid": "35240-165e85d7-1241-48da-9f2b-53bc3f4f1340"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:51:54.000Z",
+                  "updatedAt": "2026-07-28T02:51:54.000Z",
+                  "uid": "35240-b1ae6867-cb99-4414-a505-20025805554d"
+                }
+              ],
+              "id": "273ccb3a-8108-4a26-8d5d-3649839c987e",
+              "createdAt": "2026-07-28T02:51:54.000Z",
+              "updatedAt": "2026-07-28T02:51:54.000Z",
+              "uid": "35240-273ccb3a-8108-4a26-8d5d-3649839c987e"
+            },
+            {
+              "name": "return",
+              "item": [
+                {
+                  "name": "Return An Order",
+                  "id": "3b7ced76-5b81-4d5d-bde6-4d5b342bfd2b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customer_reference\": \"<string>\",\n  \"receiver\": {\n    \"instructions\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id/return",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id",
+                        "return"
+                      ],
+                      "variable": [
+                        {
+                          "id": "712fb4b8-f93e-4fef-9908-b6a507e260eb",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) The order_id UUID returned from createOrder."
+                        }
+                      ]
+                    },
+                    "description": "Creates a return label, letting receivers easily send orders back to the original sender. Domestic only."
+                  },
+                  "response": [
+                    {
+                      "id": "f45162ee-55d1-4e21-859e-d91d0a6733e6",
+                      "name": "Return order created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customer_reference\": \"<string>\",\n  \"receiver\": {\n    \"instructions\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/orders/:id/return",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "orders",
+                            ":id",
+                            "return"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"order_id\": \"<uuid>\",\n  \"state\": \"<string>\",\n  \"order_url\": \"<uri>\",\n  \"sendle_reference\": \"<string>\",\n  \"tracking_url\": \"<uri>\",\n  \"metadata\": {\n    \"in_b\": false,\n    \"amet_a20\": false\n  },\n  \"labels\": [\n    {\n      \"format\": \"png\",\n      \"size\": \"a4\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"format\": \"pdf\",\n      \"size\": \"letter\",\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"scheduling\": {\n    \"is_cancellable\": \"<boolean>\",\n    \"pickup_date\": \"<date>\",\n    \"picked_up_on\": \"<date>\",\n    \"delivered_on\": \"<date>\",\n    \"estimated_delivery_date_minimum\": \"<date>\",\n    \"estimated_delivery_date_maximum\": \"<date>\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"oz\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"l\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM9869275521\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2220647746\"\n    }\n  },\n  \"route\": {\n    \"description\": \"<string>\",\n    \"type\": \"same-city\",\n    \"delivery_guarantee_status\": \"ineligible\"\n  },\n  \"price\": {\n    \"gross\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"CAD\"\n    },\n    \"net\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"AUD\"\n    },\n    \"tax\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"USD\"\n    }\n  },\n  \"price_breakdown\": {\n    \"officia44f\": -49413792.270673975,\n    \"incididunte\": false,\n    \"dolor6\": 91873501\n  },\n  \"tax_breakdown\": {\n    \"enim23a\": \"dolor proident commodo\"\n  },\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    }\n  },\n  \"packaging_type\": \"satchel\",\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"3437.82\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"4942.36.6905\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Merchandise\",\n  \"product\": {\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"first_mile_option\": \"drop off\",\n    \"service\": \"express\",\n    \"atl_only\": \"<boolean>\"\n  },\n  \"expires_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T02:51:54.000Z",
+                      "updatedAt": "2026-07-28T02:51:54.000Z",
+                      "uid": "35240-f45162ee-55d1-4e21-859e-d91d0a6733e6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:51:54.000Z",
+                  "updatedAt": "2026-07-28T02:51:54.000Z",
+                  "uid": "35240-3b7ced76-5b81-4d5d-bde6-4d5b342bfd2b"
+                },
+                {
+                  "name": "View A Return Order",
+                  "id": "cd6be5bc-ebc9-42a9-ab0c-864ae9a1afe7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id/return",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id",
+                        "return"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f097be12-4e85-4939-8b02-69ecc4b79684",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) The order_id UUID returned from createOrder."
+                        }
+                      ]
+                    },
+                    "description": "Views the given return order, including the label URLs."
+                  },
+                  "response": [
+                    {
+                      "id": "53bcabd6-53ea-45dd-a9c2-dbdf197ca67c",
+                      "name": "Return order details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/orders/:id/return",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "orders",
+                            ":id",
+                            "return"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"order_id\": \"<uuid>\",\n  \"state\": \"<string>\",\n  \"order_url\": \"<uri>\",\n  \"sendle_reference\": \"<string>\",\n  \"tracking_url\": \"<uri>\",\n  \"metadata\": {\n    \"in_b\": false,\n    \"amet_a20\": false\n  },\n  \"labels\": [\n    {\n      \"format\": \"png\",\n      \"size\": \"a4\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"format\": \"pdf\",\n      \"size\": \"letter\",\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"scheduling\": {\n    \"is_cancellable\": \"<boolean>\",\n    \"pickup_date\": \"<date>\",\n    \"picked_up_on\": \"<date>\",\n    \"delivered_on\": \"<date>\",\n    \"estimated_delivery_date_minimum\": \"<date>\",\n    \"estimated_delivery_date_maximum\": \"<date>\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"oz\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"l\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM9869275521\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2220647746\"\n    }\n  },\n  \"route\": {\n    \"description\": \"<string>\",\n    \"type\": \"same-city\",\n    \"delivery_guarantee_status\": \"ineligible\"\n  },\n  \"price\": {\n    \"gross\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"CAD\"\n    },\n    \"net\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"AUD\"\n    },\n    \"tax\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"USD\"\n    }\n  },\n  \"price_breakdown\": {\n    \"officia44f\": -49413792.270673975,\n    \"incididunte\": false,\n    \"dolor6\": 91873501\n  },\n  \"tax_breakdown\": {\n    \"enim23a\": \"dolor proident commodo\"\n  },\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    }\n  },\n  \"packaging_type\": \"satchel\",\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"3437.82\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"4942.36.6905\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Merchandise\",\n  \"product\": {\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"first_mile_option\": \"drop off\",\n    \"service\": \"express\",\n    \"atl_only\": \"<boolean>\"\n  },\n  \"expires_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T02:51:54.000Z",
+                      "updatedAt": "2026-07-28T02:51:54.000Z",
+                      "uid": "35240-53bcabd6-53ea-45dd-a9c2-dbdf197ca67c"
+                    },
+                    {
+                      "id": "bdaa8775-2954-4a6b-a929-fbca482d1b7e",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/orders/:id/return",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "orders",
+                            ":id",
+                            "return"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\",\n  \"messages\": {\n    \"utee\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:51:54.000Z",
+                      "updatedAt": "2026-07-28T02:51:54.000Z",
+                      "uid": "35240-bdaa8775-2954-4a6b-a929-fbca482d1b7e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:51:54.000Z",
+                  "updatedAt": "2026-07-28T02:51:54.000Z",
+                  "uid": "35240-cd6be5bc-ebc9-42a9-ab0c-864ae9a1afe7"
+                }
+              ],
+              "id": "e0742593-e36a-440a-a967-750acd6a4464",
+              "createdAt": "2026-07-28T02:51:54.000Z",
+              "updatedAt": "2026-07-28T02:51:54.000Z",
+              "uid": "35240-e0742593-e36a-440a-a967-750acd6a4464"
+            },
+            {
+              "name": "View An Order",
+              "id": "55e16f65-3f15-4d68-bb9e-286ea3de3f25",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ba20cdbe-2c85-4626-aa19-612507f8ce3d",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) The order_id UUID returned from createOrder."
+                    }
+                  ]
+                },
+                "description": "Returns the order including its status, the public tracking URL, and the metadata you passed when creating it."
+              },
+              "response": [
+                {
+                  "id": "10899e12-9066-44f5-92fc-c035efd8744a",
+                  "name": "Order details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"order_id\": \"<uuid>\",\n  \"state\": \"<string>\",\n  \"order_url\": \"<uri>\",\n  \"sendle_reference\": \"<string>\",\n  \"tracking_url\": \"<uri>\",\n  \"metadata\": {\n    \"in_b\": false,\n    \"amet_a20\": false\n  },\n  \"labels\": [\n    {\n      \"format\": \"png\",\n      \"size\": \"a4\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"format\": \"pdf\",\n      \"size\": \"letter\",\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"scheduling\": {\n    \"is_cancellable\": \"<boolean>\",\n    \"pickup_date\": \"<date>\",\n    \"picked_up_on\": \"<date>\",\n    \"delivered_on\": \"<date>\",\n    \"estimated_delivery_date_minimum\": \"<date>\",\n    \"estimated_delivery_date_maximum\": \"<date>\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"oz\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"l\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM9869275521\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2220647746\"\n    }\n  },\n  \"route\": {\n    \"description\": \"<string>\",\n    \"type\": \"same-city\",\n    \"delivery_guarantee_status\": \"ineligible\"\n  },\n  \"price\": {\n    \"gross\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"CAD\"\n    },\n    \"net\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"AUD\"\n    },\n    \"tax\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"USD\"\n    }\n  },\n  \"price_breakdown\": {\n    \"officia44f\": -49413792.270673975,\n    \"incididunte\": false,\n    \"dolor6\": 91873501\n  },\n  \"tax_breakdown\": {\n    \"enim23a\": \"dolor proident commodo\"\n  },\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    }\n  },\n  \"packaging_type\": \"satchel\",\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"3437.82\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"4942.36.6905\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Merchandise\",\n  \"product\": {\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"first_mile_option\": \"drop off\",\n    \"service\": \"express\",\n    \"atl_only\": \"<boolean>\"\n  },\n  \"expires_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:51:54.000Z",
+                  "updatedAt": "2026-07-28T02:51:54.000Z",
+                  "uid": "35240-10899e12-9066-44f5-92fc-c035efd8744a"
+                },
+                {
+                  "id": "80125de8-7cb9-4ba2-a42c-57ea94dd28f6",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\",\n  \"messages\": {\n    \"utee\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:51:54.000Z",
+                  "updatedAt": "2026-07-28T02:51:54.000Z",
+                  "uid": "35240-80125de8-7cb9-4ba2-a42c-57ea94dd28f6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:51:54.000Z",
+              "updatedAt": "2026-07-28T02:51:54.000Z",
+              "uid": "35240-55e16f65-3f15-4d68-bb9e-286ea3de3f25"
+            }
+          ],
+          "id": "0cf02417-d108-4c19-95f9-e1535f446f2f",
+          "createdAt": "2026-07-28T02:51:54.000Z",
+          "updatedAt": "2026-07-28T02:51:54.000Z",
+          "uid": "35240-0cf02417-d108-4c19-95f9-e1535f446f2f"
+        },
+        {
+          "name": "Create An Order",
+          "id": "ed9c0496-ab1c-4bee-a12e-9c753d992bc6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "Client-provided key to make order creation idempotent.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2619640511\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM6789722437\"\n    }\n  },\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"lb\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"m3\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"product_code\": \"<string>\",\n  \"first_mile_option\": \"pickup\",\n  \"pickup_date\": \"<date>\",\n  \"packaging_type\": \"unlimited satchel\",\n  \"metadata\": {\n    \"minim_f\": \"velit ad qui dolore\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      }\n    }\n  },\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"0544.95\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"6968.13.65\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Sample\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            },
+            "description": "Creates an order to ship a parcel to the given delivery address."
+          },
+          "response": [
+            {
+              "id": "70f245d1-1869-4cdd-894d-da2c2053976e",
+              "name": "Order created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Client-provided key to make order creation idempotent.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2619640511\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM6789722437\"\n    }\n  },\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"lb\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"m3\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"product_code\": \"<string>\",\n  \"first_mile_option\": \"pickup\",\n  \"pickup_date\": \"<date>\",\n  \"packaging_type\": \"unlimited satchel\",\n  \"metadata\": {\n    \"minim_f\": \"velit ad qui dolore\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      }\n    }\n  },\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"0544.95\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"6968.13.65\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Sample\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"order_id\": \"<uuid>\",\n  \"state\": \"<string>\",\n  \"order_url\": \"<uri>\",\n  \"sendle_reference\": \"<string>\",\n  \"tracking_url\": \"<uri>\",\n  \"metadata\": {\n    \"in_b\": false,\n    \"amet_a20\": false\n  },\n  \"labels\": [\n    {\n      \"format\": \"png\",\n      \"size\": \"a4\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"format\": \"pdf\",\n      \"size\": \"letter\",\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"scheduling\": {\n    \"is_cancellable\": \"<boolean>\",\n    \"pickup_date\": \"<date>\",\n    \"picked_up_on\": \"<date>\",\n    \"delivered_on\": \"<date>\",\n    \"estimated_delivery_date_minimum\": \"<date>\",\n    \"estimated_delivery_date_maximum\": \"<date>\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"oz\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"l\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM9869275521\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2220647746\"\n    }\n  },\n  \"route\": {\n    \"description\": \"<string>\",\n    \"type\": \"same-city\",\n    \"delivery_guarantee_status\": \"ineligible\"\n  },\n  \"price\": {\n    \"gross\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"CAD\"\n    },\n    \"net\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"AUD\"\n    },\n    \"tax\": {\n      \"amount\": \"<number>\",\n      \"currency\": \"USD\"\n    }\n  },\n  \"price_breakdown\": {\n    \"officia44f\": -49413792.270673975,\n    \"incididunte\": false,\n    \"dolor6\": 91873501\n  },\n  \"tax_breakdown\": {\n    \"enim23a\": \"dolor proident commodo\"\n  },\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"CAD\"\n      }\n    }\n  },\n  \"packaging_type\": \"satchel\",\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"3437.82\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"4942.36.6905\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Merchandise\",\n  \"product\": {\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"first_mile_option\": \"drop off\",\n    \"service\": \"express\",\n    \"atl_only\": \"<boolean>\"\n  },\n  \"expires_at\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T02:51:54.000Z",
+              "updatedAt": "2026-07-28T02:51:54.000Z",
+              "uid": "35240-70f245d1-1869-4cdd-894d-da2c2053976e"
+            },
+            {
+              "id": "1a550697-2434-4660-8743-d84a73527ee6",
+              "name": "Malformed request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Client-provided key to make order creation idempotent.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2619640511\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM6789722437\"\n    }\n  },\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"lb\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"m3\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"product_code\": \"<string>\",\n  \"first_mile_option\": \"pickup\",\n  \"pickup_date\": \"<date>\",\n  \"packaging_type\": \"unlimited satchel\",\n  \"metadata\": {\n    \"minim_f\": \"velit ad qui dolore\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      }\n    }\n  },\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"0544.95\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"6968.13.65\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Sample\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\",\n  \"messages\": {\n    \"utee\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:51:54.000Z",
+              "updatedAt": "2026-07-28T02:51:54.000Z",
+              "uid": "35240-1a550697-2434-4660-8743-d84a73527ee6"
+            },
+            {
+              "id": "b7fb972a-b660-4fe0-bbf0-8ea9a38004db",
+              "name": "Missing or invalid credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Client-provided key to make order creation idempotent.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2619640511\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM6789722437\"\n    }\n  },\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"lb\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"m3\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"product_code\": \"<string>\",\n  \"first_mile_option\": \"pickup\",\n  \"pickup_date\": \"<date>\",\n  \"packaging_type\": \"unlimited satchel\",\n  \"metadata\": {\n    \"minim_f\": \"velit ad qui dolore\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      }\n    }\n  },\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"0544.95\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"6968.13.65\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Sample\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\",\n  \"messages\": {\n    \"utee\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:51:54.000Z",
+              "updatedAt": "2026-07-28T02:51:54.000Z",
+              "uid": "35240-b7fb972a-b660-4fe0-bbf0-8ea9a38004db"
+            },
+            {
+              "id": "a1d4d8ff-85db-4a7c-949d-b9203f89c621",
+              "name": "Validation failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Client-provided key to make order creation idempotent.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2619640511\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM6789722437\"\n    }\n  },\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"lb\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"m3\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"product_code\": \"<string>\",\n  \"first_mile_option\": \"pickup\",\n  \"pickup_date\": \"<date>\",\n  \"packaging_type\": \"unlimited satchel\",\n  \"metadata\": {\n    \"minim_f\": \"velit ad qui dolore\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      }\n    }\n  },\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"0544.95\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"6968.13.65\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Sample\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\",\n  \"messages\": {\n    \"utee\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:51:54.000Z",
+              "updatedAt": "2026-07-28T02:51:54.000Z",
+              "uid": "35240-a1d4d8ff-85db-4a7c-949d-b9203f89c621"
+            },
+            {
+              "id": "16164f1f-d1a6-474b-b579-a17cf30d0e4f",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Client-provided key to make order creation idempotent.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM2619640511\"\n    }\n  },\n  \"receiver\": {\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<email>\",\n      \"company\": \"<string>\",\n      \"sendle_id\": \"<string>\"\n    },\n    \"address\": {\n      \"address_line1\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"state_name\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"instructions\": \"<string>\",\n    \"tax_ids\": {\n      \"ioss\": \"IM6789722437\"\n    }\n  },\n  \"description\": \"<string>\",\n  \"weight\": {\n    \"value\": \"<string>\",\n    \"units\": \"lb\"\n  },\n  \"dimensions\": {\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"units\": \"cm\"\n  },\n  \"volume\": {\n    \"value\": \"<string>\",\n    \"units\": \"m3\"\n  },\n  \"customer_reference\": \"<string>\",\n  \"product_code\": \"<string>\",\n  \"first_mile_option\": \"pickup\",\n  \"pickup_date\": \"<date>\",\n  \"packaging_type\": \"unlimited satchel\",\n  \"metadata\": {\n    \"minim_f\": \"velit ad qui dolore\"\n  },\n  \"hide_pickup_address\": \"<boolean>\",\n  \"cover\": {\n    \"total_cover\": {\n      \"amount\": \"<number>\"\n    },\n    \"price\": {\n      \"gross\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"net\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"tax\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"USD\"\n      }\n    }\n  },\n  \"parcel_contents\": [\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"0544.95\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"value\": \"<string>\",\n      \"country_of_origin\": \"<string>\",\n      \"hs_code\": \"6968.13.65\",\n      \"quantity\": 1,\n      \"manufacturer_id\": \"<string>\"\n    }\n  ],\n  \"contents_type\": \"Sample\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\",\n  \"messages\": {\n    \"utee\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:51:54.000Z",
+              "updatedAt": "2026-07-28T02:51:54.000Z",
+              "uid": "35240-16164f1f-d1a6-474b-b579-a17cf30d0e4f"
+            }
+          ],
+          "createdAt": "2026-07-28T02:51:54.000Z",
+          "updatedAt": "2026-07-28T02:51:54.000Z",
+          "uid": "35240-ed9c0496-ab1c-4bee-a12e-9c753d992bc6"
+        }
+      ],
+      "id": "cfa7ba51-4b67-4525-abe1-c7357b467ea0",
+      "createdAt": "2026-07-28T02:51:54.000Z",
+      "updatedAt": "2026-07-28T02:51:54.000Z",
+      "uid": "35240-cfa7ba51-4b67-4525-abe1-c7357b467ea0"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sendle.com/api"
+    }
+  ]
+}

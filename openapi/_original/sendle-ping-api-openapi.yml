@@ -1,0 +1,51 @@
+openapi: 3.1.0
+info:
+  title: Sendle Ping API
+  version: "1.0"
+  description: |
+    Simple health-check endpoint to verify API credentials, idempotency keys, and
+    server reachability before exercising other Sendle endpoints.
+  contact:
+    name: Sendle API Support
+    email: api@sendle.com
+    url: https://developers.sendle.com
+servers:
+  - url: https://api.sendle.com/api
+    description: Production
+  - url: https://sandbox.sendle.com/api
+    description: Sandbox
+security:
+  - basicAuth: []
+tags:
+  - name: Utility
+    description: Connectivity and credential testing
+paths:
+  /ping:
+    get:
+      operationId: ping
+      summary: Basic API Test
+      tags: [Utility]
+      description: Returns a simple response and a server-generated timestamp. Useful for verifying API credentials and idempotency keys.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: Ping response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ping: { type: string, example: pong }
+                  timestamp: { type: string, format: date-time }
+              example:
+                ping: pong
+                timestamp: "2026-05-25T15:14:57Z"
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
