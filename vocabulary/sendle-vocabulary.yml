@@ -42,8 +42,7 @@ terms:
     definition: Driver collection of the parcel from the sender's address.
   - term: Drop Off
     definition: Sender deposits the parcel at a valid Sendle drop-off location.
-  - term: ATL Only
-    definition: "Authority To Leave only" - parcel will be left without signature at destination.
+  - term: "ATL Only definition: \"Authority To Leave only\" - parcel will be left without signature at destination."
   - term: Hide Pickup Address
     definition: Australia-only flag suppressing the pickup address from the printed label (privacy for senders).
 shipping_event_types:
