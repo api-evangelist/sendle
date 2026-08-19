@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "daa5d64d-14b0-4584-9fda-783f4b1ccbc8",
+      "id": "5eae565c-960c-487d-9743-5a1209cc3485",
       "name": "Tracking",
       "description": {
         "content": "Parcel tracking and webhook subscriptions",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "d7969a43-82dd-40f2-95ac-35c8ceaa2339",
+          "id": "42694fc1-bbe3-49d5-bd17-7cd823c8f6d9",
           "name": "Track A Parcel",
           "request": {
             "name": "Track A Parcel",
@@ -48,7 +48,7 @@
           },
           "response": [
             {
-              "id": "15223a6f-b75e-453d-9733-4023cb7fe9e3",
+              "id": "97a7e1d2-edc6-4d45-bc6b-6a2e64b97732",
               "name": "Tracking details",
               "originalRequest": {
                 "url": {
@@ -96,12 +96,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"state\": \"string\",\n  \"status\": {\n    \"description\": \"string\",\n    \"last_changed_at\": \"string\"\n  },\n  \"origin\": {\n    \"country\": \"string\"\n  },\n  \"destination\": {\n    \"country\": \"string\"\n  },\n  \"scheduling\": {\n    \"pickup_date\": \"1986-02-26\",\n    \"picked_up_on\": \"1988-09-11\",\n    \"delivered_on\": \"1966-01-24\",\n    \"estimated_delivery_date_minimum\": \"2008-06-29\",\n    \"estimated_delivery_date_maximum\": \"1981-09-29\"\n  },\n  \"tracking_events\": [\n    {\n      \"event_type\": \"In Transit\",\n      \"scan_time\": \"1965-10-22T15:30:57.230Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    },\n    {\n      \"event_type\": \"Card Left\",\n      \"scan_time\": \"1954-11-26T18:47:34.840Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    }\n  ]\n}",
+              "body": "{\n  \"state\": \"string\",\n  \"status\": {\n    \"description\": \"string\",\n    \"last_changed_at\": \"string\"\n  },\n  \"origin\": {\n    \"country\": \"string\"\n  },\n  \"destination\": {\n    \"country\": \"string\"\n  },\n  \"scheduling\": {\n    \"pickup_date\": \"1971-11-04\",\n    \"picked_up_on\": \"2014-08-09\",\n    \"delivered_on\": \"2020-03-22\",\n    \"estimated_delivery_date_minimum\": \"1968-10-30\",\n    \"estimated_delivery_date_maximum\": \"1959-09-06\"\n  },\n  \"tracking_events\": [\n    {\n      \"event_type\": \"Pickup Attempted\",\n      \"scan_time\": \"1950-06-24T11:07:22.906Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    },\n    {\n      \"event_type\": \"Pickup Attempted\",\n      \"scan_time\": \"2007-03-29T23:04:34.225Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "663fc732-1975-4840-a14c-499f7511abfd",
+              "id": "e840ce97-53ce-44b5-a556-5b57266d3e25",
               "name": "Parcel not found",
               "originalRequest": {
                 "url": {
@@ -150,7 +150,7 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "ee49cfb8-2a4a-4ac2-aeee-d1d49a26a576",
+              "id": "4d2adfdc-91c0-43c4-bd25-4846fe282992",
               "name": "Rate limit exceeded",
               "originalRequest": {
                 "url": {
@@ -205,7 +205,7 @@
           }
         },
         {
-          "id": "38096dde-afd7-4e53-924b-4158c92a9314",
+          "id": "8f776a6a-6efd-4a26-a5b7-b68240004c06",
           "name": "Subscribe To Tracking Events",
           "request": {
             "name": "Subscribe To Tracking Events",
@@ -245,7 +245,7 @@
           },
           "response": [
             {
-              "id": "7fdecb0d-2e54-4e51-9327-216a19343f0b",
+              "id": "e5812df0-cb8c-4be6-bd21-d9ff6bcedee4",
               "name": "Existing tracking events at the time of subscription",
               "originalRequest": {
                 "url": {
@@ -294,12 +294,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"state\": \"string\",\n  \"status\": {\n    \"description\": \"string\",\n    \"last_changed_at\": \"string\"\n  },\n  \"origin\": {\n    \"country\": \"string\"\n  },\n  \"destination\": {\n    \"country\": \"string\"\n  },\n  \"scheduling\": {\n    \"pickup_date\": \"1986-02-26\",\n    \"picked_up_on\": \"1988-09-11\",\n    \"delivered_on\": \"1966-01-24\",\n    \"estimated_delivery_date_minimum\": \"2008-06-29\",\n    \"estimated_delivery_date_maximum\": \"1981-09-29\"\n  },\n  \"tracking_events\": [\n    {\n      \"event_type\": \"In Transit\",\n      \"scan_time\": \"1965-10-22T15:30:57.230Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    },\n    {\n      \"event_type\": \"Card Left\",\n      \"scan_time\": \"1954-11-26T18:47:34.840Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    }\n  ]\n}",
+              "body": "{\n  \"state\": \"string\",\n  \"status\": {\n    \"description\": \"string\",\n    \"last_changed_at\": \"string\"\n  },\n  \"origin\": {\n    \"country\": \"string\"\n  },\n  \"destination\": {\n    \"country\": \"string\"\n  },\n  \"scheduling\": {\n    \"pickup_date\": \"1971-11-04\",\n    \"picked_up_on\": \"2014-08-09\",\n    \"delivered_on\": \"2020-03-22\",\n    \"estimated_delivery_date_minimum\": \"1968-10-30\",\n    \"estimated_delivery_date_maximum\": \"1959-09-06\"\n  },\n  \"tracking_events\": [\n    {\n      \"event_type\": \"Pickup Attempted\",\n      \"scan_time\": \"1950-06-24T11:07:22.906Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    },\n    {\n      \"event_type\": \"Pickup Attempted\",\n      \"scan_time\": \"2007-03-29T23:04:34.225Z\",\n      \"local_scan_time\": \"string\",\n      \"display_time\": \"string\",\n      \"description\": \"string\",\n      \"location\": \"string\",\n      \"location_data\": {\n        \"suburb\": \"string\",\n        \"state\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"origin_location\": \"string\",\n      \"destination_location\": \"string\",\n      \"reason\": \"string\",\n      \"requester\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "6149e847-ed93-487c-bc56-2fa9935eb423",
+              "id": "dc096d32-46bf-49c2-b14c-519b3b50ff67",
               "name": "No callback URL configured on the account",
               "originalRequest": {
                 "url": {
@@ -355,7 +355,7 @@
           }
         },
         {
-          "id": "681a961d-87a5-4c34-9985-a87f5d8544c9",
+          "id": "69ed2c54-717e-4b46-bee1-d6ad5d0da427",
           "name": "Unsubscribe From Tracking Events",
           "request": {
             "name": "Unsubscribe From Tracking Events",
@@ -389,7 +389,7 @@
           },
           "response": [
             {
-              "id": "519554b8-a43e-4731-852b-db2a9b3a2244",
+              "id": "c4b48d7a-a516-4ea7-83a2-9485a4630fad",
               "name": "Unsubscribed",
               "originalRequest": {
                 "url": {
@@ -470,11 +470,11 @@
     ]
   },
   "info": {
-    "_postman_id": "06045a1f-6dc6-4421-a567-607afac57e13",
-    "name": "Sendle Tracking API",
+    "_postman_id": "1dbd2771-c990-459b-935b-59c2b3de75db",
+    "name": "Sendle Shipping Manifests Tracking API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "Retrieve parcel tracking events and subscribe/unsubscribe a parcel from webhook tracking updates.\nSendle delivers webhooks to a callback URL configured on the account.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
+      "content": "Create and manage shipping manifests so a driver can collect multiple parcels\nby scanning a single barcode. Currently supports USPS SCAN Forms for US domestic\norders only. Manifests can only include orders booked the same day.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
       "type": "text/plain"
     }
   }

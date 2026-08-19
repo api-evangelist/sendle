@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "5327b266-3deb-4a5c-871f-fec25d38b77e",
+      "id": "f6a8b4f5-cc8f-431b-88ac-7018656b8886",
       "name": "Manifests",
       "description": {
         "content": "USPS SCAN Form shipping manifests for US Domestic orders",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "73948dfa-5eb5-4071-a0d1-a08919875aa8",
+          "id": "6371ffc3-f919-45b1-abfa-491501588994",
           "name": "Create Shipping Manifest",
           "request": {
             "name": "Create Shipping Manifest",
@@ -51,7 +51,7 @@
           },
           "response": [
             {
-              "id": "bea572be-f91b-49db-897e-dc1c460a02ed",
+              "id": "557d4a0d-3329-4bd6-81ce-95ca08d70369",
               "name": "Shipping manifests created",
               "originalRequest": {
                 "url": {
@@ -97,12 +97,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"43148258-7f84-2c71-b671-a88244997372\",\n    \"created_at\": \"2024-12-21T18:53:23.693Z\",\n    \"state\": \"available\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 288,\n    \"pickup_date\": \"1984-11-15\",\n    \"download_url\": \"https://skctMnhXXAfVuDwkOy.hyiPN9AY4X99t2BiCj\"\n  },\n  {\n    \"id\": \"37c4e145-7037-fd26-1672-3f4ef80a790c\",\n    \"created_at\": \"2018-05-17T16:03:40.535Z\",\n    \"state\": \"processing\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 1794,\n    \"pickup_date\": \"1947-10-11\",\n    \"download_url\": \"http://bHeSUmgLXwjobLROcRRvrjwGJVmF.asAf7PE0l5F31JySshw1hG+faynC+santT0byx68KKlhxi,QwRyqx,yU\"\n  }\n]",
+              "body": "[\n  {\n    \"id\": \"7670b21c-dd78-de09-0c2b-b241722d2032\",\n    \"created_at\": \"1955-03-30T20:54:56.785Z\",\n    \"state\": \"failed\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 5455,\n    \"pickup_date\": \"2004-12-20\",\n    \"download_url\": \"https://ly.dxyUOZe4-sUN6IrtLLgh03GoGJczufauuUJ-ZoyaW7F2,kEW2rQh-bXdJ3yB\"\n  },\n  {\n    \"id\": \"f0ea9fa2-c4b0-8d53-202d-de1720d39a9c\",\n    \"created_at\": \"1985-07-12T02:50:40.371Z\",\n    \"state\": \"available\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 3335,\n    \"pickup_date\": \"1946-11-10\",\n    \"download_url\": \"https://nVJWwCCpcNtETyvSOMKreHAnBjrMR.pyyu9plv4tKVoGfEdh2Ev\"\n  }\n]",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "8caa9620-8ce3-4035-9c9e-509b20cc755d",
+              "id": "9ceb60ee-337a-4b4a-8f61-57bbde91ac0d",
               "name": "Order already manifested or not eligible",
               "originalRequest": {
                 "url": {
@@ -155,7 +155,7 @@
           }
         },
         {
-          "id": "06fac229-b597-4e3f-bc09-2fe4384d87aa",
+          "id": "8ddce6c7-2ed2-4b9c-be6f-8ab9cd7906ea",
           "name": "Get All Shipping Manifests",
           "request": {
             "name": "Get All Shipping Manifests",
@@ -184,7 +184,7 @@
           },
           "response": [
             {
-              "id": "e2b5cbed-e51b-4538-b5dd-f9a83262be54",
+              "id": "2b06cfa5-211a-46be-9037-b4e88b038e0e",
               "name": "List of manifests",
               "originalRequest": {
                 "url": {
@@ -222,7 +222,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"43148258-7f84-2c71-b671-a88244997372\",\n    \"created_at\": \"2024-12-21T18:53:23.693Z\",\n    \"state\": \"available\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 288,\n    \"pickup_date\": \"1984-11-15\",\n    \"download_url\": \"https://skctMnhXXAfVuDwkOy.hyiPN9AY4X99t2BiCj\"\n  },\n  {\n    \"id\": \"37c4e145-7037-fd26-1672-3f4ef80a790c\",\n    \"created_at\": \"2018-05-17T16:03:40.535Z\",\n    \"state\": \"processing\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 1794,\n    \"pickup_date\": \"1947-10-11\",\n    \"download_url\": \"http://bHeSUmgLXwjobLROcRRvrjwGJVmF.asAf7PE0l5F31JySshw1hG+faynC+santT0byx68KKlhxi,QwRyqx,yU\"\n  }\n]",
+              "body": "[\n  {\n    \"id\": \"7670b21c-dd78-de09-0c2b-b241722d2032\",\n    \"created_at\": \"1955-03-30T20:54:56.785Z\",\n    \"state\": \"failed\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 5455,\n    \"pickup_date\": \"2004-12-20\",\n    \"download_url\": \"https://ly.dxyUOZe4-sUN6IrtLLgh03GoGJczufauuUJ-ZoyaW7F2,kEW2rQh-bXdJ3yB\"\n  },\n  {\n    \"id\": \"f0ea9fa2-c4b0-8d53-202d-de1720d39a9c\",\n    \"created_at\": \"1985-07-12T02:50:40.371Z\",\n    \"state\": \"available\",\n    \"type\": \"USPS SCAN Form\",\n    \"order_count\": 3335,\n    \"pickup_date\": \"1946-11-10\",\n    \"download_url\": \"https://nVJWwCCpcNtETyvSOMKreHAnBjrMR.pyyu9plv4tKVoGfEdh2Ev\"\n  }\n]",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -233,7 +233,7 @@
           }
         },
         {
-          "id": "453d51c6-ca22-4b80-a7fc-d12853fcd221",
+          "id": "f2017860-0e2e-4872-b5df-47ce76661401",
           "name": "Download Shipping Manifest",
           "request": {
             "name": "Download Shipping Manifest",
@@ -272,7 +272,7 @@
           },
           "response": [
             {
-              "id": "b8120034-697d-461c-a904-89f91d853bc7",
+              "id": "14761d81-e6a7-4d9f-9b2f-1422aa9bdd1e",
               "name": "PDF shipping manifest",
               "originalRequest": {
                 "url": {
@@ -331,7 +331,7 @@
           }
         },
         {
-          "id": "84a821d2-2fab-4fcd-bf46-b9ab9db4cc3f",
+          "id": "235b3563-4b59-4035-8b3f-a8f6452fb44c",
           "name": "Get Orders On Shipping Manifest",
           "request": {
             "name": "Get Orders On Shipping Manifest",
@@ -370,7 +370,7 @@
           },
           "response": [
             {
-              "id": "01cad7bb-5c9c-4029-a681-9c218256ed9f",
+              "id": "7fca1cbb-dc54-43f4-bb27-c622048120cf",
               "name": "Orders on the manifest",
               "originalRequest": {
                 "url": {
@@ -418,7 +418,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"order_id\": \"d1d6997e-3d23-1901-3064-5d6d2c1b872a\",\n    \"sendle_reference\": \"string\",\n    \"state\": \"string\"\n  },\n  {\n    \"order_id\": \"d98aa3f2-8430-a782-049e-22502f236027\",\n    \"sendle_reference\": \"string\",\n    \"state\": \"string\"\n  }\n]",
+              "body": "[\n  {\n    \"order_id\": \"4dc3702b-a330-84ec-6059-f340f3aaff8b\",\n    \"sendle_reference\": \"string\",\n    \"state\": \"string\"\n  },\n  {\n    \"order_id\": \"aea46bd8-2b05-df90-957e-aefb6ac9144f\",\n    \"sendle_reference\": \"string\",\n    \"state\": \"string\"\n  }\n]",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -429,7 +429,7 @@
           }
         },
         {
-          "id": "f9b6abfd-05a3-4dc5-9b13-b0fc6780a658",
+          "id": "a873fc83-02df-44ff-83f7-4fc29c000a74",
           "name": "Get Shipping Manifest Status",
           "request": {
             "name": "Get Shipping Manifest Status",
@@ -468,7 +468,7 @@
           },
           "response": [
             {
-              "id": "62f608f4-28a5-4f0d-a022-96057f70adbf",
+              "id": "1879a094-b860-4a17-85ab-812b1246f1d4",
               "name": "Manifest status",
               "originalRequest": {
                 "url": {
@@ -516,7 +516,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"534a6789-20f3-b21c-f079-2656b229894d\",\n  \"created_at\": \"1983-12-21T05:49:46.335Z\",\n  \"state\": \"available\",\n  \"type\": \"USPS SCAN Form\",\n  \"order_count\": 1371,\n  \"pickup_date\": \"2020-11-13\",\n  \"download_url\": \"https://ZmCHHAalQsLUakgxABVmlXhOFVLAsJ.gzvtSjW+ySvUtUbcyYxfMM-pKWg,aC,+rdGzHM3mQ7w5Nyqxt1ihu2T,VWn\"\n}",
+              "body": "{\n  \"id\": \"9fd075cf-a74f-8daf-9426-2a73f4b2100c\",\n  \"created_at\": \"1998-03-23T00:26:08.749Z\",\n  \"state\": \"pending\",\n  \"type\": \"USPS SCAN Form\",\n  \"order_count\": 8438,\n  \"pickup_date\": \"1976-04-04\",\n  \"download_url\": \"https://gcLQkckIriuB.vfzzta\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -552,7 +552,7 @@
     ]
   },
   "info": {
-    "_postman_id": "5376fc78-d06f-48e1-8538-4b593cfa7322",
+    "_postman_id": "264f6d6c-3d39-496e-87dd-6be8a3fa36d6",
     "name": "Sendle Shipping Manifests API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

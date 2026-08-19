@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Sendle Products & Quoting API",
+    "name": "Sendle Shipping Manifests Products API",
     "version": "1.0"
   },
   "request": {

@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Sendle Tracking API",
+    "name": "Sendle Shipping Manifests Tracking API",
     "version": "1.0"
   },
   "request": {

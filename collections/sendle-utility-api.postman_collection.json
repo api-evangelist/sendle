@@ -1,0 +1,135 @@
+{
+  "item": [
+    {
+      "id": "94bf298d-08f8-4298-8ce4-59f4074ae7d4",
+      "name": "Utility",
+      "description": {
+        "content": "Connectivity and credential testing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ec5cbd2-7f51-412a-95d3-4dca7b839b60",
+          "name": "Basic API Test",
+          "request": {
+            "name": "Basic API Test",
+            "description": {
+              "content": "Returns a simple response and a server-generated timestamp. Useful for verifying API credentials and idempotency keys.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Idempotency-Key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67a5ca7e-b1dd-4e7c-a450-5d136cff5538",
+              "name": "Ping response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Idempotency-Key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ping\": \"pong\",\n  \"timestamp\": \"2026-05-25T15:14:57Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sendle.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b0b77835-3b08-4fb7-9af6-1ab68108e6fd",
+    "name": "Sendle Shipping Manifests Utility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create and manage shipping manifests so a driver can collect multiple parcels\nby scanning a single barcode. Currently supports USPS SCAN Forms for US domestic\norders only. Manifests can only include orders booked the same day.\n\n\nContact Support:\n Name: Sendle API Support\n Email: api@sendle.com",
+      "type": "text/plain"
+    }
+  }
+}
