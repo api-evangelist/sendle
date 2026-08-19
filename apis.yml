@@ -1,6 +1,7 @@
 aid: sendle
 url: https://raw.githubusercontent.com/api-evangelist/sendle/refs/heads/main/apis.yml
 name: Sendle
+specificationVersion: '0.23'
 tags:
   - Shipping
   - Logistics
