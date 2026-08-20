@@ -7,6 +7,17 @@ tags:
   - Logistics
   - Last Mile
   - Parcels
+  - E-Commerce
+  - Carbon Neutral
+  - Small Business
+  - Australia
+  - United States
+  - Canada
+tags_raw:
+  - Shipping
+  - Logistics
+  - Last Mile
+  - Parcels
   - E-commerce
   - Carbon Neutral
   - Small Business
@@ -39,6 +50,10 @@ apis:
 - aid: sendle:sendle-orders-api
   name: Sendle Orders API
   tags:
+  - Order
+  - Shipping
+  - Labels
+  tags_raw:
   - Orders
   - Shipping
   - Labels
@@ -71,6 +86,10 @@ apis:
   name: Sendle Products & Quoting API
   tags:
   - Quoting
+  - Product
+  - Pricing
+  tags_raw:
+  - Quoting
   - Products
   - Pricing
   humanURL: https://developers.sendle.com/reference/getproducts
@@ -97,6 +116,10 @@ apis:
 - aid: sendle:sendle-tracking-api
   name: Sendle Tracking API
   tags:
+  - Tracking
+  - Webhook
+  - Event
+  tags_raw:
   - Tracking
   - Webhooks
   - Events
