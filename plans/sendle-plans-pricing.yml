@@ -1,3 +1,10 @@
+method: searched
+generated: '2026-08-26'
+method_note: >-
+  Captured from Sendle's published pricing pages (try.sendle.com/en-us/pricing and
+  sendle.com/pricing) while they were live. Re-probed 2026-08-26: try.sendle.com is
+  NXDOMAIN and www.sendle.com serves a client-rendered shell, so the source pages can no
+  longer be re-read. Retained as an archival record of Sendle's commercial model.
 apiCommons:
   plansVersion: "0.1"
 provider: sendle

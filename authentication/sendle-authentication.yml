@@ -1,7 +1,7 @@
-generated: '2026-07-11'
+generated: '2026-08-26'
 method: derived
-source: openapi/sendle-manifests-api-openapi.yml, openapi/sendle-orders-api-openapi.yml, openapi/sendle-ping-api-openapi.yml,
-  openapi/sendle-products-api-openapi.yml, openapi/sendle-tracking-api-openapi.yml
+source: openapi/sendle-manifests-api-openapi.yml, openapi/sendle-orders-api-openapi.yml, openapi/sendle-products-api-openapi.yml,
+  openapi/sendle-tracking-api-openapi.yml, openapi/sendle-utility-api-openapi.yml
 summary:
   types:
   - http
@@ -12,6 +12,6 @@ schemes:
   sources:
   - openapi/sendle-manifests-api-openapi.yml
   - openapi/sendle-orders-api-openapi.yml
-  - openapi/sendle-ping-api-openapi.yml
   - openapi/sendle-products-api-openapi.yml
   - openapi/sendle-tracking-api-openapi.yml
+  - openapi/sendle-utility-api-openapi.yml

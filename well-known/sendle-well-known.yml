@@ -1,0 +1,183 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Live HTTP probes on 2026-08-26 of every host named in apis.yml and in the
+  openapi/ servers[] blocks. NOTHING WAS SERVED. Three of the four hosts no
+  longer exist in DNS (NXDOMAIN at the sendle.com authoritative nameservers);
+  the one host that does resolve answers every /.well-known/ path with the same
+  18,276-byte JavaScript shell, which is a soft-404, not a document.
+note: >-
+  NO WellKnown or SecurityTxt pointer is wired in apis.yml for this provider,
+  and that is deliberate. Every row below is either a DNS failure or an SPA
+  catch-all returning identical HTML for paths that do not exist. A pointer
+  would assert that Sendle serves these documents; it does not.
+provider_status: >-
+  Sendle ceased operations 2026-01-11 and the Fast Group entity entered
+  liquidation. api.sendle.com, developers.sendle.com, sandbox.sendle.com and
+  status.sendle.com were all withdrawn from DNS. See lifecycle/sendle-lifecycle.yml.
+hosts:
+- host: www.sendle.com
+  resolves: true
+  note: >-
+    Resolves to Cloudflare (104.18.18.172) and serves a client-rendered marketing
+    shell. Every path below returned HTTP 200 with an identical 18,276-byte HTML
+    body and content-type text/html — a soft-404 catch-all, not a served document.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    served: false
+    file: null
+    note: HTML SPA shell (18276 bytes, text/html) — soft-404, not a security.txt.
+  - path: /.well-known/openid-configuration
+    status: 200
+    served: false
+    file: null
+    note: HTML SPA shell — soft-404.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    served: false
+    file: null
+    note: HTML SPA shell — soft-404.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    served: false
+    file: null
+    note: HTML SPA shell — soft-404.
+  - path: /.well-known/api-catalog
+    status: 200
+    served: false
+    file: null
+    note: HTML SPA shell — soft-404.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    served: false
+    file: null
+    note: HTML SPA shell — soft-404.
+  - path: /.well-known/agent-card.json
+    status: 200
+    served: false
+    file: null
+    note: >-
+      HTML SPA shell — soft-404. Explicitly rejected as an A2A Agent Card: the body
+      is not a JSON object and carries none of name/url/version/protocolVersion/
+      capabilities/skills. No a2a/ artifact was written.
+  - path: /.well-known/agent.json
+    status: 200
+    served: false
+    file: null
+    note: HTML SPA shell — soft-404. Legacy pre-0.3 agent card path; same rejection.
+  - path: /.well-known/mcp.json
+    status: 200
+    served: false
+    file: null
+    note: HTML SPA shell — soft-404.
+- host: api.sendle.com
+  resolves: false
+  note: >-
+    NXDOMAIN. Confirmed 2026-08-26 against Google (8.8.8.8), Cloudflare (1.1.1.1),
+    Quad9 (9.9.9.9), OpenDNS, and directly against the sendle.com authoritative
+    nameserver ns1.dnspackage.com, which returns SOA-only for this label. This is
+    the production API host named by every apis.yml baseURL and every openapi/
+    servers[] entry.
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/openid-configuration
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/oauth-protected-resource
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/api-catalog
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/ai-plugin.json
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/agent-card.json
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/agent.json
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+- host: developers.sendle.com
+  resolves: false
+  note: >-
+    NXDOMAIN. The developer hub host — every Documentation, Portal, GettingStarted,
+    Authentication, Sandbox, Guide, Partnerships and ChangeLog pointer previously
+    carried in apis.yml resolved here. All 25 of them were confirmed dead on
+    2026-08-26 and removed.
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/api-catalog
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/agent-card.json
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/agent.json
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/ai-plugin.json
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+- host: sandbox.sendle.com
+  resolves: false
+  note: >-
+    NXDOMAIN. Named as the Sandbox server in openapi/_original/sendle-ping-api-openapi.yml
+    and in every refined servers[] block. See sandbox/sendle-sandbox.yml.
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/api-catalog
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+  - path: /.well-known/agent-card.json
+    status: 0
+    served: false
+    file: null
+    note: 'no response — DNS NXDOMAIN'
+summary:
+  hosts_probed: 4
+  hosts_resolving: 1
+  paths_probed: 25
+  documents_served: 0
+  soft_404s: 9
+  dns_failures: 16

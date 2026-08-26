@@ -1,0 +1,55 @@
+overlay: 1.0.0
+info:
+  title: Sendle Shipping Manifests API — API Evangelist Overlay
+  version: 1.0.0
+  description: 'API Evangelist enhancements over openapi/sendle-manifests-api-openapi.yml. This overlay
+    never mutates the original: it records the retirement of the API, corrects the info.title that the
+    tag-split step overwrote, and attaches the runtime semantics (idempotency, reversibility, rate limits,
+    error format, pagination) that the contract itself leaves undeclared. Every value is grounded in the
+    captured spec or in a probe recorded in this repository.'
+extends: openapi/sendle-manifests-api-openapi.yml
+x-generated: '2026-08-26'
+x-method: generated
+actions:
+- target: $.info
+  description: Correct the title, which the tag-split step overwrote with the manifests title, and mark
+    the contract retired.
+  update:
+    title: Sendle Shipping Manifests API
+    x-lifecycle-state: retired
+    x-retired-on: '2026-01-11'
+    x-retirement-note: RETIRED — this API can no longer be called. Sendle ceased operations on 2026-01-11
+      and the company entered liquidation; api.sendle.com and sandbox.sendle.com were withdrawn from DNS
+      and returned NXDOMAIN when probed on 2026-08-26 against four independent resolvers and the sendle.com
+      authoritative nameserver. This overlay marks the contract as archival so no tooling generates an
+      integration against it.
+- target: $.servers[*]
+  description: Record that every declared server host no longer resolves.
+  update:
+    x-host-resolves: false
+    x-probed: '2026-08-26'
+    x-probe-result: NXDOMAIN
+- target: $.info
+  description: Point at the API Evangelist artifacts that carry the runtime semantics this contract does
+    not declare.
+  update:
+    x-apievangelist-artifacts:
+      conventions: conventions/sendle-conventions.yml
+      errors: errors/sendle-problem-types.yml
+      lifecycle: lifecycle/sendle-lifecycle.yml
+      data-model: data-model/sendle-data-model.yml
+      conformance: conformance/sendle-conformance.yml
+      authentication: authentication/sendle-authentication.yml
+      rate-limits: rate-limits/sendle-rate-limits.yml
+- target: $.paths['/manifests'].post
+  description: Record the irreversibility and the same-day constraint on manifest creation.
+  update:
+    x-irreversible: true
+    x-immutable-once-created: true
+    x-constraint: Orders must be created the same day as the manifest.
+- target: $.paths['/manifests'].get
+  description: Record that this collection response is unbounded — no pagination exists anywhere in the
+    API.
+  update:
+    x-pagination: none
+    x-unbounded-collection: true

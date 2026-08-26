@@ -1,0 +1,134 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  Derived from the 4xx/5xx responses declared across openapi/sendle-orders-api-openapi.yml,
+  sendle-tracking-api-openapi.yml, sendle-manifests-api-openapi.yml and
+  sendle-products-api-openapi.yml. The docs error reference could not be searched to
+  enrich titles or remediation: developers.sendle.com returned NXDOMAIN on 2026-08-26.
+provider: sendle
+title: Sendle API Error Catalog
+format: custom-json
+rfc9457: false
+media_type: application/json
+envelope:
+  schema: components.schemas.Error (openapi/sendle-orders-api-openapi.yml)
+  fields:
+  - name: error
+    type: string
+    detail: Machine-readable error code.
+  - name: error_description
+    type: string
+    detail: Human-readable explanation.
+  - name: messages
+    type: object
+    detail: >-
+      Map of field name to an array of validation message strings. This is the
+      field-level detail a client must read on a 422; the top-level error_description
+      alone will not tell you which field failed.
+  note: >-
+    Not RFC 9457 problem+json — no type, title, status, detail or instance members and
+    no application/problem+json media type anywhere in the contract.
+status_codes:
+- status: 400
+  name: BadRequest
+  title: Malformed request
+  media_type: application/json
+  schema: Error
+  operations:
+  - createOrder
+  remediation: >-
+    Request body could not be parsed or violated the OrderRequest schema at the syntax
+    level. Validate against components.schemas.OrderRequest before sending.
+  retryable: false
+- status: 401
+  name: Unauthorized
+  title: Missing or invalid credentials
+  media_type: application/json
+  schema: Error
+  operations:
+  - createOrder
+  remediation: >-
+    HTTP Basic credentials absent, malformed, or wrong for the environment. Sandbox and
+    production credentials were not interchangeable. Verify with GET /ping.
+  retryable: false
+- status: 404
+  name: NotFound
+  title: Resource not found
+  media_type: application/json
+  schema: Error
+  operations:
+  - viewOrder
+  - cancelOrder
+  - viewReturnOrder
+  - trackParcel
+  remediation: >-
+    The order UUID or parcel reference does not exist on this account. On trackParcel the
+    declared description is "Parcel not found" — note that a parcel belonging to a
+    different account is indistinguishable from one that never existed.
+  retryable: false
+- status: 422
+  name: UnprocessableEntity
+  title: Validation failed
+  media_type: application/json
+  schema: Error
+  operations:
+  - createOrder
+  - cancelOrder
+  - subscribeToTrackingEvents
+  - createShippingManifest
+  remediation: >-
+    Semantically invalid request. Read the `messages` map for the failing field. This is
+    the busiest error surface in the API and it carries three distinct operational
+    meanings, listed under semantic_variants below.
+  retryable: false
+- status: 429
+  name: TooManyRequests
+  title: Rate limit exceeded
+  media_type: application/json
+  schema: Error
+  operations:
+  - createOrder
+  - trackParcel
+  remediation: >-
+    Back off. NO Retry-After and no RateLimit-* header is declared in the contract, so a
+    client had no published signal for how long to wait. The one documented numeric limit
+    was 10 req/sec/IP on trackParcel.
+  retryable: true
+  gap: >-
+    A retryable status with no machine-readable retry hint. See
+    conventions/sendle-conventions.yml#rate_limit_signaling.
+semantic_variants:
+- status: 422
+  operationId: subscribeToTrackingEvents
+  declared_description: No callback URL configured on the account
+  detail: >-
+    A configuration error, not a request error — the webhook callback URL was set in the
+    Sendle dashboard, not through the API, so no API-side remediation existed. An agent
+    could not fix this itself.
+- status: 422
+  operationId: createShippingManifest
+  declared_description: Order already manifested or not eligible
+  detail: >-
+    Manifests were immutable and orders had to be created the same day as the manifest, so
+    this 422 was frequently a same-day-window failure rather than a data-shape failure.
+- status: 422
+  operationId: cancelOrder
+  detail: >-
+    Order is no longer cancellable — typically already collected by a driver. The 200
+    cancellation response's `cancellable` boolean is the pre-check for this condition.
+undeclared:
+  server_errors: >-
+    No 5xx response is declared anywhere in the five specs. A client had no contract for
+    what a Sendle 500/502/503 body looked like.
+  problem_json: Not used.
+  error_code_registry: >-
+    The `error` field is typed as a plain string with no enumeration in the contract, and
+    the docs host that would have carried the code list is gone. There is no recoverable
+    registry of Sendle error codes.
+coverage:
+  operations_total: 17
+  operations_with_declared_errors: 6
+  distinct_status_codes: 5
+  note: >-
+    11 of 17 operations declare only a success response — including every manifests read
+    operation and both products/quoting operations.

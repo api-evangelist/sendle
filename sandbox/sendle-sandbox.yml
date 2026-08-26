@@ -1,0 +1,64 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  Derived from the servers[] blocks of openapi/_original/sendle-ping-api-openapi.yml and
+  all five refined specs, plus the recommendations block of rate-limits/sendle-rate-limits.yml.
+  The testing docs page (developers.sendle.com/reference/sendles-sandbox-server) could not be
+  searched — the host returned NXDOMAIN on 2026-08-26.
+provider: sendle
+title: Sendle Sandbox
+status: decommissioned
+available: false
+description: >-
+  Sendle ran a separate sandbox environment on its own host with its own credentials. It was
+  a full parallel environment, not a test mode toggled by a key prefix. The host no longer
+  resolves.
+environments:
+- name: production
+  base_url: https://api.sendle.com/api
+  resolves: false
+  probe_status: 0
+  probe_result: NXDOMAIN
+  checked: '2026-08-26'
+- name: sandbox
+  base_url: https://sandbox.sendle.com/api
+  resolves: false
+  probe_status: 0
+  probe_result: NXDOMAIN
+  checked: '2026-08-26'
+  source: openapi/_original/sendle-ping-api-openapi.yml servers[1] (description "Sandbox")
+mode_selection:
+  mechanism: separate-host
+  detail: >-
+    Environment was chosen by HOST, not by a key prefix, header, or path segment. Every spec
+    in openapi/ declares both servers with descriptions "Production" and "Sandbox".
+credentials:
+  separate: true
+  interchangeable: false
+  detail: >-
+    Sandbox and production credentials were not interchangeable — recorded in
+    rate-limits/sendle-rate-limits.yml recommendations. Both environments used the same HTTP
+    Basic scheme (account ID as username, API key as password).
+  key_prefixes: none published
+  note: >-
+    Sendle used no test-vs-live key prefix, so a credential could not be identified as
+    test-mode by inspection. NO TEST CREDENTIALS ARE RECORDED HERE — none were ever published.
+verification_tooling:
+  - operation: ping
+    path: GET /ping
+    detail: >-
+      The dedicated way to verify sandbox credentials and idempotency-key handling before
+      going live. It accepts the Idempotency-Key header for exactly that purpose and returns
+      a server-generated timestamp.
+    source: openapi/sendle-utility-api-openapi.yml
+test_fixtures:
+  test_addresses: not published
+  test_parcels: not published
+  triggers: not published
+  time_simulation: not published
+  detail: >-
+    No fixture catalogue, trigger endpoint, or test clock is recoverable. NOTHING IS INVENTED
+    HERE — the docs host that would have carried published test values is gone.
+caveat: >-
+  This document records a sandbox that existed and is now unreachable. See
+  lifecycle/sendle-lifecycle.yml.

@@ -1,0 +1,140 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Live DNS and HTTP probes on 2026-08-26 across every Sendle host in this repo,
+  plus contemporaneous public reporting of the company's collapse and liquidation.
+provider: sendle
+title: Sendle API Lifecycle — Decommissioned
+status: retired
+summary: >-
+  The Sendle API is gone. Not deprecated, not sunset with a migration window —
+  withdrawn from DNS. As of 2026-08-26 api.sendle.com, developers.sendle.com,
+  sandbox.sendle.com, status.sendle.com and try.sendle.com all return NXDOMAIN
+  from the sendle.com authoritative nameservers. Sendle cancelled all deliveries
+  on 2026-01-11 and the company entered liquidation. The five OpenAPI definitions
+  in openapi/ are now an archival record of an API that can no longer be called.
+lifecycle_state:
+  api: retired
+  contract: archived
+  docs: gone
+  status_page: gone
+  sandbox: gone
+  as_of: '2026-08-26'
+company_status:
+  state: liquidation
+  ceased_operations: '2026-01-11'
+  detail: >-
+    Sendle, an Australian carbon-neutral parcel aggregator founded 2014, merged in
+    2025 with US-based FirstMile and ACI Logistix to form Fast Group. The Fast Group
+    board resolved to wind the business down on 2026-01-10; deliveries were cancelled
+    2026-01-11; the entity entered liquidation, with McGrathNicol appointed as
+    liquidators. Reported by ABC News, SmartCompany, Internet Retailing (AU) and ACS
+    Information Age.
+  note: >-
+    Company status is recorded here because it is the ONLY thing that explains the
+    lifecycle evidence below. It is not a substitute for the probes — every claim
+    about a Sendle host in this file was verified by our own DNS/HTTP request.
+evidence:
+- surface: production API host
+  url: https://api.sendle.com/api/ping
+  status: 0
+  result: NXDOMAIN
+  checked: '2026-08-26'
+  note: >-
+    Verified against 8.8.8.8, 1.1.1.1, 9.9.9.9, 208.67.222.222 and directly against
+    the authoritative ns1.dnspackage.com, which answers SOA-only for this label.
+- surface: developer hub
+  url: https://developers.sendle.com/reference/welcome
+  status: 0
+  result: NXDOMAIN
+  checked: '2026-08-26'
+  note: >-
+    Last Internet Archive capture 2026-03-17 (HTTP 200). Continuously archived from
+    2023-12 through 2026-03, then the host left DNS.
+- surface: status page
+  url: https://status.sendle.com
+  status: 0
+  result: NXDOMAIN
+  checked: '2026-08-26'
+- surface: sandbox host
+  url: https://sandbox.sendle.com/api
+  status: 0
+  result: NXDOMAIN
+  checked: '2026-08-26'
+- surface: regional marketing / pricing
+  url: https://try.sendle.com/en-us/pricing
+  status: 0
+  result: NXDOMAIN
+  checked: '2026-08-26'
+- surface: changelog
+  url: https://developers.sendle.com/changelog
+  status: 0
+  result: NXDOMAIN
+  checked: '2026-08-26'
+- surface: corporate website
+  url: https://www.sendle.com
+  status: 200
+  result: alive-but-empty
+  checked: '2026-08-26'
+  note: >-
+    Still serves an 18,276-byte client-rendered marketing shell (title "Sendle |
+    Simple, affordable parcel delivery for small business") with a sitemap.xml
+    whose lastmod is 2026-08-24. Server-rendered HTML contains no body text. The
+    domain now sits on ns1-4.dnspackage.com (admin@syrahost.com), registrar
+    Dreamscape Networks, registry expiry 2027-01-19 — a different DNS operator
+    from the one that served the API hosts.
+- surface: GitHub organization
+  url: https://github.com/sendle
+  status: 200
+  result: alive
+  checked: '2026-08-26'
+  note: 38 public repos, all forks/exercises, most recent push 2025-12-02. No API client.
+versioning:
+  scheme: unversioned-path
+  detail: >-
+    Derived from openapi/ servers[] and paths: every operation lived under
+    https://api.sendle.com/api with no version segment and no version header. There
+    was no published version negotiation mechanism.
+  evidence: openapi/sendle-orders-api-openapi.yml (servers[0].url)
+  source: derived
+deprecation_policy:
+  published: false
+  sunset_header: unknown
+  deprecation_header: unknown
+  detail: >-
+    No deprecation policy is recoverable — developers.sendle.com is gone. Sendle used
+    the OpenAPI `deprecated` flag in its own specs, but never published an RFC 8594
+    Sunset/Deprecation header policy that we can evidence.
+deprecated_operations:
+- api: sendle-products-api
+  operationId: getQuote
+  method: GET
+  path: /quote
+  summary: Get A Quote (Deprecated)
+  deprecated: true
+  replacement: getProducts (GET /products) and postProducts (POST /products)
+  source: derived from openapi/sendle-products-api-openapi.yml
+  note: >-
+    The only operation Sendle ever marked deprecated in a machine-readable way. No
+    sunset date was declared.
+sla:
+  published: false
+  note: No SLA document is recoverable; the status page host no longer resolves.
+status_page:
+  url: https://status.sendle.com
+  status: 0
+  live: false
+  note: >-
+    NXDOMAIN as of 2026-08-26. The StatusPage pointer previously carried in apis.yml
+    was removed — a pointer to a host that does not resolve is a false claim.
+support:
+  email: api@sendle.com
+  reachable: unknown
+  note: >-
+    Mailbox deliverability not probed (sendle.com publishes SPF but no DMARC). The
+    company is in liquidation; treat as unmonitored.
+migration_guidance:
+  detail: >-
+    There is no first-party migration path. Integrators who were on Sendle have moved
+    to other aggregators. This repo retains the contract for archival and comparative
+    purposes only — DO NOT generate integration code against it.

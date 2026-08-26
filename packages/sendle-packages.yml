@@ -1,0 +1,123 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  npm registry search + registry.npmjs.org metadata, rubygems.org API,
+  repo.packagist.org, pypi.org, and a full enumeration of the github.com/sendle
+  organization (38 public repos, api.github.com/orgs/sendle/repos) on 2026-08-26.
+provider: sendle
+title: Sendle Client Libraries and Packages
+description: >-
+  Sendle never published a first-party client library in any package registry.
+  The github.com/sendle organization contains 38 public repositories and not one
+  of them is a Sendle API client — they are forks of Ruby/Elixir community
+  libraries (ecto, exq, geokit, barlix, fun_with_flags), Heroku buildpacks, and
+  hiring exercises. Every package below is COMMUNITY-MAINTAINED. official is
+  false on all of them.
+official_package_count: 0
+package_count: 6
+note: >-
+  No `SDKs` pointer is wired in apis.yml because sdk_count counts official,
+  first-party SDKs and Sendle shipped zero. The `Packages` pointer records the
+  third-party ecosystem, which is the honest finding.
+provider_status: >-
+  Sendle ceased operations 2026-01-11 and entered liquidation; api.sendle.com is
+  NXDOMAIN as of 2026-08-26. Every package below now wraps an API host that does
+  not resolve. None has been updated since the shutdown except @unclick/sendle-mcp,
+  which was first published 2026-05-30 — four months AFTER the API went dark.
+packages:
+- name: sendle-node
+  registry: npm
+  url: https://www.npmjs.com/package/sendle-node
+  language: javascript
+  official: false
+  maintainer: Gomah (community)
+  repository: https://github.com/Gomah/sendle-node
+  license: MIT
+  version: 3.0.0
+  published: '2023-03-25'
+  first_published: '2021-05-01'
+  note: >-
+    The most widely used community Node client. Last release 2023-03-25 — roughly
+    three years before Sendle shut down, and it predates the Manifests API entirely.
+- name: sendle_api
+  registry: rubygems
+  url: https://rubygems.org/gems/sendle_api
+  language: ruby
+  official: false
+  maintainer: PostCo (community)
+  repository: https://github.com/PostCo/sendle_api
+  version: 0.2.0
+  published: '2025-03-13'
+  downloads: 38401
+  note: Object-based Ruby wrapper. Most recently maintained community client found.
+- name: sendle-api
+  registry: rubygems
+  url: https://rubygems.org/gems/sendle-api
+  language: ruby
+  official: false
+  maintainer: community
+  repository: null
+  version: 0.0.13
+  published: '2016-05-03'
+  downloads: 13163
+  note: >-
+    Abandoned. Its homepage_uri is http://api-doc.sendle.com — an even older Sendle
+    docs host that also no longer resolves. Ten years without a release.
+- name: cognito/sendle
+  registry: packagist
+  url: https://packagist.org/packages/cognito/sendle
+  language: php
+  official: false
+  maintainer: joshbmarshall (community)
+  repository: https://github.com/joshbmarshall/sendle
+  version: 1.0.0
+  published: '2021-08-02'
+  note: PHP client. No release in five years.
+- name: rob-lester-jr04/laravel-sendle
+  registry: packagist
+  url: https://packagist.org/packages/rob-lester-jr04/laravel-sendle
+  language: php
+  official: false
+  maintainer: roblesterjr04 (community)
+  repository: https://github.com/roblesterjr04/Laravel-Sendle
+  version: '1.0'
+  published: '2023-11-07'
+  note: Laravel service-provider wrapper.
+- name: '@unclick/sendle-mcp'
+  registry: npm
+  url: https://www.npmjs.com/package/@unclick/sendle-mcp
+  language: javascript
+  kind: mcp-server
+  official: false
+  maintainer: UnClick (https://unclick.world) — third party
+  repository: https://github.com/malamutemayhem/unclick
+  license: Apache-2.0
+  version: 0.1.0
+  published: '2026-05-30'
+  note: >-
+    A third-party stdio MCP server for "Sendle shipping quotes, orders, and parcel
+    tracking", first published 2026-05-30 — after Sendle had already ceased
+    operations and after api.sendle.com left DNS. It is NOT a Sendle product and
+    cannot function. Recorded in mcp/sendle-mcp.yml; deliberately not credited to
+    the provider.
+absent_registries:
+- registry: pypi
+  probed: https://pypi.org/pypi/sendle/json
+  status: 404
+  note: No Sendle package on PyPI, first-party or otherwise.
+- registry: pkg.go.dev
+  note: No Sendle Go module found.
+- registry: nuget
+  note: No Sendle .NET package found.
+- registry: maven-central
+  note: No Sendle Java artifact found.
+- registry: crates.io
+  note: No Sendle Rust crate found.
+first_party_repositories_checked:
+  org: https://github.com/sendle
+  public_repos: 38
+  client_libraries: 0
+  note: >-
+    Nearest thing to a developer artifact in the org is `print-openapi` (SCSS,
+    2023-03-09), a tool that renders an OpenAPI spec to printable HTML — tooling
+    ABOUT OpenAPI, not a Sendle client.

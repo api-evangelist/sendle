@@ -1,0 +1,155 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  Derived from the five OpenAPI definitions in openapi/, the AsyncAPI in asyncapi/, and
+  authentication/, errors/, conventions/ in this repo. The docs host that would have
+  carried compliance claims (developers.sendle.com) returned NXDOMAIN on 2026-08-26, so
+  no prose claim could be searched — every entry below is evidenced against the contract
+  itself or recorded as unevidenced.
+provider: sendle
+title: Sendle Standards Conformance
+description: >-
+  What the Sendle contract does and does not conform to. Sendle shipped clean OpenAPI 3.1
+  with idempotency on its money-moving operation, and almost nothing else from the
+  cross-cutting standards set: no OAuth, no RFC 9457, no RFC 8594, no pagination standard,
+  and no rate-limit headers.
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: >-
+    All five definitions declare openapi: 3.1.0 and parse. openapi/sendle-orders-api-openapi.yml
+    through sendle-utility-api-openapi.yml.
+- id: asyncapi
+  conforms: true
+  evidence: >-
+    asyncapi/sendle-tracking-asyncapi.yml describes the per-parcel tracking webhook. Sendle
+    did not publish this itself; it is an API Evangelist capture of the documented webhook
+    surface, so it evidences the EVENT SURFACE existing, not an AsyncAPI the provider shipped.
+  provider_published: false
+- id: json-schema-2020-12
+  conforms: true
+  evidence: >-
+    OpenAPI 3.1 uses JSON Schema 2020-12 for all component schemas. json-schema/sendle-order-schema.json
+    and json-schema/sendle-tracking-event-schema.json are extracted forms.
+- id: http-basic-auth
+  conforms: true
+  evidence: >-
+    components.securitySchemes.basicAuth (type http, scheme basic) on every operation of
+    every spec. RFC 7617.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 or openIdConnect securityScheme in any of the five specs. Authorization is
+    a single account-wide Basic credential with no scoping.
+- id: oidc
+  conforms: false
+  evidence: >-
+    No openIdConnect scheme; /.well-known/openid-configuration is a soft-404 on
+    www.sendle.com and NXDOMAIN on every API host (well-known/sendle-well-known.yml).
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    Errors use a bespoke {error, error_description, messages} envelope with media type
+    application/json. No application/problem+json anywhere.
+    errors/sendle-problem-types.yml.
+- id: rfc8594
+  name: Sunset / Deprecation HTTP headers
+  conforms: false
+  evidence: >-
+    No Sunset or Deprecation response header is declared on any operation, including the
+    one operation flagged deprecated (getQuote). lifecycle/sendle-lifecycle.yml.
+- id: idempotency
+  conforms: true
+  evidence: >-
+    Idempotency-Key request header on POST /orders (components.parameters.IdempotencyKey,
+    max length 100) and on GET /ping so integrators could verify handling before going
+    live. Retention window undocumented.
+  cross_ref: conventions/sendle-conventions.yml#idempotency
+- id: pagination
+  conforms: false
+  evidence: >-
+    No limit/offset/cursor/page parameter and no Link header on any collection operation.
+    GET /manifests and GET /manifests/{id}/orders return unbounded arrays.
+- id: rate-limit-headers
+  name: RFC 9239 / draft-ietf-httpapi-ratelimit-headers
+  conforms: false
+  evidence: >-
+    429 declared on createOrder and trackParcel with no RateLimit-*, X-RateLimit-* or
+    Retry-After header in any response. rate-limits/sendle-rate-limits.yml.
+- id: json-api
+  conforms: false
+  evidence: Plain JSON resource representations; no JSON:API document structure or media type.
+- id: odata
+  conforms: false
+  evidence: No $metadata surface, no OData query options.
+- id: scim
+  conforms: false
+  evidence: No SCIM schema URNs; no user or group provisioning surface exists.
+- id: fhir
+  conforms: false
+  applicable: false
+  evidence: Not a healthcare provider.
+- id: fapi
+  conforms: false
+  applicable: false
+  evidence: Not a financial-grade API.
+- id: psd2
+  conforms: false
+  applicable: false
+  evidence: Not a payment-services provider.
+- id: webhooks
+  conforms: true
+  evidence: >-
+    POST/DELETE /parcels/{ref}/tracking/subscribe register and remove a per-parcel webhook
+    subscription; delivery goes to an account-level callback URL configured out-of-band in
+    the dashboard.
+  caveat: >-
+    No signature, no shared secret, and no replay-protection mechanism is declared in the
+    contract for inbound webhook verification.
+domain_standards:
+  market: parcel shipping and last-mile logistics
+  declared: none
+  detail: >-
+    The contract declares NO logistics domain standard. It is a bespoke REST model: no
+    EDIFACT (IFTMIN/IFTSTA) or X12 (204/214/856) message types, no GS1 EPCIS event
+    vocabulary, no UPU S10 identifier scheme, and no standard carrier-interchange shape.
+    The one industry-standard artifact in the model is the HS code and country_of_origin
+    pair on ParcelContent, which is a customs data element rather than a message standard,
+    and the USPS SCAN Form the Manifests API produced — a carrier-specific document format,
+    not an open standard.
+  checks:
+  - standard: UPU S10 tracking identifier
+    declared: false
+    evidence: >-
+      sendle_reference is a Sendle-proprietary string; no S10 (two-letter service + 8 digits
+      + check digit + ISO country) format constraint appears on any tracking parameter.
+  - standard: GS1 EPCIS
+    declared: false
+    evidence: TrackingEvent uses free-form event_type/description, not EPCIS event vocabulary.
+  - standard: EDIFACT IFTSTA / X12 214
+    declared: false
+    evidence: No EDI surface exists; the tracking projection is bespoke JSON.
+  - standard: HS tariff codes (WCO Harmonized System)
+    declared: true
+    evidence: >-
+      components.schemas.ParcelContent.hs_code — the only externally-governed identifier
+      scheme the contract accepts. Used for cross-border customs declarations on
+      international orders.
+    note: >-
+      A data element, not a message standard. Recorded because it is genuinely present and
+      externally governed, not to fill the domain-standard slot.
+  reward_only_note: >-
+    Parcel-aggregation APIs have no widely adopted open interchange standard, so the absence
+    of one is not counted against Sendle.
+compliance_programs:
+  published: false
+  certifications: []
+  trust_center: null
+  detail: >-
+    probe-security-programs.py returned vdp=none trust=none on 2026-08-26. No security.txt,
+    no bug bounty on HackerOne/Bugcrowd/Intigriti, no trust center, and no named
+    certification (SOC 2, ISO 27001, PCI, HIPAA, FedRAMP) is reachable. No `Compliance`
+    pointer is wired in apis.yml as a result.
+caveat: >-
+  The API these conformance findings describe is RETIRED. api.sendle.com has been withdrawn
+  from DNS. This document grades the archived contract, not a callable service.

@@ -1,0 +1,177 @@
+generated: '2026-08-26'
+method: derived
+status: candidate
+source: >-
+  No Sendle MCP server exists. SEARCHED on 2026-08-26: npm registry (full text search for
+  "sendle"), the github.com/sendle organization (38 public repos), /.well-known/mcp.json on
+  every Sendle host, and the developer hub — which is NXDOMAIN. The candidate tool list
+  below is DERIVED from the operationIds in this repo's OpenAPI definitions.
+provider: sendle
+title: Sendle MCP Server — Candidate (none published)
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: probed
+  note: >-
+    Sendle never shipped an MCP server, remote or stdio. mode is `none` because this tool
+    list is a derivation from the OpenAPI, not a product. No endpoint URL is guessed.
+    `auth: api-key` describes what such a server WOULD need (HTTP Basic account-id/API-key),
+    not a live server.
+provider_status: >-
+  RETIRED. api.sendle.com returned NXDOMAIN on 2026-08-26 from four independent resolvers
+  and from the sendle.com authoritative nameserver. Any MCP server built against these
+  operations — including the third-party one below — cannot reach a backend.
+third_party:
+- name: '@unclick/sendle-mcp'
+  registry: npm
+  url: https://www.npmjs.com/package/@unclick/sendle-mcp
+  version: 0.1.0
+  published: '2026-05-30'
+  publisher: UnClick (https://unclick.world)
+  repository: https://github.com/malamutemayhem/unclick
+  license: Apache-2.0
+  official: false
+  mode: local-stdio
+  description: 'Sendle shipping quotes, orders, and parcel tracking.'
+  note: >-
+    NOT a Sendle product and deliberately NOT credited to the provider. First published
+    2026-05-30 — roughly five months after Sendle ceased operations on 2026-01-11 and after
+    api.sendle.com left DNS. It is recorded here and in packages/sendle-packages.yml so the
+    catalog does not later mistake it for a first-party agent surface.
+candidate_tools:
+- name: sendle_get_products
+  category: quoting
+  rest: getProducts
+  method: GET
+  path: /products
+  description: Return one quote per Sendle shipping product for a route (domestic, or DAP international).
+- name: sendle_post_products
+  category: quoting
+  rest: postProducts
+  method: POST
+  path: /products
+  description: >-
+    Quote with a request body, adding DDP Price Guaranteed international (duties and taxes
+    included) and parcel contents.
+- name: sendle_create_order
+  category: fulfillment
+  rest: createOrder
+  method: POST
+  path: /orders
+  description: Book a parcel for delivery and return label URLs plus a tracking URL.
+  write: true
+  idempotent: true
+  idempotency_key: Idempotency-Key
+  reversal: sendle_cancel_order
+- name: sendle_view_order
+  category: fulfillment
+  rest: viewOrder
+  method: GET
+  path: /orders/{id}
+  description: Retrieve an order by its order_id UUID.
+- name: sendle_cancel_order
+  category: fulfillment
+  rest: cancelOrder
+  method: POST
+  path: /orders/{id}/cancel
+  description: Cancel an order if a driver has not yet collected it.
+  write: true
+  reverses: sendle_create_order
+- name: sendle_return_order
+  category: fulfillment
+  rest: returnOrder
+  method: POST
+  path: /orders/{id}/return
+  description: Create a domestic return label against an existing order.
+  write: true
+- name: sendle_view_return_order
+  category: fulfillment
+  rest: viewReturnOrder
+  method: GET
+  path: /orders/{id}/return
+  description: Retrieve the return order created for an order.
+- name: sendle_track_parcel
+  category: tracking
+  rest: trackParcel
+  method: GET
+  path: /parcels/{ref}/tracking
+  description: Return all tracking events for a parcel by its Sendle reference.
+  rate_limit: 10 requests/second per IP
+- name: sendle_subscribe_tracking
+  category: tracking
+  rest: subscribeToTrackingEvents
+  method: POST
+  path: /parcels/{ref}/tracking/subscribe
+  description: Subscribe a parcel to webhook tracking updates.
+  write: true
+  reversal: sendle_unsubscribe_tracking
+  caveat: >-
+    422s when no account-level callback URL is configured, and the callback URL cannot be
+    set through the API — only in the dashboard. An agent could not self-remediate.
+- name: sendle_unsubscribe_tracking
+  category: tracking
+  rest: unsubscribeFromTrackingEvents
+  method: DELETE
+  path: /parcels/{ref}/tracking/subscribe
+  description: Remove a parcel's webhook tracking subscription.
+  write: true
+- name: sendle_create_manifest
+  category: manifests
+  rest: createShippingManifest
+  method: POST
+  path: /manifests
+  description: Create a USPS SCAN Form manifest batching US-domestic orders under one barcode.
+  write: true
+  irreversible: true
+  caveat: Manifests are immutable; no delete or amend operation exists.
+- name: sendle_list_manifests
+  category: manifests
+  rest: getShippingManifests
+  method: GET
+  path: /manifests
+  description: List all shipping manifests on the account.
+- name: sendle_download_manifest
+  category: manifests
+  rest: downloadShippingManifest
+  method: GET
+  path: /manifests/{id}/download
+  description: Download the printable PDF manifest.
+  media_type: application/pdf
+- name: sendle_get_manifest_orders
+  category: manifests
+  rest: getShippingManifestOrders
+  method: GET
+  path: /manifests/{id}/orders
+  description: List the orders on a manifest.
+- name: sendle_get_manifest_status
+  category: manifests
+  rest: getShippingManifestStatus
+  method: GET
+  path: /manifests/{id}/status
+  description: Return the status and metadata of a manifest.
+- name: sendle_ping
+  category: utility
+  rest: ping
+  method: GET
+  path: /ping
+  description: Verify credentials and idempotency-key handling; returns a server timestamp.
+excluded_operations:
+- operationId: getQuote
+  reason: Deprecated in the contract; superseded by getProducts/postProducts.
+coverage:
+  openapi_operations: 17
+  candidate_tools: 16
+  excluded: 1
+probes:
+- url: https://www.sendle.com/.well-known/mcp.json
+  status: 200
+  result: HTML SPA shell (soft-404), not an MCP manifest
+- url: https://api.sendle.com/.well-known/mcp.json
+  status: 0
+  result: NXDOMAIN
+- url: https://api.github.com/orgs/sendle/repos
+  status: 200
+  result: 38 repos, no MCP server

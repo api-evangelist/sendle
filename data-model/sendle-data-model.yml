@@ -1,0 +1,256 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  Derived from $ref graphs and id-reference fields across
+  openapi/sendle-orders-api-openapi.yml, sendle-products-api-openapi.yml,
+  sendle-tracking-api-openapi.yml and sendle-manifests-api-openapi.yml. The object
+  reference on developers.sendle.com could not be searched to enrich id-prefixes or
+  domains — the host returned NXDOMAIN on 2026-08-26.
+provider: sendle
+title: Sendle API Data Model
+description: >-
+  Sendle's model has one root aggregate — Order — surrounded by value objects, and two
+  satellites that reference an order by an OPAQUE STRING rather than by a typed link:
+  Tracking (keyed by sendle_reference) and Manifest (a US-domestic batch of orders).
+  There is no customer, account, or address-book entity in the public contract.
+root_entities:
+- name: Order
+  api: sendle-orders-api
+  identifier: order_id
+  identifier_format: uuid
+  secondary_identifier: sendle_reference
+  secondary_identifier_note: >-
+    Human-shaped shipment reference. This — not order_id — is the key the Tracking API
+    accepts, so the two APIs are joined by a string a client must carry itself.
+  operations:
+  - createOrder
+  - viewOrder
+  - cancelOrder
+  - returnOrder
+  - viewReturnOrder
+  states_field: state
+  detail: The only writable, persistent, retrievable resource in the API.
+- name: Manifest
+  api: sendle-manifests-api
+  identifier: id
+  operations:
+  - createShippingManifest
+  - getShippingManifests
+  - downloadShippingManifest
+  - getShippingManifestOrders
+  - getShippingManifestStatus
+  fields:
+  - id
+  - created_at
+  - state
+  - type
+  - order_count
+  - pickup_date
+  - download_url
+  detail: >-
+    A USPS SCAN Form batching many US-domestic orders under one barcode. Immutable once
+    created — no update or delete operation exists.
+- name: Tracking
+  api: sendle-tracking-api
+  identifier: ref (sendle_reference, path parameter)
+  operations:
+  - trackParcel
+  - subscribeToTrackingEvents
+  - unsubscribeFromTrackingEvents
+  fields:
+  - state
+  - status
+  - origin
+  - destination
+  - scheduling
+  - tracking_events
+  detail: A read projection over a parcel's scan history, not an independently created resource.
+- name: ProductQuote
+  api: sendle-products-api
+  identifier: none
+  persistent: false
+  operations:
+  - getProducts
+  - postProducts
+  - getQuote
+  detail: >-
+    Ephemeral. Quotes are computed per request and have no id, so a quote cannot be
+    referenced later or attached to an order — the client re-sends product_code instead.
+value_objects:
+- name: Party
+  composed_of:
+  - Contact
+  - Address
+  used_by:
+  - OrderRequest.sender
+  - OrderRequest.receiver
+  - Order.sender
+  - Order.receiver
+- name: Contact
+  fields: [name, phone, email, company, sendle_id]
+  note: >-
+    sendle_id is the only cross-account identifier in the model — it links a party to a
+    Sendle account without exposing an account entity.
+- name: Address
+  fields: [address_line1, address_line2, suburb, postcode, state_name, country]
+- name: AddressOnly
+  api: sendle-products-api
+  fields: [address_line1, address_line2, suburb, postcode, country]
+  note: >-
+    A near-duplicate of Address minus state_name, defined separately in the products
+    spec. The quoting surface and the ordering surface do not share an address type.
+- name: Weight
+  fields: [value, units]
+- name: Volume
+  fields: [value, units]
+- name: Dimensions
+  fields: [length, width, height, units]
+- name: Money
+  fields: [amount, currency]
+  note: Defined independently in BOTH the orders and products specs.
+- name: Price
+  composed_of: [Money]
+  fields: [gross, net, tax]
+- name: Cover
+  composed_of: [Price]
+  fields: [total_cover, price]
+  note: Parcel insurance.
+- name: ParcelContent
+  fields: [description, value, quantity, country_of_origin, hs_code, manufacturer_id]
+  note: >-
+    Customs line items. hs_code and country_of_origin are the international-shipping
+    fields that make this a cross-border-capable model.
+- name: Product
+  fields: [code, name, first_mile_option, service, atl_only]
+- name: Scheduling
+  fields: [is_cancellable, pickup_date, picked_up_on, delivered_on, estimated_delivery_date_minimum, estimated_delivery_date_maximum]
+  note: >-
+    is_cancellable here is the same reversibility signal exposed as `cancellable` on the
+    cancelOrder response. See conventions/sendle-conventions.yml#reversibility.
+- name: Route
+  fields: [description, type, delivery_guarantee_status]
+- name: TrackingEvent
+  fields: [event_type, scan_time, local_scan_time, display_time, description, location, location_data, origin_location, destination_location, reason, requester]
+relationships:
+- from: Order
+  to: Party
+  type: has_one
+  via: sender
+  binding: $ref
+- from: Order
+  to: Party
+  type: has_one
+  via: receiver
+  binding: $ref
+- from: Order
+  to: Product
+  type: has_one
+  via: product
+  binding: $ref
+  note: Selected on create by the scalar product_code from a ProductQuote.
+- from: Order
+  to: Price
+  type: has_one
+  via: price
+  binding: $ref
+- from: Order
+  to: Cover
+  type: has_one
+  via: cover
+  binding: $ref
+- from: Order
+  to: Scheduling
+  type: has_one
+  via: scheduling
+  binding: $ref
+- from: Order
+  to: Route
+  type: has_one
+  via: route
+  binding: $ref
+- from: Order
+  to: Weight
+  type: has_one
+  via: weight
+  binding: $ref
+- from: Order
+  to: Volume
+  type: has_one
+  via: volume
+  binding: $ref
+- from: Order
+  to: Dimensions
+  type: has_one
+  via: dimensions
+  binding: $ref
+- from: Order
+  to: ParcelContent
+  type: has_many
+  via: parcel_contents
+  binding: $ref
+- from: Order
+  to: Order
+  type: has_one
+  via: returnOrder (POST /orders/{id}/return)
+  binding: operation
+  note: >-
+    A return is itself an Order, created against a parent order id. The contract does not
+    expose a field on either side naming the other — the link exists only in the URL.
+- from: Party
+  to: Contact
+  type: has_one
+  via: contact
+  binding: $ref
+- from: Party
+  to: Address
+  type: has_one
+  via: address
+  binding: $ref
+- from: Cover
+  to: Price
+  type: has_one
+  via: price
+  binding: $ref
+- from: Price
+  to: Money
+  type: has_many
+  via: gross / net / tax
+  binding: $ref
+- from: Manifest
+  to: Order
+  type: has_many
+  via: GET /manifests/{id}/orders
+  binding: operation
+  note: >-
+    Untyped. The manifest schema exposes only order_count; the member orders are reachable
+    only through a separate operation whose response is not $ref'd to Order.
+- from: Tracking
+  to: Order
+  type: belongs_to
+  via: sendle_reference (path parameter `ref`)
+  binding: id-reference
+  note: >-
+    A string join, not a $ref. Nothing in the Tracking schema names the order_id, so a
+    client must persist sendle_reference at create time to ever track the parcel.
+- from: Tracking
+  to: TrackingEvent
+  type: has_many
+  via: tracking_events
+  binding: $ref
+observations:
+- >-
+  No Account, Customer, or User entity is exposed. Identity is implicit in the HTTP Basic
+  credential, which is why there is no scopes/ artifact for this provider.
+- >-
+  Money and Address are each defined twice — once in the orders spec, once in the products
+  spec (as Money and AddressOnly) — so quoting and ordering do not share types even though
+  a client must move data between them.
+- >-
+  The webhook callback URL is account-level and configured in the dashboard, not modeled in
+  the API at all. subscribeToTrackingEvents 422s when it is unset, and no operation can set
+  it. See errors/sendle-problem-types.yml#semantic_variants.
+counts:
+  root_entities: 4
+  value_objects: 15
+  relationships: 20
+  cross_spec_duplicate_types: 2

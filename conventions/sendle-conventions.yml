@@ -1,0 +1,197 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  Derived from openapi/sendle-orders-api-openapi.yml, sendle-products-api-openapi.yml,
+  sendle-tracking-api-openapi.yml, sendle-manifests-api-openapi.yml,
+  sendle-utility-api-openapi.yml and openapi/_original/sendle-ping-api-openapi.yml,
+  cross-read against rate-limits/sendle-rate-limits.yml and
+  authentication/sendle-authentication.yml. The docs host (developers.sendle.com) is
+  NXDOMAIN as of 2026-08-26, so nothing here could be upgraded from the provider's
+  own prose — every field below is grounded in the captured contract.
+provider: sendle
+title: Sendle API Cross-Cutting Conventions
+description: >-
+  Runtime semantics for the Sendle API as captured in this repo's OpenAPI. The API is
+  RETIRED (see lifecycle/sendle-lifecycle.yml); this document describes how it behaved,
+  not how to call it.
+base_url: https://api.sendle.com/api
+authentication:
+  style: http-basic
+  scheme: basicAuth
+  detail: >-
+    HTTP Basic Authentication on every operation in every spec — username is the Sendle
+    account ID, password is the API key. There is no OAuth, no bearer token, and no
+    per-scope authorization model, so scopes/ is intentionally absent.
+  applies_to: all operations
+  source: components.securitySchemes.basicAuth (all five specs)
+idempotency:
+  supported: true
+  header: Idempotency-Key
+  location: header
+  required: false
+  max_length: 100
+  scope: order creation
+  operations:
+  - createOrder
+  - ping
+  retention: not documented
+  detail: >-
+    A client-provided Idempotency-Key header makes POST /orders safe to retry — the
+    canonical double-booking hazard for a shipping API, where a retried create means a
+    second parcel and a second charge. GET /ping accepts the same header specifically so
+    an integrator can verify idempotency-key handling before going live, which is an
+    unusually thoughtful piece of API design.
+  evidence:
+  - openapi/sendle-orders-api-openapi.yml#/components/parameters/IdempotencyKey
+  - openapi/sendle-utility-api-openapi.yml (GET /ping, Idempotency-Key parameter)
+  gaps:
+  - Retention window for a stored idempotency key is not documented in the contract.
+  - No response header echoes whether a request was replayed from an idempotent record.
+  - cancelOrder and returnOrder do not accept Idempotency-Key, though both are POSTs.
+pagination:
+  style: none
+  detail: >-
+    No collection operation in any of the five specs declares a pagination parameter.
+    GET /manifests returns an unbounded array of Manifest, and GET /manifests/{id}/orders
+    returns an unbounded array of orders on that manifest. There is no limit, offset,
+    cursor, page, or Link header anywhere in the contract.
+  risk: >-
+    An unbounded array response with no client-side control is a real integration hazard
+    for a high-volume shipper.
+  source: derived
+field_expansion:
+  supported: false
+  detail: No expand/fields/include parameter exists in any operation.
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: true
+  detail: >-
+    Orders carry client-supplied free-text correlation fields — customer_reference and a
+    metadata object on the order — echoed back on viewOrder. This is how an integrator
+    ties a Sendle order back to their own order ID.
+  source: components.schemas.OrderRequest / Order
+request_id_tracing:
+  supported: false
+  detail: >-
+    No X-Request-Id, X-Correlation-Id, or trace header is declared in any request or
+    response. An integrator debugging a failed call had nothing to quote back to support
+    except the order UUID.
+versioning:
+  style: unversioned-path
+  detail: All operations under /api with no version segment and no version header.
+  cross_ref: lifecycle/sendle-lifecycle.yml
+error_envelope:
+  format: custom-json
+  rfc9457: false
+  media_type: application/json
+  shape:
+    error: machine-readable error code string
+    error_description: human-readable message
+    messages: object mapping field name to an array of message strings
+  detail: >-
+    A bespoke three-field envelope, not RFC 9457 problem+json. The `messages` map is the
+    field-level validation detail and is what a client must read on a 422.
+  cross_ref: errors/sendle-problem-types.yml
+  source: openapi/sendle-orders-api-openapi.yml#/components/schemas/Error
+rate_limit_signaling:
+  documented_headers: []
+  status_on_exhaustion: 429
+  retry_after: not declared
+  detail: >-
+    429 is declared as a response on createOrder and trackParcel, but NO rate-limit
+    response header is declared anywhere in the contract — no X-RateLimit-*, no
+    RateLimit-*, no Retry-After. An agent could observe exhaustion but could not see it
+    coming or learn when to retry. The one published numeric limit (10 req/sec/IP on
+    trackParcel) lived only in prose.
+  cross_ref: rate-limits/sendle-rate-limits.yml
+content_negotiation:
+  request: application/json
+  response: application/json
+  binary: >-
+    GET /manifests/{id}/download returns application/pdf — the only non-JSON response
+    surface in the API.
+dry_run_mode:
+  supported: false
+  grade: absent
+  detail: >-
+    No preview, validate-only, or dry_run flag exists on any write operation. The closest
+    thing is the sandbox environment (sandbox.sendle.com), which was a separate
+    credentialed environment rather than a per-request rehearsal. See
+    sandbox/sendle-sandbox.yml. Sandbox is now NXDOMAIN.
+reversibility:
+  grade: documented
+  applicable: true
+  detail: >-
+    Sendle's two write surfaces that commit money and physical logistics — order creation
+    and its label — both have a first-class reversal operation in the contract. What the
+    contract does NOT state is the window. cancelOrder's own description makes the window
+    a physical event ("if it has not yet been collected by a driver") rather than a stated
+    duration, and the 200 response carries a `cancellable` boolean and a
+    `cancellation_message` so a client can discover the current state — but no time bound
+    is published. Because no window is stated, this grades `documented`, not `verified`.
+    NO WINDOW IS ASSERTED HERE THAT THE CONTRACT DOES NOT STATE.
+  surfaces:
+  - write_operation: createOrder
+    method: POST
+    path: /orders
+    reversal:
+      operation: cancel
+      operationId: cancelOrder
+      method: POST
+      path: /orders/{id}/cancel
+    window:
+      stated: false
+      condition: >-
+        "Cancels the given order if it has not yet been collected by a driver" — an
+        event-bounded condition, not a duration. The order's own `cancellable` boolean
+        and `cancelled_at` timestamp report the outcome.
+      docs_url: null
+      note: >-
+        developers.sendle.com is NXDOMAIN as of 2026-08-26, so no docs page can be cited
+        for a window and none is invented.
+    grade: documented
+  - write_operation: createOrder
+    method: POST
+    path: /orders
+    reversal:
+      operation: return
+      operationId: returnOrder
+      method: POST
+      path: /orders/{id}/return
+    window:
+      stated: false
+      condition: >-
+        "Creates a return label, letting receivers easily send orders back to the original
+        sender. Domestic only." A compensating shipment rather than a true reversal — it
+        does not undo the original charge.
+      docs_url: null
+    grade: documented
+  - write_operation: subscribeToTrackingEvents
+    method: POST
+    path: /parcels/{ref}/tracking/subscribe
+    reversal:
+      operation: unsubscribe
+      operationId: unsubscribeFromTrackingEvents
+      method: DELETE
+      path: /parcels/{ref}/tracking/subscribe
+    window:
+      stated: false
+      condition: Fully reversible at any time; returns 204.
+    grade: documented
+  irreversible:
+  - operationId: createShippingManifest
+    path: POST /manifests
+    detail: >-
+      Manifests are immutable once created — there is no delete, void, or amend operation
+      on /manifests in the contract. A USPS SCAN Form created against the wrong set of
+      orders could not be withdrawn through the API.
+  - operationId: postProducts
+    detail: Read-only quoting; nothing to reverse.
+cross_references:
+  errors: errors/sendle-problem-types.yml
+  lifecycle: lifecycle/sendle-lifecycle.yml
+  authentication: authentication/sendle-authentication.yml
+  rate_limits: rate-limits/sendle-rate-limits.yml
+  data_model: data-model/sendle-data-model.yml
+  sandbox: sandbox/sendle-sandbox.yml

@@ -3,27 +3,27 @@ url: https://raw.githubusercontent.com/api-evangelist/sendle/refs/heads/main/api
 name: Sendle
 specificationVersion: '0.23'
 tags:
-  - Shipping
-  - Logistics
-  - Last Mile
-  - Parcels
-  - E-Commerce
-  - Carbon Neutral
-  - Small Business
-  - Australia
-  - United States
-  - Canada
+- Shipping
+- Logistics
+- Last Mile
+- Parcels
+- E-Commerce
+- Carbon Neutral
+- Small Business
+- Australia
+- United States
+- Canada
 tags_raw:
-  - Shipping
-  - Logistics
-  - Last Mile
-  - Parcels
-  - E-commerce
-  - Carbon Neutral
-  - Small Business
-  - Australia
-  - United States
-  - Canada
+- Shipping
+- Logistics
+- Last Mile
+- Parcels
+- E-commerce
+- Carbon Neutral
+- Small Business
+- Australia
+- United States
+- Canada
 kind: contract
 accessModel:
   pricing: paid
@@ -41,11 +41,15 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sendle.png
 access: 3rd-Party
 description: |
-  Sendle is a 100%-carbon-neutral parcel shipping service built for small businesses,
-  offering door-to-door delivery in Australia, the United States, and Canada plus
-  international shipping from AU and US to ~180 countries. The Sendle API exposes
-  quoting, order creation, label retrieval, tracking, USPS SCAN-Form shipping
-  manifests, and per-parcel tracking webhooks via HTTP Basic Authentication.
+  RETIRED — Sendle ceased operations on 11 January 2026 and the company entered liquidation;
+  the API host, developer hub, sandbox and status page have all been withdrawn from DNS and
+  returned NXDOMAIN when probed on 26 August 2026. Sendle was a 100%-carbon-neutral parcel
+  shipping service built for small businesses, offering door-to-door delivery in Australia,
+  the United States and Canada plus international shipping from AU and US to ~180 countries.
+  Its API exposed quoting, order creation, label retrieval, tracking, USPS SCAN-Form shipping
+  manifests and per-parcel tracking webhooks over HTTP Basic Authentication, with an
+  Idempotency-Key header on order creation. The five OpenAPI definitions in this repository
+  are retained as an archival record of a contract that can no longer be called.
 apis:
 - aid: sendle:sendle-orders-api
   name: Sendle Orders API
@@ -57,23 +61,17 @@ apis:
   - Orders
   - Shipping
   - Labels
-  humanURL: https://developers.sendle.com/reference/createorder
+  humanURL: https://www.sendle.com
   baseURL: https://api.sendle.com/api
   properties:
-  - url: https://developers.sendle.com/reference/createorder
-    type: Documentation
-  - url: https://developers.sendle.com/reference/vieworder
-    type: Documentation
-  - url: https://developers.sendle.com/reference/cancelorder
-    type: Documentation
-  - url: https://developers.sendle.com/reference/returnorder
-    type: Documentation
   - url: openapi/sendle-orders-api-openapi.yml
     type: OpenAPI
   - url: json-schema/sendle-order-schema.json
     type: JSONSchema
   - url: json-ld/sendle-context.jsonld
     type: JSONLD
+  - url: overlays/sendle-orders-overlay.yaml
+    type: Overlay
   description: >
     Create, view, cancel, and return parcel orders. Supports domestic AU / US / CA
 
@@ -92,17 +90,13 @@ apis:
   - Quoting
   - Products
   - Pricing
-  humanURL: https://developers.sendle.com/reference/getproducts
+  humanURL: https://www.sendle.com
   baseURL: https://api.sendle.com/api
   properties:
-  - url: https://developers.sendle.com/reference/getproducts
-    type: Documentation
-  - url: https://developers.sendle.com/reference/postproducts
-    type: Documentation
-  - url: https://developers.sendle.com/reference/getquote
-    type: Documentation
   - url: openapi/sendle-products-api-openapi.yml
     type: OpenAPI
+  - url: overlays/sendle-products-overlay.yaml
+    type: Overlay
   description: >
     Get one quote per shipping product for a given route. GET /products handles
 
@@ -123,23 +117,20 @@ apis:
   - Tracking
   - Webhooks
   - Events
-  humanURL: https://developers.sendle.com/reference/trackparcel
+  humanURL: https://www.sendle.com
   baseURL: https://api.sendle.com/api
   properties:
-  - url: https://developers.sendle.com/reference/trackparcel
-    type: Documentation
-  - url: https://developers.sendle.com/reference/subscribetotrackingevents
-    type: Documentation
-  - url: https://developers.sendle.com/reference/unsubscribetotrackingevents
-    type: Documentation
-  - url: https://developers.sendle.com/reference/tracking-webhooks
-    type: Documentation
   - url: openapi/sendle-tracking-api-openapi.yml
     type: OpenAPI
   - url: asyncapi/sendle-tracking-asyncapi.yml
     type: AsyncAPI
   - url: json-schema/sendle-tracking-event-schema.json
     type: JSONSchema
+  - url: overlays/sendle-tracking-overlay.yaml
+    type: Overlay
+  - url: asyncapi/sendle-tracking-asyncapi.yml
+    name: Sendle Tracking Webhooks
+    type: Webhooks
   description: >
     Retrieve all tracking events for a parcel by Sendle reference, or subscribe a
 
@@ -155,19 +146,13 @@ apis:
   - USPS
   - SCAN Form
   - US Domestic
-  humanURL: https://developers.sendle.com/reference/createshippingmanifest
+  humanURL: https://www.sendle.com
   baseURL: https://api.sendle.com/api
   properties:
-  - url: https://developers.sendle.com/reference/createshippingmanifest
-    type: Documentation
-  - url: https://developers.sendle.com/reference/getshippingmanifests
-    type: Documentation
-  - url: https://developers.sendle.com/reference/downloadshippingmanifest
-    type: Documentation
-  - url: https://developers.sendle.com/reference/getshippingmanifeststatus
-    type: Documentation
   - url: openapi/sendle-manifests-api-openapi.yml
     type: OpenAPI
+  - url: overlays/sendle-manifests-overlay.yaml
+    type: Overlay
   description: >
     Create, list, download (PDF), and inspect USPS SCAN Form shipping manifests so
 
@@ -179,81 +164,95 @@ apis:
 - aid: sendle:sendle-utility-api
   name: Sendle Utility API
   description: Connectivity and credential testing
-  humanURL: https://developers.sendle.com/reference/createorder
+  humanURL: https://www.sendle.com
   baseURL: https://api.sendle.com/api
   tags:
   - Utility
   properties:
   - type: OpenAPI
     url: openapi/sendle-utility-api-openapi.yml
-  - type: Documentation
-    url: https://developers.sendle.com/reference/ping
+  - url: overlays/sendle-utility-overlay.yaml
+    type: Overlay
 common:
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/sendle/overview
-  - type: AgenticAccess
-    url: agentic-access/sendle-agentic-access.yml
-  - type: DomainSecurity
-    url: security/sendle-domain-security.yml
-  - type: Authentication
-    url: authentication/sendle-authentication.yml
-  - url: https://www.sendle.com
-    name: Sendle
-    type: Website
-  - url: https://developers.sendle.com
-    name: Sendle Developer Hub
-    type: Portal
-  - url: https://developers.sendle.com/llms.txt
-    name: Sendle Docs Index (llms.txt)
-    type: Documentation
-  - url: https://developers.sendle.com/reference/authentication
-    name: Authenticating API Requests
-    type: Authentication
-  - url: https://developers.sendle.com/reference/getting-your-api-key
-    name: Getting Your API Key
-    type: GettingStarted
-  - url: https://developers.sendle.com/reference/sendles-sandbox-server
-    name: Sendle's Sandbox Server
-    type: Sandbox
-  - url: https://developers.sendle.com/docs/integration-best-practices
-    name: Integration Best Practices
-    type: Guide
-  - url: https://developers.sendle.com/docs/regional-api-differences
-    name: Regional API Differences
-    type: Guide
-  - url: https://developers.sendle.com/docs/becoming-a-partner
-    name: Becoming a Partner
-    type: Partnerships
-  - url: https://developers.sendle.com/changelog
-    name: Sendle API Changelog
-    type: ChangeLog
-  - url: https://status.sendle.com
-    name: Sendle Status
-    type: StatusPage
-  - url: https://github.com/sendle
-    name: Sendle on GitHub
-    type: GitHub
-  - url: https://www.linkedin.com/company/sendle
-    name: Sendle on LinkedIn
-    type: LinkedIn
-  - url: https://try.sendle.com/en-us/pricing
-    name: Sendle Pricing
-    type: Pricing
-  - url: plans/sendle-plans-pricing.yml
-    name: Sendle Plans
-    type: Plans
-  - url: rate-limits/sendle-rate-limits.yml
-    name: Sendle Rate Limits
-    type: RateLimits
-  - url: finops/sendle-finops.yml
-    name: Sendle FinOps Mapping
-    type: FinOps
-  - url: vocabulary/sendle-vocabulary.yml
-    name: Sendle Vocabulary
-    type: Vocabulary
-  - url: mailto:api@sendle.com
-    name: Sendle API Support
-    type: Support
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/sendle/overview
+- type: AgenticAccess
+  url: agentic-access/sendle-agentic-access.yml
+- type: DomainSecurity
+  url: security/sendle-domain-security.yml
+- type: Authentication
+  url: authentication/sendle-authentication.yml
+- url: https://www.sendle.com
+  name: Sendle
+  type: Website
+- url: https://github.com/sendle
+  name: Sendle on GitHub
+  type: GitHub
+- url: https://www.linkedin.com/company/sendle
+  name: Sendle on LinkedIn
+  type: LinkedIn
+- url: plans/sendle-plans-pricing.yml
+  name: Sendle Plans
+  type: Plans
+- url: rate-limits/sendle-rate-limits.yml
+  name: Sendle Rate Limits
+  type: RateLimits
+- url: finops/sendle-finops.yml
+  name: Sendle FinOps Mapping
+  type: FinOps
+- url: vocabulary/sendle-vocabulary.yml
+  name: Sendle Vocabulary
+  type: Vocabulary
+- url: mailto:api@sendle.com
+  name: Sendle API Support
+  type: Support
+- url: packages/sendle-packages.yml
+  name: Sendle Client Libraries (community)
+  type: Packages
+- url: llms/sendle-llms.txt
+  name: Sendle llms.txt
+  type: LLMsTxt
+- url: conventions/sendle-conventions.yml
+  name: Sendle API Conventions
+  type: Conventions
+- url: conventions/sendle-conventions.yml
+  name: Sendle Idempotency (Idempotency-Key on order creation)
+  type: Idempotency
+- url: data-model/sendle-data-model.yml
+  name: Sendle Data Model
+  type: DataModel
+- url: errors/sendle-problem-types.yml
+  name: Sendle Error Catalog
+  type: ErrorCatalog
+- url: lifecycle/sendle-lifecycle.yml
+  name: Sendle API Lifecycle (retired)
+  type: Lifecycle
+- url: conformance/sendle-conformance.yml
+  name: Sendle Standards Conformance
+  type: Conformance
 maintainers:
-  - FN: Kin Lane
-    email: info@apievangelist.com
+- FN: Kin Lane
+  email: info@apievangelist.com
+created: '2026-05-25'
+modified: '2026-08-26'
+x-enrichment:
+  date: '2026-08-26'
+  status: minimal
+  artifacts_added: 16
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: defunct
+  detail: Sendle ceased operations on 2026-01-11 and entered liquidation; api.sendle.com, developers.sendle.com, sandbox.sendle.com, status.sendle.com and try.sendle.com all return NXDOMAIN from the sendle.com authoritative nameserver, leaving only a client-rendered marketing shell on www.sendle.com that answers every /.well-known/ path with the same 18,276-byte HTML body.
+  evidence:
+  - url: https://api.sendle.com/api/ping
+    status: 0
+  - url: https://developers.sendle.com/reference/welcome
+    status: 0
+  - url: https://status.sendle.com
+    status: 0
+  - url: https://www.sendle.com/.well-known/security.txt
+    status: 200
+  - url: https://www.sendle.com
+    status: 200
+  checked: '2026-08-26'

@@ -1,3 +1,12 @@
+method: searched
+generated: '2026-08-26'
+limit_count: 1
+method_note: >-
+  Captured from developers.sendle.com reference pages while they were live. Re-probed
+  2026-08-26: developers.sendle.com is NXDOMAIN, so the source pages can no longer be
+  re-read. Only ONE numeric limit was ever published (10 req/sec/IP on trackParcel); the
+  API declared no RateLimit-*/Retry-After response headers at all. See
+  conventions/sendle-conventions.yml#rate_limit_signaling.
 apiCommons:
   rateLimitsVersion: "0.1"
 provider: sendle

@@ -1,0 +1,84 @@
+# Sendle
+
+> RETIRED — DO NOT INTEGRATE. Sendle was a 100%-carbon-neutral parcel delivery
+> service for small businesses in Australia, the United States and Canada, with
+> international shipping from AU and US. Sendle cancelled all deliveries on
+> 2026-01-11 and the company entered liquidation. As of 2026-08-26 the API host
+> (api.sendle.com), the developer hub (developers.sendle.com), the sandbox
+> (sandbox.sendle.com) and the status page (status.sendle.com) all return
+> NXDOMAIN. The contracts below are an archival record of an API that can no
+> longer be called.
+
+Provenance: generated 2026-08-26 by the API Evangelist enrichment pipeline from
+apis.yml and the artifacts in this repository. Sendle never published an
+llms.txt of its own that is reachable today — developers.sendle.com/llms.txt
+returned NXDOMAIN when probed on 2026-08-26.
+
+## Status
+
+- Company state: liquidation; operations ceased 2026-01-11
+- API state: retired, host withdrawn from DNS
+- Corporate website: https://www.sendle.com (HTTP 200, client-rendered shell)
+- Lifecycle record: lifecycle/sendle-lifecycle.yml
+
+## What the API was
+
+Base URL: https://api.sendle.com/api (no longer resolves)
+Authentication: HTTP Basic — account ID as username, API key as password
+Idempotency: Idempotency-Key request header on POST /orders
+Errors: custom JSON envelope {error, error_description, messages} — not RFC 9457
+Rate limits: 10 requests/second per IP on parcel tracking; no rate-limit headers
+
+## Contracts (archived in this repository)
+
+- [Orders API](openapi/sendle-orders-api-openapi.yml): create, view, cancel and
+  return parcel orders — createOrder, viewOrder, cancelOrder, returnOrder,
+  viewReturnOrder.
+- [Products & Quoting API](openapi/sendle-products-api-openapi.yml): one quote per
+  shipping product for a route — getProducts, postProducts, and the deprecated
+  getQuote.
+- [Tracking API](openapi/sendle-tracking-api-openapi.yml): parcel scan history and
+  per-parcel webhook subscriptions — trackParcel, subscribeToTrackingEvents,
+  unsubscribeFromTrackingEvents.
+- [Shipping Manifests API](openapi/sendle-manifests-api-openapi.yml): USPS SCAN
+  Form manifests for US-domestic pickups — createShippingManifest,
+  getShippingManifests, downloadShippingManifest, getShippingManifestOrders,
+  getShippingManifestStatus.
+- [Utility API](openapi/sendle-utility-api-openapi.yml): ping, for verifying
+  credentials and idempotency-key handling.
+- [Tracking AsyncAPI](asyncapi/sendle-tracking-asyncapi.yml): the tracking webhook
+  event surface.
+
+## Semantics
+
+- [Conventions and reversibility](conventions/sendle-conventions.yml): auth style,
+  idempotency, the absence of pagination, error envelope shape, rate-limit
+  signalling, and which write operations could be taken back.
+- [Error catalog](errors/sendle-problem-types.yml): every declared 4xx and what the
+  three distinct 422 meanings were.
+- [Data model](data-model/sendle-data-model.yml): Order as the single root
+  aggregate, and the string join between an order and its tracking record.
+- [Authentication](authentication/sendle-authentication.yml)
+- [Rate limits](rate-limits/sendle-rate-limits.yml)
+- [Plans and pricing](plans/sendle-plans-pricing.yml)
+- [Sandbox](sandbox/sendle-sandbox.yml): a separate host, now also gone.
+- [Standards conformance](conformance/sendle-conformance.yml)
+
+## Agent surfaces
+
+- MCP server: none. Sendle never shipped one. A derived candidate tool list is at
+  mcp/sendle-mcp.yml with deployment mode `none`. A third-party npm package
+  (@unclick/sendle-mcp) exists but is not a Sendle product and was first published
+  after the API went dark.
+- A2A Agent Card: none served. Every /.well-known/ path on every Sendle host is
+  either a DNS failure or an HTML shell — see well-known/sendle-well-known.yml.
+- Client libraries: no first-party SDK in any registry. Six community packages are
+  catalogued in packages/sendle-packages.yml; all now wrap a host that does not
+  resolve.
+
+## Optional
+
+- [GitHub organization](https://github.com/sendle): 38 public repositories, all
+  forks of community libraries and hiring exercises. No API client.
+- [Postman workspace](https://www.postman.com/kinlaneapi/sendle/overview):
+  API Evangelist's collections, not Sendle's.

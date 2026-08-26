@@ -1,0 +1,28 @@
+generated: '2026-08-26'
+method: probed
+source: Live probe of https://developers.sendle.com/changelog on 2026-08-26.
+provider: sendle
+title: Sendle API Changelog — Unrecoverable
+available: false
+scheme: unversioned-path
+current_version: null
+entries: []
+probe:
+  url: https://developers.sendle.com/changelog
+  status: 0
+  result: NXDOMAIN
+  checked: '2026-08-26'
+detail: >-
+  Sendle published a dated changelog on its ReadMe-hosted developer hub. That host has been
+  withdrawn from DNS (confirmed against 8.8.8.8, 1.1.1.1, 9.9.9.9, 208.67.222.222 and the
+  authoritative ns1.dnspackage.com), so no entries can be captured. The ChangeLog pointer
+  previously carried in apis.yml was removed rather than left asserting a page that no longer
+  exists.
+  The only version movement recoverable from the contract itself is the deprecation of
+  GET /quote in favour of GET/POST /products — recorded in lifecycle/sendle-lifecycle.yml.
+archive:
+  wayback_developer_hub_last_capture: '2026-03-17'
+  note: >-
+    web.archive.org holds captures of developers.sendle.com from 2023-12 to 2026-03. No
+    archived copy is saved into this repo: an Internet Archive snapshot is not a surface the
+    provider serves, and recording one as `searched` would misstate provenance.
