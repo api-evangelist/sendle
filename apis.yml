@@ -186,6 +186,9 @@ apis:
   - url: overlays/sendle-utility-overlay.yaml
     type: Overlay
 common:
+- type: CapabilityMap
+  url: capabilities/sendle-capability-edges.yml
+  name: Sendle Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/sendle/overview
 - type: AgenticAccess
