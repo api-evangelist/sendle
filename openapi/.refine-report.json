@@ -1,22 +1,33 @@
 {
   "provider": "sendle",
   "sources": [
+    "_original/sendle-ping-api-openapi.yml",
     "sendle-manifests-api-openapi.yml",
     "sendle-orders-api-openapi.yml",
     "sendle-products-api-openapi.yml",
-    "sendle-tracking-api-openapi.yml",
-    "sendle-utility-api-openapi.yml"
+    "sendle-tracking-api-openapi.yml"
   ],
   "outputs": [
+    "sendle-utility-api-openapi.yml",
     "sendle-manifests-api-openapi.yml",
     "sendle-orders-api-openapi.yml",
     "sendle-products-api-openapi.yml",
-    "sendle-tracking-api-openapi.yml",
-    "sendle-utility-api-openapi.yml"
+    "sendle-tracking-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "sendle-manifests-api-openapi.yml: previously refined output kept for 5 operation(s) no archived document covers (e.g. /manifests get, /manifests post, /manifests/{id}/download get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "sendle-orders-api-openapi.yml: previously refined output kept for 5 operation(s) no archived document covers (e.g. /orders post, /orders/{id} get, /orders/{id}/cancel post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "sendle-products-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /products get, /products post, /quote get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "sendle-tracking-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /parcels/{ref}/tracking get, /parcels/{ref}/tracking/subscribe delete, /parcels/{ref}/tracking/subscribe post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sendle-ping-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sendle-utility-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

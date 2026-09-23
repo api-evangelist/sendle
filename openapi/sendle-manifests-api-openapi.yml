@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Sendle Shipping Manifests API
   version: '1.0'
@@ -6,9 +6,7 @@ info:
 
     by scanning a single barcode. Currently supports USPS SCAN Forms for US domestic
 
-    orders only. Manifests can only include orders booked the same day.
-
-    '
+    orders only. Manifests can only include orders booked the same day.'
   contact:
     name: Sendle API Support
     email: api@sendle.com
