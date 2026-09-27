@@ -17,7 +17,7 @@ specificationVersion: '0.23'
 tags:
 - Shipping
 - Logistics
-- Last Mile
+- Last Mile Delivery
 - Parcel
 - E-Commerce
 - Carbon Neutral
@@ -65,6 +65,7 @@ description: |
   manifests and per-parcel tracking webhooks over HTTP Basic Authentication, with an
   Idempotency-Key header on order creation. The five OpenAPI definitions in this repository
   are retained as an archival record of a contract that can no longer be called.
+x-status: defunct
 apis:
 - aid: sendle:sendle-orders-api
   name: Sendle Orders API

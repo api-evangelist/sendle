@@ -281,11 +281,17 @@ components:
           type: string
         country:
           type: string
-    PartyAddress:
+    Money:
       type: object
       properties:
-        address:
-          $ref: '#/components/schemas/AddressOnly'
+        amount:
+          type: number
+        currency:
+          type: string
+          enum:
+          - AUD
+          - CAD
+          - USD
     ProductQuote:
       type: object
       properties:
@@ -377,17 +383,11 @@ components:
                   $ref: '#/components/schemas/Money'
                 tax:
                   $ref: '#/components/schemas/Money'
-    Money:
+    PartyAddress:
       type: object
       properties:
-        amount:
-          type: number
-        currency:
-          type: string
-          enum:
-          - AUD
-          - CAD
-          - USD
+        address:
+          $ref: '#/components/schemas/AddressOnly'
   securitySchemes:
     basicAuth:
       type: http
