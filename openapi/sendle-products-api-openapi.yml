@@ -189,81 +189,22 @@ paths:
                   $ref: '#/components/schemas/ProductQuote'
 components:
   schemas:
-    ProductsRequest:
+    Money:
       type: object
-      required:
-      - sender
-      - receiver
-      - weight
       properties:
-        sender:
-          $ref: '#/components/schemas/PartyAddress'
-        receiver:
-          $ref: '#/components/schemas/PartyAddress'
-        weight:
-          type: object
-          properties:
-            value:
-              type: string
-            units:
-              type: string
-              enum:
-              - kg
-              - lb
-              - g
-              - oz
-        dimensions:
-          type: object
-          properties:
-            length:
-              type: string
-            width:
-              type: string
-            height:
-              type: string
-            units:
-              type: string
-              enum:
-              - cm
-              - in
-        packaging_type:
+        amount:
+          type: number
+        currency:
           type: string
           enum:
-          - box
-          - satchel
-          - unlimited satchel
-        parcel_contents:
-          type: array
-          items:
-            type: object
-            properties:
-              description:
-                type: string
-              value:
-                type: string
-              quantity:
-                type: integer
-              country_of_origin:
-                type: string
-              hs_code:
-                type: string
-        contents_type:
-          type: string
-          enum:
-          - Documents
-          - Gift
-          - Merchandise
-          - Returned Goods
-          - Sample
-          - Other
-        cover:
-          type: object
-          properties:
-            total_cover:
-              type: object
-              properties:
-                amount:
-                  type: number
+          - AUD
+          - CAD
+          - USD
+    PartyAddress:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressOnly'
     AddressOnly:
       type: object
       required:
@@ -281,17 +222,6 @@ components:
           type: string
         country:
           type: string
-    Money:
-      type: object
-      properties:
-        amount:
-          type: number
-        currency:
-          type: string
-          enum:
-          - AUD
-          - CAD
-          - USD
     ProductQuote:
       type: object
       properties:
@@ -383,11 +313,81 @@ components:
                   $ref: '#/components/schemas/Money'
                 tax:
                   $ref: '#/components/schemas/Money'
-    PartyAddress:
+    ProductsRequest:
       type: object
+      required:
+      - sender
+      - receiver
+      - weight
       properties:
-        address:
-          $ref: '#/components/schemas/AddressOnly'
+        sender:
+          $ref: '#/components/schemas/PartyAddress'
+        receiver:
+          $ref: '#/components/schemas/PartyAddress'
+        weight:
+          type: object
+          properties:
+            value:
+              type: string
+            units:
+              type: string
+              enum:
+              - kg
+              - lb
+              - g
+              - oz
+        dimensions:
+          type: object
+          properties:
+            length:
+              type: string
+            width:
+              type: string
+            height:
+              type: string
+            units:
+              type: string
+              enum:
+              - cm
+              - in
+        packaging_type:
+          type: string
+          enum:
+          - box
+          - satchel
+          - unlimited satchel
+        parcel_contents:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+              value:
+                type: string
+              quantity:
+                type: integer
+              country_of_origin:
+                type: string
+              hs_code:
+                type: string
+        contents_type:
+          type: string
+          enum:
+          - Documents
+          - Gift
+          - Merchandise
+          - Returned Goods
+          - Sample
+          - Other
+        cover:
+          type: object
+          properties:
+            total_cover:
+              type: object
+              properties:
+                amount:
+                  type: number
   securitySchemes:
     basicAuth:
       type: http
