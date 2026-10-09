@@ -67,3 +67,28 @@ notes:
   - International Duties Paid (DDP Price Guaranteed) shipments include duties and taxes in the quote.
   - International Duties Unpaid (DAP) shipments leave duties to the recipient on arrival.
   - Live rates are returned by the Products / Quote API endpoints — there is no public per-route rate card.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  units: []
+  plans:
+  - name: Sendle Personal
+    access: other
+    model: metered
+    model_how: stated
+    units: []
+    periods: []
+  - name: Sendle Premium
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Sendle Pro
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
