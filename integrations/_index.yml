@@ -18,8 +18,8 @@
     value: sendle
     property: schemas.TrackingData.carrier_name
     detected_by: detect-carrier-edges.py
-    detected: '2026-10-12'
-  status: pending-generation
+    detected: '2026-10-13'
+  status: not-a-workflow
   arazzo: null
 - slug: sendle-17track
   label: 17track
@@ -30,5 +30,5 @@
   evidence: https://res.17track.net/asset/carrier/info/apicarrier.all.json
   source: edge
   relationship: carrier-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null

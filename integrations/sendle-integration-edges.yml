@@ -22,14 +22,14 @@ edges:
   relationship: carrier-coverage
   evidence: https://github.com/api-evangelist/karrio/blob/main/openapi/karrio-batches-api-openapi.yml
   detected_by: detect-carrier-edges.py
-  first_seen: '2026-10-12'
+  first_seen: '2026-10-13'
   contract_reference:
     repo: karrio
     spec_file: karrio-batches-api-openapi.yml
     value: sendle
     property: schemas.TrackingData.carrier_name
     detected_by: detect-carrier-edges.py
-    detected: '2026-10-12'
+    detected: '2026-10-13'
 - partner_name: 17track
   partner: 17track
   partner_match: aggregator
@@ -39,6 +39,6 @@ edges:
   relationship: carrier-coverage
   evidence: https://res.17track.net/asset/carrier/info/apicarrier.all.json
   detected_by: detect-carrier-edges.py
-  first_seen: '2026-10-12'
+  first_seen: '2026-10-13'
   matched_by: domain:sendle.com
 templates: []
