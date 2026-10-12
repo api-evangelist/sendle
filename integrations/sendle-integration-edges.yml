@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/sendle/integrations
+- https://n8n.io/integrations/sendle/
+- https://composio.dev/toolkits/sendle
+- https://monid.ai/tools/sendle
+checked:
+- https://composio.dev/toolkits/sendle
+- https://monid.ai/tools/sendle
+- https://n8n.io/integrations/sendle/
+- https://zapier.com/apps/sendle/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
