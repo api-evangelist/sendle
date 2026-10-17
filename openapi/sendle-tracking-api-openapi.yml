@@ -86,55 +86,6 @@ paths:
           description: Unsubscribed
 components:
   schemas:
-    Tracking:
-      type: object
-      properties:
-        state:
-          type: string
-        status:
-          type: object
-          properties:
-            description:
-              type: string
-            last_changed_at:
-              type: string
-        origin:
-          type: object
-          properties:
-            country:
-              type: string
-        destination:
-          type: object
-          properties:
-            country:
-              type: string
-        scheduling:
-          type: object
-          properties:
-            pickup_date:
-              type: string
-              format: date
-              nullable: true
-            picked_up_on:
-              type: string
-              format: date
-              nullable: true
-            delivered_on:
-              type: string
-              format: date
-              nullable: true
-            estimated_delivery_date_minimum:
-              type: string
-              format: date
-              nullable: true
-            estimated_delivery_date_maximum:
-              type: string
-              format: date
-              nullable: true
-        tracking_events:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrackingEvent'
     TrackingEvent:
       type: object
       properties:
@@ -190,6 +141,55 @@ components:
           type: string
         requester:
           type: string
+    Tracking:
+      type: object
+      properties:
+        state:
+          type: string
+        status:
+          type: object
+          properties:
+            description:
+              type: string
+            last_changed_at:
+              type: string
+        origin:
+          type: object
+          properties:
+            country:
+              type: string
+        destination:
+          type: object
+          properties:
+            country:
+              type: string
+        scheduling:
+          type: object
+          properties:
+            pickup_date:
+              type: string
+              format: date
+              nullable: true
+            picked_up_on:
+              type: string
+              format: date
+              nullable: true
+            delivered_on:
+              type: string
+              format: date
+              nullable: true
+            estimated_delivery_date_minimum:
+              type: string
+              format: date
+              nullable: true
+            estimated_delivery_date_maximum:
+              type: string
+              format: date
+              nullable: true
+        tracking_events:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
   securitySchemes:
     basicAuth:
       type: http

@@ -355,17 +355,6 @@ components:
               properties:
                 amount:
                   type: number
-    Money:
-      type: object
-      properties:
-        amount:
-          type: number
-        currency:
-          type: string
-          enum:
-          - AUD
-          - CAD
-          - USD
     AddressOnly:
       type: object
       required:
@@ -388,6 +377,17 @@ components:
       properties:
         address:
           $ref: '#/components/schemas/AddressOnly'
+    Money:
+      type: object
+      properties:
+        amount:
+          type: number
+        currency:
+          type: string
+          enum:
+          - AUD
+          - CAD
+          - USD
   securitySchemes:
     basicAuth:
       type: http
