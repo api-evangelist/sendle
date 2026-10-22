@@ -97,7 +97,7 @@ versioning:
     was no published version negotiation mechanism.
   evidence: openapi/sendle-orders-api-openapi.yml (servers[0].url)
   source: derived
-deprecation_policy:
+deprecation:
   published: false
   sunset_header: unknown
   deprecation_header: unknown

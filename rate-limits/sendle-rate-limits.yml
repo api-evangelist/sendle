@@ -1,64 +1,34 @@
+name: Sendle rate limits
+generated: '2026-10-21'
 method: searched
-generated: '2026-08-26'
-limit_count: 1
-method_note: >-
-  Captured from developers.sendle.com reference pages while they were live. Re-probed
-  2026-08-26: developers.sendle.com is NXDOMAIN, so the source pages can no longer be
-  re-read. Only ONE numeric limit was ever published (10 req/sec/IP on trackParcel); the
-  API declared no RateLimit-*/Retry-After response headers at all. See
-  conventions/sendle-conventions.yml#rate_limit_signaling.
+source: https://developers.sendle.com/reference/trackparcel
+provider: sendle
+title: Sendle API Rate Limits (archival)
 apiCommons:
   rateLimitsVersion: "0.1"
-provider: sendle
-title: Sendle API Rate Limits
-description: |
-  Sendle publishes one explicit rate limit (the tracking endpoint). Other endpoints
-  do not document a numeric limit; integrators are expected to back off on 429
-  responses. Webhooks reduce the need to poll tracking and are the recommended
-  way to receive ongoing updates.
+limit_count: 1
+method_note: >-
+  Archival. Captured from developers.sendle.com while it was live (last_verified 2026-05-25).
+  Re-probed 2026-10-21: developers.sendle.com, api.sendle.com and sandbox.sendle.com all fail
+  DNS resolution, and a Wayback Machine lookup was refused (429 / fetch tool blocked), so the
+  source sentence cannot be re-read and no verbatim limit_text is available. The earlier file
+  also listed createOrder and getProducts with "not documented" limits; those were not limits
+  and are dropped here. Only one numeric limit was ever published; the contracts declare no
+  RateLimit-* / X-RateLimit-* / Retry-After response headers.
 last_verified: 2026-05-25
-source:
-  - https://developers.sendle.com/reference/trackparcel
-  - https://developers.sendle.com/reference/tracking-webhooks
-defaults:
-  burst: not documented
-  sustained: not documented
-  scope: per IP
+headers: []
+status_on_exhaustion: 429
 limits:
-  - api: sendle-tracking-api
+  - name: Tracking polling limit
+    endpoint: GET /parcels/{ref}/tracking
     operation: trackParcel
-    method: GET
-    path: /parcels/{ref}/tracking
-    limit:
-      requests: 10
-      period: second
-      scope: per_ip
-    notes: Sendle recommends polling each parcel at most once per hour. Higher limits are available on request via api@sendle.com.
-  - api: sendle-orders-api
-    operation: createOrder
-    method: POST
-    path: /orders
-    limit:
-      requests: not documented
-      period: minute
-      scope: per_account
-    notes: Sendle does not publish a numeric limit. Use Idempotency-Key on retries to avoid duplicate bookings.
-  - api: sendle-products-api
-    operation: getProducts
-    method: GET
-    path: /products
-    limit:
-      requests: not documented
-      period: minute
-      scope: per_account
-quota:
-  parcels_per_month_billing_floors:
-    - tier: Sendle Premium
-      minimum: 20
-    - tier: Sendle Pro
-      minimum: 200
-recommendations:
-  - Subscribe to tracking webhooks instead of polling /parcels/{ref}/tracking on a tight loop.
-  - Cache quotes briefly (≤ 5 minutes) per route+weight to amortize Products calls.
-  - Use the sandbox (sandbox.sendle.com) for load testing — sandbox and production credentials are not interchangeable.
-  - Treat 429 as a hard backoff signal and reach out to api@sendle.com if a higher limit is required.
+    api: sendle-tracking-api
+    window: 1 second
+    max: 10
+    scope: per IP
+    limit: 10
+    limit_text: null
+    limit_text_note: Source page unreachable (NXDOMAIN); value retained from the 2026-05-25 capture.
+    notes: >-
+      Earlier capture recorded that Sendle recommended polling each parcel at most once per
+      hour and offered higher limits on request via api@sendle.com.

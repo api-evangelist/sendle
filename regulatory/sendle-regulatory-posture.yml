@@ -1,0 +1,59 @@
+generated: '2026-10-21'
+method: searched
+source: https://www.sendle.com/privacy
+pages_read:
+- url: https://www.sendle.com/privacy
+  http_status: 200
+  note: 'Privacy Policy, "Last updated: 20 August 2026". Issued by the MWH McKenna Worldwide Australia Group, which operates Sendle.'
+- url: https://www.sendle.com/terms
+  http_status: 200
+  note: Terms; section 16 Personal Data Protection defers to the Privacy Policy.
+signals:
+  data_subject_request:
+    url: https://www.sendle.com/privacy
+    section: '13 Your Rights'
+    channel: www.mckennaworldwide.com/contact, info@mckennaworldwide.com, +61 2 9733 0700
+    stated_sla: within a reasonable period and, where applicable, within the timeframe required by the Applicable Data Protection Law
+    rights_named: [access, correction, deletion (jurisdiction-dependent), restriction/objection (jurisdiction-dependent), portability (jurisdiction-dependent)]
+    evidence:
+    - source: https://www.sendle.com/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: 'You have the right to request access to, and correction of, any personal information we hold about you. To make a request, please contact us at: www.mckennaworldwide.com/contact, info@mckennaworldwide.com, or +61 2 9733 0700.'
+    - source: https://www.sendle.com/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: 'We will respond to your access or correction request within a reasonable period and, where applicable, within the timeframe required by the Applicable Data Protection Law. We may charge a reasonable fee for providing access to your information, to cover our administrative costs.'
+    - source: https://www.sendle.com/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: 'You may also have additional rights under the Applicable Data Protection Law of Your Jurisdiction, including the right to request deletion of your personal information, the right to restrict or object to processing, and the right to data portability. Please contact us if you wish to exercise any of these rights.'
+    note: >-
+      A documented access/correction channel (web form, email, phone) with a non-specific response SLA and a possible
+      access fee; deletion, restriction/objection and portability are acknowledged only where the user's local law grants them.
+      Portability here is a data-subject right, not contractual exit assistance, so no exit_assistance signal is recorded.
+  data_retention:
+    url: https://www.sendle.com/privacy
+    section: '12 Security & how do we store data?'
+    evidence:
+    - source: https://www.sendle.com/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: 'We retain personal information only for as long as necessary to fulfil the purposes for which it was collected, or as required or permitted by law. When personal information is no longer needed, we will take reasonable steps to destroy or permanently de-identify it.'
+    note: Purpose-limited retention with destruction or de-identification; no concrete retention periods are published.
+  data_residency:
+    url: https://www.sendle.com/privacy
+    section: '3 What is the purpose of this Policy & its lawful basis for processing? (3.10 Overseas storage and disclosure)'
+    countries_named: [United States of America, United Kingdom, European Union member states, Singapore, Philippines]
+    evidence:
+    - source: https://www.sendle.com/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: 'We may store or disclose personal information to recipients located outside Australia, including to cloud service providers and other third-party service providers. Countries where your information may be transferred include, but are not limited to:'
+    - source: https://www.sendle.com/terms
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: 'Sendle will handle personal information in accordance with its Privacy Policy, including when sharing information with Carriers and other providers or transferring it overseas to perform a Service.'
+    note: >-
+      No residency commitment: data may leave Australia, with a non-exhaustive list of destination countries (US, UK, EU,
+      Singapore, Philippines). Categories of service providers are named but no subprocessor list is published.

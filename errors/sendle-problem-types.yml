@@ -28,7 +28,7 @@ envelope:
   note: >-
     Not RFC 9457 problem+json — no type, title, status, detail or instance members and
     no application/problem+json media type anywhere in the contract.
-status_codes:
+problems:
 - status: 400
   name: BadRequest
   title: Malformed request

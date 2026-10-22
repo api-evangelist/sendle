@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendle/main/json-schema/sendle-product-quote-schema.json",
+  "title": "ProductQuote",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sendle-products-api-openapi.yml#/components/schemas/ProductQuote",
+  "type": "object",
+  "properties": {
+    "quote": {
+      "type": "object",
+      "properties": {
+        "gross": {
+          "$ref": "#/$defs/Money"
+        },
+        "net": {
+          "$ref": "#/$defs/Money"
+        },
+        "tax": {
+          "$ref": "#/$defs/Money"
+        }
+      }
+    },
+    "price_breakdown": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/Money"
+      }
+    },
+    "tax_breakdown": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "plan": {
+      "type": "string"
+    },
+    "eta": {
+      "type": "object",
+      "properties": {
+        "days_range": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "date_range": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "for_send_date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "same-city",
+            "national",
+            "remote",
+            "export"
+          ]
+        }
+      }
+    },
+    "allowed_packaging": {
+      "type": "string",
+      "enum": [
+        "any",
+        "box",
+        "satchel",
+        "unlimited satchel"
+      ]
+    },
+    "product": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "first_mile_option": {
+          "type": "string",
+          "enum": [
+            "pickup",
+            "drop off"
+          ]
+        },
+        "service": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "express"
+          ]
+        },
+        "atl_only": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cover": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "object",
+          "properties": {
+            "gross": {
+              "$ref": "#/$defs/Money"
+            },
+            "net": {
+              "$ref": "#/$defs/Money"
+            },
+            "tax": {
+              "$ref": "#/$defs/Money"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "enum": [
+            "AUD",
+            "CAD",
+            "USD"
+          ]
+        }
+      }
+    }
+  }
+}

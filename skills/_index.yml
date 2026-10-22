@@ -1,0 +1,15 @@
+name: Sendle agent skills
+generated: '2026-10-21'
+method: derived
+source: operationIds in openapi/*.yml; no provider-published skills or AGENTS.md exist (Sendle is retired, developer hub NXDOMAIN)
+provider: sendle
+status: reference-only (provider retired 2026-01-11)
+skills:
+- name: sendle-quote-and-ship
+  path: skills/sendle-quote-and-ship.md
+- name: sendle-track-parcel
+  path: skills/sendle-track-parcel.md
+- name: sendle-returns
+  path: skills/sendle-returns.md
+- name: sendle-daily-manifest
+  path: skills/sendle-daily-manifest.md

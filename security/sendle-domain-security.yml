@@ -1,4 +1,4 @@
-generated: '2026-08-26'
+generated: '2026-10-21'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -7,13 +7,14 @@ hosts:
   tls_version: TLSv1.3
   cert_expires: Nov 21 23:26:29 2026 GMT
   hsts: false
-- host: developers.sendle.com
-  https: false
 - host: api.sendle.com
+  https: false
+- host: sandbox.sendle.com
   https: false
 domains:
 - domain: sendle.com
   dnssec: false
   caa: []
   spf: true
-  dmarc: false
+  dmarc: true
+  dmarc_policy: none

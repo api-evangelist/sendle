@@ -1,94 +1,109 @@
+name: Sendle pricing
+generated: '2026-10-21'
 method: searched
-generated: '2026-08-26'
-method_note: >-
-  Captured from Sendle's published pricing pages (try.sendle.com/en-us/pricing and
-  sendle.com/pricing) while they were live. Re-probed 2026-08-26: try.sendle.com is
-  NXDOMAIN and www.sendle.com serves a client-rendered shell, so the source pages can no
-  longer be re-read. Retained as an archival record of Sendle's commercial model.
-apiCommons:
-  plansVersion: "0.1"
+source: https://www.sendle.com/pro
 provider: sendle
-title: Sendle Plans and Pricing
-description: |
-  Sendle's commercial model is volume-based, not subscription-based. There are three
-  account tiers (Personal, Premium, Pro) with no monthly fees; better rates unlock as
-  monthly parcel volume grows. Customers are billed per shipment in the currency of
-  the sender country (AUD/CAD/USD). Sendle Premium and Pro also include levels of
-  business support.
-source:
-  - https://try.sendle.com/en-us/pricing
-  - https://sendle.com/pricing
-last_verified: 2026-05-25
+title: Sendle Plans and Pricing — Sendlers Shippers Club
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+currency: AUD
+currency_note: >-
+  The page shows "$" amounts "excl. GST" under an AU locale switch; AUD is read from that
+  context, the page does not print a currency code.
+delivery:
+  delivery: managed
+method_note: >-
+  Read 2026-10-21 from https://www.sendle.com/pro, which is JavaScript-rendered (a plain GET
+  returns an 18 KB shell; text recovered with fetch-url.py --render). This is the relaunched
+  Sendle brand (footer social links "sendlebymckennaworldwide"). It prices a parcel-shipping
+  membership, NOT API access: the Sendle API hosts (api.sendle.com, developers.sendle.com,
+  sandbox.sendle.com) still fail DNS resolution on 2026-10-21, see lifecycle/sendle-lifecycle.yml.
+  Supersedes the 2026-05 capture of the old Personal/Premium/Pro volume tiers from
+  try.sendle.com, which no longer resolves.
+summary_text: "Plans start at $4.99 a month (excl. GST), billed monthly in advance."
+plan_count: 7
 plans:
-  - id: sendle-personal
-    name: Sendle Personal
-    type: PayAsYouGo
-    description: Default tier for occasional senders. No monthly fee or minimums.
-    pricing_model: per-shipment
-    minimum_volume:
-      parcels_per_month: 0
-    geo: [AU, US, CA]
+  - name: Standard Sender
+    description: Great for getting started
+    price: 0
+    price_text: "Standard Sender stays at $0 with standard freight pricing."
+    billing_period: month
     features:
-      - Free pickup and drop-off
-      - No subscription fees
-      - No contracts
-      - International shipping from AU and US to ~180 countries; CA to US
-      - Sendle Saver, Preferred, 3-Day Guaranteed, 2-Day Guaranteed service tiers (US)
-  - id: sendle-premium
-    name: Sendle Premium
-    type: VolumeTier
-    description: Better rates for higher-volume senders, with premium business support.
-    pricing_model: per-shipment
-    minimum_volume:
-      parcels_per_month: 20
-    geo: [AU, US, CA]
+      - Standard pricing
+    limits:
+      - "Freight-spend threshold: No threshold"
+      - "1 primary account, No sub-accounts"
+  - name: Tier 1
+    description: Ship more, save more
+    price: 4.99
+    price_text: "$4.99"
+    billing_period: month
     features:
-      - Discounted per-shipment rates
-      - Free premium business support
-      - No subscription fees
-      - Free pickup and drop-off
-  - id: sendle-pro
-    name: Sendle Pro
-    type: VolumeTier
-    description: Highest-volume tier with maximum per-shipment savings.
-    pricing_model: per-shipment
-    minimum_volume:
-      parcels_per_month: 200
-    geo: [AU, US, CA]
+      - Tier 1 pricing
+      - "$2.50 freight-account credit when threshold is met"
+    limits:
+      - "Freight-spend threshold: $100"
+      - "1 primary account, Up to 10 paid sub-accounts"
+  - name: Tier 2
+    description: Growing together
+    price: 6.99
+    price_text: "$6.99"
+    billing_period: month
     features:
-      - Up to ~80% savings vs Personal
-      - Free priority business support
-      - No subscription fees
-      - Free pickup and drop-off
-      - Account-managed onboarding for high-volume senders
-notes:
-  - Rates vary by route, weight, dimensions, packaging type, and service speed.
-  - Currency is determined by sender country (AUD for AU, CAD for CA, USD for US).
-  - International Duties Paid (DDP Price Guaranteed) shipments include duties and taxes in the quote.
-  - International Duties Unpaid (DAP) shipments leave duties to the recipient on arrival.
-  - Live rates are returned by the Products / Quote API endpoints — there is no public per-route rate card.
-x-canonical:
-  generated: '2026-10-08'
-  vocabulary: all/0-working/economics/plans-canonical.yml
-  models:
-  - metered
-  units: []
-  plans:
-  - name: Sendle Personal
-    access: other
-    model: metered
-    model_how: stated
-    units: []
-    periods: []
-  - name: Sendle Premium
-    access: other
-    model: unstated
-    model_how: derived
-    units: []
-    periods: []
-  - name: Sendle Pro
-    access: other
-    model: unstated
-    model_how: derived
-    units: []
-    periods: []
+      - Tier 2 pricing
+      - "$3.50 freight-account credit when threshold is met"
+    limits:
+      - "Freight-spend threshold: $250"
+      - "1 primary account, Up to 10 paid sub-accounts"
+  - name: Tier 3
+    description: More volume, more value
+    price: 8.99
+    price_text: "$8.99"
+    billing_period: month
+    features:
+      - Tier 3 pricing
+      - "$4.50 freight-account credit when threshold is met"
+    limits:
+      - "Freight-spend threshold: $500"
+      - "1 primary account, Up to 10 paid sub-accounts"
+  - name: Tier 4
+    description: Scaling for impact
+    price: 14.99
+    price_text: "$14.99"
+    billing_period: month
+    features:
+      - Tier 4 pricing
+      - "$7.50 freight-account credit when threshold is met"
+    limits:
+      - "Freight-spend threshold: $1,000"
+      - "1 primary + 2 free sub-accounts, Up to 10 in total"
+  - name: Tier 5
+    description: High volume, high impact
+    price: 29.99
+    price_text: "$29.99"
+    billing_period: month
+    features:
+      - Tier 5 pricing
+      - "$15.00 freight-account credit when threshold is met"
+    limits:
+      - "Freight-spend threshold: $2,000"
+      - "1 primary + 2 free sub-accounts, Up to 10 in total"
+  - name: Tier 6
+    description: Maximum value, greater change
+    price: 49.99
+    price_text: "$49.99"
+    billing_period: month
+    features:
+      - Tier 6 pricing
+      - "$25.00 freight-account credit when threshold is met ($49.99 at $8,000)"
+    limits:
+      - "Freight-spend threshold: $4,000"
+      - "1 primary + 2 free sub-accounts, Up to 10 in total"
+add_ons:
+  - name: Customer sub-account
+    price_text: "Add up to 10 sub-accounts for $5 each a month plus GST."
+terms:
+  - "All membership fees and freight-spend thresholds exclude GST."
+  - "Cancelling takes effect at the end of your current prepaid month, and stops the next charge."
+  - "If spend runs more than 15% under your threshold for two billing months in a row, you move to the next lower tier."

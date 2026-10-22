@@ -1,6 +1,9 @@
 aid: sendle
+
 url: https://raw.githubusercontent.com/api-evangelist/sendle/refs/heads/main/apis.yml
+
 name: Sendle
+
 deliveryModel:
   model: saas
   open_source: false
@@ -13,7 +16,9 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 specificationVersion: '0.23'
+
 tags:
 - Shipping
 - Logistics
@@ -25,6 +30,7 @@ tags:
 - Australia
 - United States
 - Canada
+
 tags_raw:
 - Shipping
 - Logistics
@@ -36,7 +42,9 @@ tags_raw:
 - Australia
 - United States
 - Canada
+
 kind: contract
+
 accessModel:
   pricing: paid
   onboarding: unknown
@@ -53,151 +61,86 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sendle.png
+
 access: 3rd-Party
-description: |
-  Sendle is a parcel delivery service built for small businesses, best known for 100%-carbon-neutral
+
+description: 'Sendle is a parcel delivery service built for small businesses, best known for 100%-carbon-neutral
+
   door-to-door shipping in Australia, the United States and Canada. The original operator, Sendle Pty
+
   Ltd, ceased trading in January 2026 and entered liquidation, and its API host, developer hub, sandbox
+
   and status page were withdrawn from DNS. In July 2026 McKenna Worldwide Services, an Australian
+
   logistics company with Quantium Solutions heritage, bought the Sendle brand, domain names and
+
   trademarks from the liquidators (not the company or its debts) and relaunched it, debuting the new
+
   Sendle at Online Retailer in Sydney on 22-23 July with operations expected by September 2026; Quantium
-  Solutions handles the deliveries behind the customer-facing brand. As of 3 October 2026
-  www.sendle.com answers again, but api.sendle.com and developers.sendle.com still do not resolve, so no
-  API from the relaunched Sendle has been confirmed. The five OpenAPI definitions in this repository
-  describe the original operator's API (quoting, orders, labels, tracking, USPS SCAN-Form manifests and
+
+  Solutions handles the deliveries behind the customer-facing brand. As of 21 October 2026
+
+  www.sendle.com answers again (pricing via the Sendlers Shippers Club membership, a support centre and
+
+  self-serve signup), but api.sendle.com and developers.sendle.com still do not resolve and the relaunched
+
+  site links to no API or developer documentation, so no API from the relaunched Sendle has been confirmed. The five OpenAPI definitions in this
+  repository
+
+  describe the original operator''s API (quoting, orders, labels, tracking, USPS SCAN-Form manifests and
+
   tracking webhooks over HTTP Basic Authentication) and are kept as the record of that contract.
-x-status: "acquired"
-x-acquirer: "McKenna Worldwide Services"
-x-acquirer-url: "https://mckennaworldwide.com/"
-x-acquired-date: "2026-07"
-x-status-source: "https://www.startupdaily.net/topic/business/sendle-reborn-after-logistics-company-buys-brand-from-liquidators/"
-x-status-evidence: "McKenna Worldwide Services bought the Sendle brand, domains and trademarks from the liquidators of Sendle Pty Ltd and relaunched it in July 2026 (startupdaily.net 2026-07-27; https://www.smartcompany.com.au/transport-logistics/sendle-is-back-under-new-ownership/ ; https://postandparcel.info/162432/news/e-commerce/sendle-relaunches-with-the-backing-of-mckenna-worldwide-services/). www.sendle.com answers 200 on 2026-10-03; api.sendle.com and developers.sendle.com do not resolve. McKenna has no catalog record, so the acquirer is named, not linked."
-apis:
-- aid: sendle:sendle-orders-api
-  name: Sendle Orders API
-  tags:
-  - Order
-  - Shipping
-  - Labels
-  tags_raw:
-  - Orders
-  - Shipping
-  - Labels
-  humanURL: https://www.sendle.com
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: openapi/sendle-orders-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/sendle-order-schema.json
-    type: JSONSchema
-  - url: json-ld/sendle-context.jsonld
-    type: JSONLD
-  - url: overlays/sendle-orders-overlay.yaml
-    type: Overlay
-  description: >
-    Create, view, cancel, and return parcel orders. Supports domestic AU / US / CA
 
-    orders plus international from AU and US (DAP and DDP Price Guaranteed) and from
+  '
 
-    CA to US. Returns label URLs, tracking URL, full price + tax breakdown, scheduling,
+x-status: acquired
 
-    and route metadata. Idempotency-Key header is supported for safe retries.
-- aid: sendle:sendle-products-api
-  name: Sendle Products & Quoting API
-  tags:
-  - Quoting
-  - Product
-  - Pricing
-  tags_raw:
-  - Quoting
-  - Products
-  - Pricing
-  humanURL: https://www.sendle.com
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: openapi/sendle-products-api-openapi.yml
-    type: OpenAPI
-  - url: overlays/sendle-products-overlay.yaml
-    type: Overlay
-  description: >
-    Get one quote per shipping product for a given route. GET /products handles
+x-acquirer: McKenna Worldwide Services
 
-    domestic and DAP international; POST /products adds DDP Price Guaranteed
+x-acquirer-url: https://mckennaworldwide.com/
 
-    (duties + taxes included). Each quote includes plan, ETA, route classification,
+x-acquired-date: 2026-07
 
-    allowed packaging, and product code (e.g. STANDARD-PICKUP). The legacy
+x-status-source: https://www.startupdaily.net/topic/business/sendle-reborn-after-logistics-company-buys-brand-from-liquidators/
 
-    GET /quote is deprecated.
-- aid: sendle:sendle-tracking-api
-  name: Sendle Tracking API
-  tags:
-  - Tracking
-  - Webhook
-  - Event
-  tags_raw:
-  - Tracking
-  - Webhooks
-  - Events
-  humanURL: https://www.sendle.com
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: openapi/sendle-tracking-api-openapi.yml
-    type: OpenAPI
-  - url: asyncapi/sendle-tracking-asyncapi.yml
-    type: AsyncAPI
-  - url: json-schema/sendle-tracking-event-schema.json
-    type: JSONSchema
-  - url: overlays/sendle-tracking-overlay.yaml
-    type: Overlay
-  - url: asyncapi/sendle-tracking-asyncapi.yml
-    name: Sendle Tracking Webhooks
-    type: Webhooks
-  description: >
-    Retrieve all tracking events for a parcel by Sendle reference, or subscribe a
+x-status-evidence: McKenna Worldwide Services bought the Sendle brand, domains and trademarks from the liquidators of Sendle Pty Ltd and relaunched
+  it in July 2026 (startupdaily.net 2026-07-27; https://www.smartcompany.com.au/transport-logistics/sendle-is-back-under-new-ownership/ ; https://postandparcel.info/162432/news/e-commerce/sendle-relaunches-with-the-backing-of-mckenna-worldwide-services/).
+  www.sendle.com answers 200 on 2026-10-03; api.sendle.com and developers.sendle.com do not resolve. McKenna has no catalog record, so the acquirer
+  is named, not linked.
 
-    parcel to webhook tracking updates. Webhooks deliver per-event JSON payloads
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
 
-    to the account-level callback URL configured in the Sendle dashboard. Polling
+created: '2026-05-25'
 
-    is rate-limited to 10 req/sec/IP; Sendle recommends webhooks over polling.
-- aid: sendle:sendle-manifests-api
-  name: Sendle Shipping Manifests API
-  tags:
-  - Manifests
-  - USPS
-  - SCAN Form
-  - US Domestic
-  humanURL: https://www.sendle.com
-  baseURL: https://api.sendle.com/api
-  properties:
-  - url: openapi/sendle-manifests-api-openapi.yml
-    type: OpenAPI
-  - url: overlays/sendle-manifests-overlay.yaml
-    type: Overlay
-  description: >
-    Create, list, download (PDF), and inspect USPS SCAN Form shipping manifests so
+modified: '2026-10-21'
 
-    a driver can pick up many US Domestic Sendle orders with a single barcode scan.
-
-    Orders must be created the same day as the manifest; manifests are immutable
-
-    once created.
-- aid: sendle:sendle-utility-api
-  name: Sendle Utility API
-  description: Connectivity and credential testing
-  humanURL: https://www.sendle.com
-  baseURL: https://api.sendle.com/api
-  tags:
-  - Utility
-  properties:
-  - type: OpenAPI
-    url: openapi/sendle-utility-api-openapi.yml
-  - url: overlays/sendle-utility-overlay.yaml
-    type: Overlay
 common:
+- type: Deprecation
+  url: lifecycle/sendle-lifecycle.yml
+- type: Spectral
+  url: rules/sendle-rules.yml
+- type: Spectral
+  url: rules/sendle-jsonschema-spectral-rules.yml
+- type: Spectral
+  url: rules/sendle-asyncapi-spectral-rules.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/sendle-sandbox.yml
+- type: StatusPage
+  url: https://status.sendle.com
+- type: Hosts
+  url: hosts/sendle-hosts.yml
+- type: IntegrationEdges
+  url: integrations/sendle-integration-edges.yml
+- type: Vendors
+  url: vendors/sendle-vendors.yml
+- type: Documentation
+  url: https://developers.instagram.com/
 - type: CapabilityMap
   url: capabilities/sendle-capability-edges.yml
   name: Sendle Business Capability Map
@@ -215,9 +158,27 @@ common:
 - url: https://github.com/sendle
   name: Sendle on GitHub
   type: GitHub
-- url: https://www.linkedin.com/company/sendle
-  name: Sendle on LinkedIn
+- url: https://www.linkedin.com/company/sendlebymckenna/
+  name: Sendle by McKenna on LinkedIn
   type: LinkedIn
+- url: https://www.facebook.com/sendlebymckennaworldwide
+  name: Sendle on Facebook
+  type: Facebook
+- url: https://www.instagram.com/heysendle/
+  name: Sendle on Instagram
+  type: Instagram
+- url: https://www.sendle.com/pro
+  name: Sendlers Shippers Club Pricing
+  type: Pricing
+- url: https://www.sendle.com/signup
+  name: Sendle Sign Up
+  type: SignUp
+- url: https://www.sendle.com/terms
+  name: Sendle Delivery Terms and Conditions
+  type: TermsOfService
+- url: https://www.sendle.com/privacy
+  name: Sendle Privacy Policy
+  type: PrivacyPolicy
 - url: plans/sendle-plans-pricing.yml
   name: Sendle Plans
   type: Plans
@@ -230,8 +191,8 @@ common:
 - url: vocabulary/sendle-vocabulary.yml
   name: Sendle Vocabulary
   type: Vocabulary
-- url: mailto:api@sendle.com
-  name: Sendle API Support
+- url: https://www.sendle.com/support
+  name: Sendle Support Center
   type: Support
 - url: packages/sendle-packages.yml
   name: Sendle Client Libraries (community)
@@ -257,31 +218,178 @@ common:
 - url: conformance/sendle-conformance.yml
   name: Sendle Standards Conformance
   type: Conformance
-maintainers:
-- FN: Kin Lane
-  email: info@apievangelist.com
-created: '2026-05-25'
-modified: '2026-08-26'
-x-enrichment:
-  date: '2026-08-26'
-  status: minimal
-  artifacts_added: 16
-  pass: local-v1
+
+apis:
+- aid: sendle:sendle-orders-api
+  name: Sendle Orders API
+  tags:
+  - Order
+  - Shipping
+  - Labels
+  tags_raw:
+  - Orders
+  - Shipping
+  - Labels
+  humanURL: https://www.sendle.com
+  baseURL: https://api.sendle.com/api
+  properties:
+  - url: openapi/sendle-orders-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/sendle-order-schema.json
+    type: JSONSchema
+  - url: json-ld/sendle-context.jsonld
+    type: JSONLD
+  - url: overlays/sendle-orders-overlay.yaml
+    type: Overlay
+  description: 'Create, view, cancel, and return parcel orders. Supports domestic AU / US / CA
+
+    orders plus international from AU and US (DAP and DDP Price Guaranteed) and from
+
+    CA to US. Returns label URLs, tracking URL, full price + tax breakdown, scheduling,
+
+    and route metadata. Idempotency-Key header is supported for safe retries.
+
+    '
+- aid: sendle:sendle-products-api
+  name: Sendle Products & Quoting API
+  tags:
+  - Quoting
+  - Product
+  - Pricing
+  tags_raw:
+  - Quoting
+  - Products
+  - Pricing
+  humanURL: https://www.sendle.com
+  baseURL: https://api.sendle.com/api
+  properties:
+  - url: openapi/sendle-products-api-openapi.yml
+    type: OpenAPI
+  - url: overlays/sendle-products-overlay.yaml
+    type: Overlay
+  - type: JSONSchema
+    url: json-schema/sendle-product-quote-schema.json
+  - type: JSONSchema
+    url: json-schema/sendle-products-request-schema.json
+  description: 'Get one quote per shipping product for a given route. GET /products handles
+
+    domestic and DAP international; POST /products adds DDP Price Guaranteed
+
+    (duties + taxes included). Each quote includes plan, ETA, route classification,
+
+    allowed packaging, and product code (e.g. STANDARD-PICKUP). The legacy
+
+    GET /quote is deprecated.
+
+    '
+- aid: sendle:sendle-tracking-api
+  name: Sendle Tracking API
+  tags:
+  - Tracking
+  - Webhook
+  - Event
+  tags_raw:
+  - Tracking
+  - Webhooks
+  - Events
+  humanURL: https://www.sendle.com
+  baseURL: https://api.sendle.com/api
+  properties:
+  - url: openapi/sendle-tracking-api-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/sendle-tracking-asyncapi.yml
+    type: AsyncAPI
+  - url: json-schema/sendle-tracking-event-schema.json
+    type: JSONSchema
+  - url: overlays/sendle-tracking-overlay.yaml
+    type: Overlay
+  - url: asyncapi/sendle-tracking-asyncapi.yml
+    name: Sendle Tracking Webhooks
+    type: Webhooks
+  description: 'Retrieve all tracking events for a parcel by Sendle reference, or subscribe a
+
+    parcel to webhook tracking updates. Webhooks deliver per-event JSON payloads
+
+    to the account-level callback URL configured in the Sendle dashboard. Polling
+
+    is rate-limited to 10 req/sec/IP; Sendle recommends webhooks over polling.
+
+    '
+- aid: sendle:sendle-manifests-api
+  name: Sendle Shipping Manifests API
+  tags:
+  - Manifests
+  - USPS
+  - SCAN Form
+  - US Domestic
+  humanURL: https://www.sendle.com
+  baseURL: https://api.sendle.com/api
+  properties:
+  - url: openapi/sendle-manifests-api-openapi.yml
+    type: OpenAPI
+  - url: overlays/sendle-manifests-overlay.yaml
+    type: Overlay
+  - type: JSONSchema
+    url: json-schema/sendle-manifest-schema.json
+  description: 'Create, list, download (PDF), and inspect USPS SCAN Form shipping manifests so
+
+    a driver can pick up many US Domestic Sendle orders with a single barcode scan.
+
+    Orders must be created the same day as the manifest; manifests are immutable
+
+    once created.
+
+    '
+- aid: sendle:sendle-utility-api
+  name: Sendle Utility API
+  description: Connectivity and credential testing
+  humanURL: https://www.sendle.com
+  baseURL: https://api.sendle.com/api
+  tags:
+  - Utility
+  properties:
+  - type: OpenAPI
+    url: openapi/sendle-utility-api-openapi.yml
+  - url: overlays/sendle-utility-overlay.yaml
+    type: Overlay
+
 x-coverage:
   state: none
   reason: defunct
-  detail: Sendle ceased operations on 2026-01-11 and entered liquidation; api.sendle.com, developers.sendle.com, sandbox.sendle.com, status.sendle.com and try.sendle.com all return NXDOMAIN from the sendle.com authoritative nameserver, leaving only a client-rendered marketing shell on www.sendle.com that answers every /.well-known/ path with the same 18,276-byte HTML body.
+  detail: The original operator Sendle Pty Ltd ceased operations on 2026-01-11 and its API was withdrawn. The brand was relaunched by McKenna
+    Worldwide Services in July 2026; on 2026-10-21 www.sendle.com serves a client-rendered site (pricing, support, signup, terms, privacy all
+    render real content; an unknown path renders a 404 page) whose nav and footer link to no API or developer documentation, and api.sendle.com,
+    developers.sendle.com and status.sendle.com return no DNS records.
   evidence:
+  - url: https://www.sendle.com
+    status: 200
+  - url: https://www.sendle.com/pro
+    status: 200
+  - url: https://www.sendle.com/support
+    status: 200
+  - url: https://www.sendle.com/signup
+    status: 200
+  - url: https://www.sendle.com/terms
+    status: 200
+  - url: https://www.sendle.com/privacy
+    status: 200
+  - url: https://www.linkedin.com/company/sendlebymckenna/
+    status: 200
+  - url: https://github.com/sendle
+    status: 200
   - url: https://api.sendle.com/api/ping
     status: 0
   - url: https://developers.sendle.com/reference/welcome
     status: 0
   - url: https://status.sendle.com
     status: 0
-  - url: https://www.sendle.com/.well-known/security.txt
-    status: 200
-  - url: https://www.sendle.com
-    status: 200
-  checked: '2026-08-26'
+  checked: '2026-10-21'
+
 x-tags-removed:
 - Defunct
+x-enrichment:
+  date: '2026-10-21'
+  status: enriched
+  artifacts_added: 12
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

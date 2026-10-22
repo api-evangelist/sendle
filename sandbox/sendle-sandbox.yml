@@ -13,6 +13,11 @@ description: >-
   Sendle ran a separate sandbox environment on its own host with its own credentials. It was
   a full parallel environment, not a test mode toggled by a key prefix. The host no longer
   resolves.
+docs: https://developers.sendle.com/reference/sendles-sandbox-server
+docs_live: false
+docs_note: >-
+  The sandbox docs page named in source; its host returned NXDOMAIN on 2026-08-26, so it is
+  recorded as the documented location, not as a live page.
 environments:
 - name: production
   base_url: https://api.sendle.com/api

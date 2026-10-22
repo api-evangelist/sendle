@@ -175,3 +175,11 @@ probes:
 - url: https://api.github.com/orgs/sendle/repos
   status: 200
   result: 38 repos, no MCP server
+- url: https://www.sendle.com/.well-known/mcp.json
+  status: 200
+  checked: '2026-10-21'
+  result: Same 18127-byte catch-all HTML shell served for every path (also /llms.txt); not an MCP manifest
+- url: https://api.sendle.com/api/ping
+  status: 0
+  checked: '2026-10-21'
+  result: NXDOMAIN (host api.sendle.com) -- still retired
